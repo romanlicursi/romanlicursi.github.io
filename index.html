@@ -147,6 +147,32 @@
       border-color: var(--color-accent);
       color: var(--color-accent);
     }
+    .cta-pill--primary {
+      background: var(--color-accent);
+      color: #0d0d0f;
+      border-color: var(--color-accent);
+      font-weight: 600;
+    }
+    .cta-pill--primary:hover {
+      background: #16a34a;
+      border-color: #16a34a;
+      color: #0d0d0f;
+    }
+
+    /* ── Hero stats ── */
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-bottom: 28px;
+    }
+    .hero-stats span::before {
+      content: '↗ ';
+      color: var(--color-accent);
+      font-size: 11px;
+    }
 
     /* ── Project cards ── */
     .project-grid {
@@ -381,6 +407,13 @@
     }
 
     /* ── Skills ── */
+    .skills-intro {
+      font-size: 14px;
+      color: var(--color-muted);
+      line-height: 1.65;
+      margin-bottom: 28px;
+      max-width: 600px;
+    }
     .skills-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -502,19 +535,24 @@
       <p class="hero-tagline">RevOps &amp; GTM Engineer</p>
       <p class="hero-open">Open to: Summer 2026 internships &middot; RevOps &middot; AI GTM</p>
       <p class="hero-bio">
-        I design data systems that make B2B revenue teams faster and more accurate —
-        combining SQL, Python, and ML with a ground-level understanding of how
-        sales and marketing actually work.
+        I build the revenue infrastructure B2B teams run on — lead scoring models,
+        CRM automations, GTM data pipelines, and analytics that tie every campaign
+        back to CAC, pipeline, and payback.
       </p>
+      <div class="hero-stats">
+        <span>$131K MRR flagged</span>
+        <span>50K orders processed</span>
+        <span>12% MQL&rarr;SQL lift</span>
+      </div>
       <div class="hero-ctas">
-        <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="cta-pill">
-          GitHub &rarr;
+        <a href="mailto:romanlicursi@gmail.com" class="cta-pill cta-pill--primary">
+          Email &rarr;
         </a>
         <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="cta-pill">
           LinkedIn &rarr;
         </a>
-        <a href="mailto:romanlicursi@gmail.com" class="cta-pill">
-          Email &rarr;
+        <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="cta-pill">
+          GitHub &rarr;
         </a>
       </div>
     </div>
@@ -545,12 +583,12 @@
             <span class="chip">Context Engineering</span>
           </div>
           <p class="project-desc">
-            Built a 6-layer career intelligence system that automates job market research, career path mapping,
-            and outreach — end to end. Scrapes live LinkedIn job postings and professional profiles via Apify,
-            processes them through a staged Claude pipeline (raw data &rarr; structured summaries &rarr; sprint plans
-            &rarr; contact dossiers &rarr; personalized outreach drafts), and runs autonomously on GitHub Actions
-            with a weekly digest email delivered to inbox. Includes a personal CRM updated automatically each run
-            and a decision framework that filters all recommendations against explicit career optimization targets.
+            Automated career research, scoring, and personalized outreach end-to-end — a 6-layer pipeline that
+            runs weekly on GitHub Actions and delivers a digest to inbox. Scrapes live LinkedIn job postings and
+            professional profiles via Apify, processes them through a staged Claude pipeline (raw data &rarr;
+            structured summaries &rarr; sprint plans &rarr; contact dossiers &rarr; personalized outreach drafts),
+            with a personal CRM updated automatically each run and a decision framework that filters all
+            recommendations against explicit career optimization targets.
           </p>
           <div class="metrics">
             <span class="metric">6-layer pipeline</span>
@@ -579,11 +617,10 @@
             <span class="chip">pandas</span>
           </div>
           <p class="project-desc">
-            End-to-end ETL pipeline processing 50,000 e-commerce orders across a multi-source dataset.
-            Detected and resolved 7,984 data quality issues before reaching analytics consumers.
-            Five analytics tables built with CTEs and window functions: fct_orders (47K rows), dim_customers (11K),
-            product_performance, marketing_attribution, and daily_metrics.
-            Designed for AWS production deployment (S3 → Glue → Athena → QuickSight).
+            Caught and resolved 7,984 data quality issues before they reached analytics — across 50,000 orders
+            and a multi-source dataset. Five analytics tables built with CTEs and window functions: fct_orders
+            (47K rows), dim_customers (11K), product_performance, marketing_attribution, and daily_metrics.
+            Designed for AWS production deployment (S3 &rarr; Glue &rarr; Athena &rarr; QuickSight).
           </p>
           <div class="metrics">
             <span class="metric">50K orders</span>
@@ -611,11 +648,11 @@
             <span class="chip">pandas</span>
           </div>
           <p class="project-desc">
-            Dual-model lead scoring combining rule-based logic with logistic regression.
-            Scores leads on behavioral attributes (pages viewed, CTA clicks, email opens)
-            and firmographic signals (revenue, company size, industry).
-            Automated Slack alerts fire when leads exceed a configurable threshold.
-            Production-ready pipeline with StandardScaler, OneHotEncoder, and fallback error handling.
+            Lifted MQL&rarr;SQL conversion by 12% with a dual-model lead scoring system combining rule-based
+            logic and logistic regression. Scores leads on behavioral attributes (pages viewed, CTA clicks,
+            email opens) and firmographic signals (revenue, company size, industry). Automated Slack alerts
+            fire when leads exceed a configurable threshold. Production-ready pipeline with StandardScaler,
+            OneHotEncoder, and fallback error handling.
           </p>
           <div class="metrics">
             <span class="metric">12% MQL→SQL lift</span>
@@ -642,10 +679,10 @@
             <span class="chip">scikit-learn</span>
           </div>
           <p class="project-desc">
-            Full-stack RevOps analytics suite for a fictional B2B SaaS company.
-            Churn prediction model (logistic regression, AUC 0.793) flagged 22.8% of accounts as at-risk.
-            Layered CAC/payback analysis by channel, funnel drop-off tracking (Lead → MQL → SQL → Customer),
-            and cohort retention analysis. LinkedIn spend flagged as high CAC, long payback — actionable channel finding.
+            Surfaced $131K in saveable MRR and flagged LinkedIn as a high-CAC channel — a full RevOps analytics
+            suite built on a churn prediction model (logistic regression, AUC 0.793) that flagged 22.8% of
+            accounts as at-risk. Layered CAC/payback analysis by channel, funnel drop-off tracking
+            (Lead &rarr; MQL &rarr; SQL &rarr; Customer), and cohort retention analysis.
           </p>
           <div class="metrics">
             <span class="metric">AUC 0.793</span>
@@ -768,63 +805,51 @@
   <section id="skills" class="reveal">
     <div class="container">
       <h2 class="section-label">Skills</h2>
+      <p class="skills-intro">I combine technical depth with business fluency — every system I build ties to real revenue outcomes.</p>
       <div class="skills-grid">
 
         <div>
-          <div class="skill-group-label">AI &amp; Automation</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Claude API</span>
-            <span class="skill-tag">Context Engineering</span>
-            <span class="skill-tag">Apify</span>
-            <span class="skill-tag">GitHub Actions</span>
-            <span class="skill-tag">Prompt Engineering</span>
-          </div>
-        </div>
-
-        <div>
-          <div class="skill-group-label">Data Engineering</div>
+          <div class="skill-group-label">Data &amp; Analytics</div>
           <div class="skill-tags">
             <span class="skill-tag">SQL</span>
             <span class="skill-tag">Python</span>
-            <span class="skill-tag">ETL</span>
-            <span class="skill-tag">DuckDB</span>
-            <span class="skill-tag">AWS</span>
-            <span class="skill-tag">pandas</span>
-            <span class="skill-tag">Streamlit</span>
+            <span class="skill-tag">Tableau</span>
+            <span class="skill-tag">Excel</span>
           </div>
         </div>
 
         <div>
-          <div class="skill-group-label">GTM &amp; RevOps</div>
+          <div class="skill-group-label">GTM Stack</div>
           <div class="skill-tags">
             <span class="skill-tag">Salesforce</span>
             <span class="skill-tag">HubSpot</span>
             <span class="skill-tag">Clay</span>
             <span class="skill-tag">Apollo</span>
-            <span class="skill-tag">Revenue Operations</span>
-            <span class="skill-tag">Go-to-Market</span>
+            <span class="skill-tag">Zapier</span>
+            <span class="skill-tag">Make</span>
           </div>
         </div>
 
         <div>
-          <div class="skill-group-label">Analytics &amp; ML</div>
+          <div class="skill-group-label">Go-to-Market</div>
           <div class="skill-tags">
-            <span class="skill-tag">Tableau</span>
-            <span class="skill-tag">scikit-learn</span>
-            <span class="skill-tag">Machine Learning</span>
-            <span class="skill-tag">Predictive Modeling</span>
-            <span class="skill-tag">Plotly</span>
+            <span class="skill-tag">CRM</span>
+            <span class="skill-tag">Data Enrichment</span>
+            <span class="skill-tag">Email Campaigning</span>
+            <span class="skill-tag">B2B SaaS</span>
+            <span class="skill-tag">Data Sourcing</span>
+            <span class="skill-tag">Go-to-Market Strategy</span>
           </div>
         </div>
 
         <div>
-          <div class="skill-group-label">Languages</div>
+          <div class="skill-group-label">SaaS Economics</div>
           <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">R</span>
-            <span class="skill-tag">Java</span>
-            <span class="skill-tag">C</span>
+            <span class="skill-tag">CAC</span>
+            <span class="skill-tag">LTV</span>
+            <span class="skill-tag">Churn Analysis</span>
+            <span class="skill-tag">Payback Period</span>
+            <span class="skill-tag">Funnel Analytics</span>
           </div>
         </div>
 
