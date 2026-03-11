@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roman Licursi — RevOps & GTM Engineer</title>
+  <meta name="description" content="Roman Licursi — CS junior at UW–Madison who designs data systems that make B2B revenue teams faster and more accurate." />
+  <meta property="og:title" content="Roman Licursi — RevOps & GTM Engineer" />
+  <meta property="og:description" content="CS junior at UW–Madison building data-driven revenue systems — SQL, Python, ML, and GTM strategy." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://romanlicursi.github.io" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --color-bg:          #0d0d0f;
+      --color-surface:     #141417;
+      --color-border:      #2a2a30;
+      --color-text:        #e8e8ec;
+      --color-muted:       #7a7a8a;
+      --color-accent:      #22c55e;
+      --color-result-bg:   #0f2318;
+      --color-result-text: #4ade80;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-mono: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+      --max-w: 768px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ── Layout helpers ── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Navigation ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 0;
+      transition: border-color 200ms, backdrop-filter 200ms, background 200ms;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(13, 13, 15, 0.85);
+      border-bottom-color: var(--color-border);
+    }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-brand {
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--color-muted);
+      transition: color 150ms;
+    }
+    .nav-links a:hover { color: var(--color-text); }
+
+    /* ── Sections ── */
+    section { padding: 80px 0; }
+    section + section { border-top: 1px solid var(--color-border); }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 32px;
+    }
+
+    /* ── Hero ── */
+    #hero { padding: 96px 0 80px; }
+    .hero-name {
+      font-size: clamp(36px, 6vw, 52px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .hero-school {
+      font-size: 14px;
+      color: var(--color-muted);
+      margin-bottom: 24px;
+    }
+    .hero-tagline {
+      font-size: clamp(18px, 3vw, 22px);
+      font-weight: 500;
+      color: var(--color-accent);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .hero-bio {
+      font-size: 15px;
+      color: var(--color-muted);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: border-color 150ms, color 150ms, background 150ms;
+    }
+    .cta-pill:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    /* ── Project cards ── */
+    .project-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .project-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-left: 2px solid var(--color-accent);
+      border-radius: 8px;
+      padding: 24px 24px 20px;
+      transition: box-shadow 200ms, transform 200ms;
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      transform: translateY(-2px);
+    }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .project-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .project-date {
+      font-size: 12px;
+      color: var(--color-muted);
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+    .project-desc {
+      font-size: 14px;
+      color: var(--color-muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .stack-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 3px 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      color: var(--color-muted);
+    }
+    .metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .metric {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      background: var(--color-result-bg);
+      color: var(--color-result-text);
+      border-radius: 4px;
+    }
+
+    /* ── Experience timeline ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 1px 1fr;
+      gap: 0 20px;
+    }
+    .timeline-line {
+      position: relative;
+    }
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-accent);
+    }
+    .timeline-line::after {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: calc(100% - 10px);
+      background: var(--color-border);
+    }
+    .timeline-item:last-child .timeline-line::after { display: none; }
+    .exp-role {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .exp-company {
+      font-size: 13px;
+      color: var(--color-accent);
+      font-weight: 500;
+    }
+    .exp-meta {
+      font-size: 12px;
+      color: var(--color-muted);
+      margin-bottom: 10px;
+      margin-top: 2px;
+    }
+    .exp-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .exp-bullets li {
+      font-size: 13px;
+      color: var(--color-muted);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .exp-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--color-border);
+    }
+    .exp-upcoming {
+      font-size: 13px;
+      color: var(--color-muted);
+      font-style: italic;
+    }
+
+    /* ── Education & Certs ── */
+    .edu-block {
+      margin-bottom: 36px;
+    }
+    .edu-school {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .edu-degree {
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-bottom: 4px;
+    }
+    .edu-dates {
+      font-size: 12px;
+      color: var(--color-muted);
+      margin-bottom: 8px;
+    }
+    .edu-activities {
+      font-size: 13px;
+      color: var(--color-muted);
+    }
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .cert-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+    }
+    .cert-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .cert-meta {
+      font-size: 12px;
+      color: var(--color-muted);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .skill-group-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-tag {
+      font-size: 12px;
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      color: var(--color-muted);
+    }
+
+    /* ── Contact ── */
+    #contact { text-align: center; padding-bottom: 100px; }
+    .contact-heading {
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .contact-bio {
+      font-size: 14px;
+      color: var(--color-muted);
+      max-width: 480px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--color-border);
+      padding: 24px 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      section { padding: 60px 0; }
+      #hero { padding: 72px 0 60px; }
+      .skills-grid { grid-template-columns: 1fr; gap: 20px; }
+      .nav-links { gap: 18px; }
+      .cert-item { flex-direction: column; align-items: flex-start; }
+      .cert-meta { text-align: left; }
+    }
+    @media (max-width: 400px) {
+      .container { padding: 0 16px; }
+      .nav-links a { font-size: 12px; }
+      .hero-ctas { flex-direction: column; }
+      .cta-pill { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav id="nav">
+    <div class="container">
+      <span class="nav-brand">Roman Licursi</span>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="container">
+      <h1 class="hero-name">Roman Licursi</h1>
+      <p class="hero-school">Computer Science @ UW–Madison &middot; Graduating May 2027</p>
+      <p class="hero-tagline">RevOps &amp; GTM Engineer</p>
+      <p class="hero-bio">
+        I design data systems that make B2B revenue teams faster and more accurate —
+        combining SQL, Python, and ML with a ground-level understanding of how
+        sales and marketing actually work.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="cta-pill">
+          GitHub &rarr;
+        </a>
+        <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="cta-pill">
+          LinkedIn &rarr;
+        </a>
+        <a href="mailto:romanlicursi@gmail.com" class="cta-pill">
+          Email &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Projects ── -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Projects</p>
+      <div class="project-grid">
+
+        <div class="project-card">
+          <div class="project-header">
+            <span class="project-title">E-Commerce Data Quality Pipeline</span>
+            <span class="project-date">Nov 2025</span>
+          </div>
+          <div class="stack-chips">
+            <span class="chip">Python</span>
+            <span class="chip">DuckDB</span>
+            <span class="chip">SQL</span>
+            <span class="chip">AWS</span>
+            <span class="chip">pandas</span>
+          </div>
+          <p class="project-desc">
+            End-to-end ETL pipeline processing 50,000 e-commerce orders across a multi-source dataset.
+            Detected and resolved 7,984 data quality issues before reaching analytics consumers.
+            Five analytics tables built with CTEs and window functions: fct_orders (47K rows), dim_customers (11K),
+            product_performance, marketing_attribution, and daily_metrics.
+            Designed for AWS production deployment (S3 → Glue → Athena → QuickSight).
+          </p>
+          <div class="metrics">
+            <span class="metric">50K orders</span>
+            <span class="metric">7,984 issues resolved</span>
+            <span class="metric">5 analytics tables</span>
+            <span class="metric">&lt;30s execution</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <span class="project-title">Lead Scoring Automation System</span>
+            <span class="project-date">Aug–Sep 2025</span>
+          </div>
+          <div class="stack-chips">
+            <span class="chip">Python</span>
+            <span class="chip">scikit-learn</span>
+            <span class="chip">SQL</span>
+            <span class="chip">Slack API</span>
+            <span class="chip">pandas</span>
+          </div>
+          <p class="project-desc">
+            Dual-model lead scoring combining rule-based logic with logistic regression.
+            Scores leads on behavioral attributes (pages viewed, CTA clicks, email opens)
+            and firmographic signals (revenue, company size, industry).
+            Automated Slack alerts fire when leads exceed a configurable threshold.
+            Production-ready pipeline with StandardScaler, OneHotEncoder, and fallback error handling.
+          </p>
+          <div class="metrics">
+            <span class="metric">12% MQL→SQL lift</span>
+            <span class="metric">Rule-based + ML</span>
+            <span class="metric">Automated Slack alerts</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header">
+            <span class="project-title">NimbusHR RevOps Dashboard</span>
+            <span class="project-date">Jul–Aug 2025</span>
+          </div>
+          <div class="stack-chips">
+            <span class="chip">SQL</span>
+            <span class="chip">Python</span>
+            <span class="chip">Tableau</span>
+            <span class="chip">Streamlit</span>
+            <span class="chip">scikit-learn</span>
+          </div>
+          <p class="project-desc">
+            Full-stack RevOps analytics suite for a fictional B2B SaaS company.
+            Churn prediction model (logistic regression, AUC 0.793) flagged 22.8% of accounts as at-risk.
+            Layered CAC/payback analysis by channel, funnel drop-off tracking (Lead → MQL → SQL → Customer),
+            and cohort retention analysis. LinkedIn spend flagged as high CAC, long payback — actionable channel finding.
+          </p>
+          <div class="metrics">
+            <span class="metric">AUC 0.793</span>
+            <span class="metric">22.8% at-risk flagged</span>
+            <span class="metric">$131K saveable MRR</span>
+            <span class="metric">ROAS 2.8 → 3.3</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Experience ── -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Experience</p>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div>
+            <div class="exp-role">Revenue Operations Intern</div>
+            <div class="exp-company">Donaldson</div>
+            <div class="exp-meta">Dec 2025–Present &middot; Starting May 2026</div>
+            <p class="exp-upcoming">Upcoming role — starting May 2026.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div>
+            <div class="exp-role">Growth Intern</div>
+            <div class="exp-company">Roger <span style="color:var(--color-muted);font-weight:400">(YC S24)</span></div>
+            <div class="exp-meta">Dec 2025–Present</div>
+            <ul class="exp-bullets">
+              <li>Running outbound growth experiments for a YC-backed AI SDR platform</li>
+              <li>Building prospect lists, launching campaigns across LinkedIn and email, tracking performance metrics</li>
+              <li>Creating monthly content (TikTok, LinkedIn video) demonstrating product value</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div>
+            <div class="exp-role">Business Development &amp; Growth Associate</div>
+            <div class="exp-company">CAUHEC</div>
+            <div class="exp-meta">Sep 2025–Present</div>
+            <ul class="exp-bullets">
+              <li>Built CRM automation and outbound pipelines from scratch, connecting CRM to automated email sequences</li>
+              <li>Sourced and enriched qualified university and healthcare partner lead data</li>
+              <li>Designed B2B funnel dashboards used by the Founder/CEO for growth strategy</li>
+              <li>Established measurable outbound infrastructure where none previously existed</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div>
+            <div class="exp-role">Data Analytics Intern</div>
+            <div class="exp-company">Community Action Partnership of Ramsey &amp; Washington Counties</div>
+            <div class="exp-meta">Jul–Aug 2025</div>
+            <ul class="exp-bullets">
+              <li>Built dashboards tracking 100+ active community partnerships, filterable by engagement tier, department, and staff lead</li>
+              <li>Analyzed historical data to surface engagement gaps and regional disparities</li>
+              <li>Presented findings to agency staff to improve outreach equity and strategy</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-line"></div>
+          <div>
+            <div class="exp-role">Website Director</div>
+            <div class="exp-company">TEDxUWMadison</div>
+            <div class="exp-meta">Oct 2024–Aug 2025</div>
+            <ul class="exp-bullets">
+              <li>Led full website redesign, improving UX and accessibility</li>
+              <li>Kept site current with event details, ticketing, and speaker lineups</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Education & Certs ── -->
+  <section id="education">
+    <div class="container">
+      <p class="section-label">Education &amp; Certifications</p>
+
+      <div class="edu-block">
+        <div class="edu-school">University of Wisconsin–Madison</div>
+        <div class="edu-degree">B.S. Computer Science</div>
+        <div class="edu-dates">Sep 2023–May 2027</div>
+        <div class="edu-activities">Chi Psi Fraternity &middot; Informatics Skunkworks Machine Learning &middot; Data Science Club</div>
+      </div>
+
+      <ul class="cert-list">
+        <li class="cert-item">
+          <span class="cert-name">Revenue Operations</span>
+          <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
+        </li>
+        <li class="cert-item">
+          <span class="cert-name">HubSpot Sales Hub Software</span>
+          <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
+        </li>
+        <li class="cert-item">
+          <span class="cert-name">Claude Code in Action</span>
+          <span class="cert-meta">Anthropic &middot; Mar 2026</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Skills ── -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Skills</p>
+      <div class="skills-grid">
+
+        <div>
+          <div class="skill-group-label">Data Engineering</div>
+          <div class="skill-tags">
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">ETL</span>
+            <span class="skill-tag">DuckDB</span>
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">pandas</span>
+            <span class="skill-tag">Streamlit</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">GTM &amp; RevOps</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Salesforce</span>
+            <span class="skill-tag">HubSpot</span>
+            <span class="skill-tag">Clay</span>
+            <span class="skill-tag">Apollo</span>
+            <span class="skill-tag">Revenue Operations</span>
+            <span class="skill-tag">Go-to-Market</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">Analytics &amp; ML</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Tableau</span>
+            <span class="skill-tag">scikit-learn</span>
+            <span class="skill-tag">Machine Learning</span>
+            <span class="skill-tag">Predictive Modeling</span>
+            <span class="skill-tag">Plotly</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">Languages</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">R</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">C</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="contact-heading">Let's connect.</h2>
+      <p class="contact-bio">
+        If you're building a data-driven GTM or RevOps function — or just want
+        to trade notes — I'm easy to reach.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:romanlicursi@gmail.com" class="cta-pill">romanlicursi@gmail.com</a>
+        <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="cta-pill">LinkedIn</a>
+        <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="cta-pill">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      &copy; 2026 Roman Licursi
+    </div>
+  </footer>
+
+  <!-- ── JS: nav scroll + smooth behavior ── -->
+  <script>
+    // Nav blur on scroll
+    const nav = document.getElementById('nav');
+    const sentinel = document.getElementById('hero');
+    const navObserver = new IntersectionObserver(
+      ([entry]) => nav.classList.toggle('scrolled', !entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    navObserver.observe(sentinel);
+
+    // Active nav link highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const linkObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(a => {
+              const active = a.getAttribute('href') === '#' + entry.target.id;
+              a.style.color = active ? 'var(--color-text)' : '';
+            });
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    sections.forEach(s => linkObserver.observe(s));
+  </script>
+
+</body>
+</html>
