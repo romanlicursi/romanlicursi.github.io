@@ -165,6 +165,10 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
       transform: translateY(-2px);
     }
+    .project-card--featured {
+      border-left-width: 3px;
+      background: #13181e;
+    }
     .project-header {
       display: flex;
       justify-content: space-between;
@@ -172,6 +176,11 @@
       gap: 16px;
       margin-bottom: 10px;
       flex-wrap: wrap;
+    }
+    .project-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
     .project-title {
       font-size: 15px;
@@ -184,6 +193,31 @@
       white-space: nowrap;
       margin-top: 2px;
     }
+    .project-header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .featured-badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: var(--color-result-bg);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(34,197,94,0.25);
+    }
+    .project-link {
+      font-size: 12px;
+      color: var(--color-muted);
+      transition: color 150ms;
+      white-space: nowrap;
+    }
+    .project-link:hover { color: var(--color-accent); }
     .project-desc {
       font-size: 14px;
       color: var(--color-muted);
@@ -439,6 +473,7 @@
     <div class="container">
       <h1 class="hero-name">Roman Licursi</h1>
       <p class="hero-school">Computer Science @ UW–Madison &middot; Graduating May 2027</p>
+      <p class="hero-school" style="margin-top:4px"><span style="display:inline-block;width:7px;height:7px;background:var(--color-accent);border-radius:50%;margin-right:6px;vertical-align:middle"></span>Open to: Summer 2026 internships &middot; RevOps &middot; AI GTM</p>
       <p class="hero-tagline">RevOps &amp; GTM Engineer</p>
       <p class="hero-bio">
         I design data systems that make B2B revenue teams faster and more accurate —
@@ -465,10 +500,50 @@
       <p class="section-label">Projects</p>
       <div class="project-grid">
 
+        <div class="project-card project-card--featured">
+          <div class="project-header">
+            <div class="project-header-left">
+              <span class="project-title">Career OS</span>
+              <span class="project-date">Mar 2026</span>
+            </div>
+            <div class="project-header-right">
+              <span class="featured-badge">Featured</span>
+              <a href="https://github.com/romanlicursi/career-os" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+            </div>
+          </div>
+          <div class="stack-chips">
+            <span class="chip">Python</span>
+            <span class="chip">Claude API</span>
+            <span class="chip">Apify</span>
+            <span class="chip">GitHub Actions</span>
+            <span class="chip">Context Engineering</span>
+          </div>
+          <p class="project-desc">
+            Built a 6-layer career intelligence system that automates job market research, career path mapping,
+            and outreach — end to end. Scrapes live LinkedIn job postings and professional profiles via Apify,
+            processes them through a staged Claude pipeline (raw data &rarr; structured summaries &rarr; sprint plans
+            &rarr; contact dossiers &rarr; personalized outreach drafts), and runs autonomously on GitHub Actions
+            with a weekly digest email delivered to inbox. Includes a personal CRM updated automatically each run
+            and a decision framework that filters all recommendations against explicit career optimization targets.
+          </p>
+          <div class="metrics">
+            <span class="metric">6-layer pipeline</span>
+            <span class="metric">Autonomous weekly runs</span>
+            <span class="metric">LinkedIn scraping</span>
+            <span class="metric">Auto-updated CRM</span>
+            <span class="metric">GitHub Actions</span>
+          </div>
+        </div>
+
         <div class="project-card">
           <div class="project-header">
-            <span class="project-title">E-Commerce Data Quality Pipeline</span>
-            <span class="project-date">Nov 2025</span>
+            <div class="project-header-left">
+              <span class="project-title">E-Commerce Data Quality Pipeline</span>
+              <span class="project-date">Nov 2025</span>
+            </div>
+            <div class="project-header-right">
+              <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+            </div>
           </div>
           <div class="stack-chips">
             <span class="chip">Python</span>
@@ -494,8 +569,13 @@
 
         <div class="project-card">
           <div class="project-header">
-            <span class="project-title">Lead Scoring Automation System</span>
-            <span class="project-date">Aug–Sep 2025</span>
+            <div class="project-header-left">
+              <span class="project-title">Lead Scoring Automation System</span>
+              <span class="project-date">Aug–Sep 2025</span>
+            </div>
+            <div class="project-header-right">
+              <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+            </div>
           </div>
           <div class="stack-chips">
             <span class="chip">Python</span>
@@ -520,8 +600,13 @@
 
         <div class="project-card">
           <div class="project-header">
-            <span class="project-title">NimbusHR RevOps Dashboard</span>
-            <span class="project-date">Jul–Aug 2025</span>
+            <div class="project-header-left">
+              <span class="project-title">NimbusHR RevOps Dashboard</span>
+              <span class="project-date">Jul–Aug 2025</span>
+            </div>
+            <div class="project-header-right">
+              <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+            </div>
           </div>
           <div class="stack-chips">
             <span class="chip">SQL</span>
@@ -660,6 +745,17 @@
       <div class="skills-grid">
 
         <div>
+          <div class="skill-group-label">AI &amp; Automation</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Claude API</span>
+            <span class="skill-tag">Context Engineering</span>
+            <span class="skill-tag">Apify</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">Prompt Engineering</span>
+          </div>
+        </div>
+
+        <div>
           <div class="skill-group-label">Data Engineering</div>
           <div class="skill-tags">
             <span class="skill-tag">SQL</span>
@@ -729,7 +825,7 @@
   <!-- ── Footer ── -->
   <footer>
     <div class="container">
-      &copy; 2026 Roman Licursi
+      &copy; 2026 Roman Licursi &middot; Built with <a href="https://claude.ai/claude-code" target="_blank" rel="noopener" style="color:var(--color-muted);text-decoration:underline;text-underline-offset:3px;transition:color 150ms" onmouseover="this.style.color='var(--color-accent)'" onmouseout="this.style.color='var(--color-muted)'">Claude Code</a>
     </div>
   </footer>
 
