@@ -100,31 +100,50 @@
 
     /* ── Hero ── */
     #hero { padding: 96px 0 80px; }
+    .hero-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .hero-text { flex: 1; min-width: 0; }
+    .hero-photo-wrap { flex-shrink: 0; padding-top: 8px; }
+    .hero-photo {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-border);
+      display: block;
+      transition: border-color 200ms;
+    }
+    .hero-photo:hover { border-color: var(--color-accent); }
     .hero-name {
       font-size: clamp(36px, 6vw, 52px);
       font-weight: 600;
       line-height: 1.1;
       letter-spacing: -0.02em;
-      margin-bottom: 6px;
-    }
-    .hero-school {
-      font-size: 14px;
-      color: var(--color-muted);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .hero-tagline {
-      font-size: clamp(18px, 3vw, 22px);
-      font-weight: 500;
+      font-size: clamp(17px, 2.5vw, 20px);
+      font-weight: 600;
       color: var(--color-accent);
-      margin-bottom: 20px;
+      margin-bottom: 4px;
       letter-spacing: -0.01em;
+    }
+    .hero-tagline-sub {
+      font-size: 14px;
+      color: var(--color-muted);
+      font-weight: 400;
+      margin-bottom: 16px;
+      line-height: 1.5;
     }
     .hero-bio {
       font-size: 15px;
       color: var(--color-muted);
-      max-width: 600px;
       line-height: 1.7;
-      margin-bottom: 36px;
+      margin-bottom: 24px;
     }
     .hero-ctas {
       display: flex;
@@ -499,6 +518,8 @@
     @media (max-width: 640px) {
       section { padding: 60px 0; }
       #hero { padding: 72px 0 60px; }
+      .hero-inner { flex-direction: column-reverse; gap: 20px; }
+      .hero-photo { width: 80px; height: 80px; }
       .skills-grid { grid-template-columns: 1fr; gap: 20px; }
       .nav-links { gap: 18px; }
       .cert-item { flex-direction: column; align-items: flex-start; }
@@ -530,30 +551,37 @@
   <!-- ── Hero ── -->
   <section id="hero">
     <div class="container">
-      <h1 class="hero-name">Roman Licursi</h1>
-      <p class="hero-school">Computer Science @ UW–Madison &middot; Graduating May 2027</p>
-      <p class="hero-tagline">RevOps &amp; GTM Engineer</p>
-      <p class="hero-open">Open to: Summer 2026 internships &middot; RevOps &middot; AI GTM</p>
-      <p class="hero-bio">
-        I build the revenue infrastructure B2B teams run on — lead scoring models,
-        CRM automations, GTM data pipelines, and analytics that tie every campaign
-        back to CAC, pipeline, and payback.
-      </p>
-      <div class="hero-stats">
-        <span>$131K MRR flagged</span>
-        <span>50K orders processed</span>
-        <span>12% MQL&rarr;SQL lift</span>
-      </div>
-      <div class="hero-ctas">
-        <a href="mailto:romanlicursi@gmail.com" class="cta-pill cta-pill--primary">
-          Email &rarr;
-        </a>
-        <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="cta-pill">
-          LinkedIn &rarr;
-        </a>
-        <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="cta-pill">
-          GitHub &rarr;
-        </a>
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1 class="hero-name">Roman Licursi</h1>
+          <p class="hero-tagline">Revenue Systems</p>
+          <p class="hero-tagline-sub">Building automation, analytics, and AI workflows for B2B SaaS growth</p>
+          <p class="hero-open">Open to: Summer 2026 internships &middot; RevOps &middot; AI GTM</p>
+          <p class="hero-bio">
+            I build the revenue infrastructure B2B teams run on — lead scoring models,
+            CRM automations, GTM data pipelines, and analytics that tie every campaign
+            back to CAC, pipeline, and payback.
+          </p>
+          <div class="hero-stats">
+            <span>7,984 data issues caught</span>
+            <span>6-layer autonomous pipeline</span>
+            <span>YC-backed startup</span>
+          </div>
+          <div class="hero-ctas">
+            <a href="mailto:romanlicursi@gmail.com" class="cta-pill cta-pill--primary">
+              Email &rarr;
+            </a>
+            <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="cta-pill">
+              LinkedIn &rarr;
+            </a>
+            <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="cta-pill">
+              GitHub &rarr;
+            </a>
+          </div>
+        </div>
+        <div class="hero-photo-wrap">
+          <img src="https://media.licdn.com/dms/image/v2/D5603AQESlFULlS13Mg/profile-displayphoto-scale_400_400/B56ZuApjrfK8Ak-/0/1767389937021?e=1775088000&v=beta&t=kTmrkVCrLarUmRgza7u_lIjIJW-eoNz1wgBEqDL8mt8" alt="Roman Licursi" class="hero-photo" loading="lazy" />
+        </div>
       </div>
     </div>
   </section>
@@ -617,9 +645,10 @@
             <span class="chip">pandas</span>
           </div>
           <p class="project-desc">
-            Caught and resolved 7,984 data quality issues before they reached analytics — across 50,000 orders
-            and a multi-source dataset. Five analytics tables built with CTEs and window functions: fct_orders
-            (47K rows), dim_customers (11K), product_performance, marketing_attribution, and daily_metrics.
+            End-to-end ETL pipeline across a 50,000-order multi-source e-commerce dataset — catching and
+            resolving 7,984 data quality issues before they reached analytics consumers. Five analytics tables
+            built with CTEs and window functions: fct_orders (47K rows), dim_customers (11K),
+            product_performance, marketing_attribution, and daily_metrics.
             Designed for AWS production deployment (S3 &rarr; Glue &rarr; Athena &rarr; QuickSight).
           </p>
           <div class="metrics">
@@ -648,11 +677,11 @@
             <span class="chip">pandas</span>
           </div>
           <p class="project-desc">
-            Lifted MQL&rarr;SQL conversion by 12% with a dual-model lead scoring system combining rule-based
-            logic and logistic regression. Scores leads on behavioral attributes (pages viewed, CTA clicks,
-            email opens) and firmographic signals (revenue, company size, industry). Automated Slack alerts
-            fire when leads exceed a configurable threshold. Production-ready pipeline with StandardScaler,
-            OneHotEncoder, and fallback error handling.
+            Dual-model lead scoring system combining rule-based logic and logistic regression, modeled to
+            project a 12% MQL&rarr;SQL conversion lift. Scores leads on behavioral attributes (pages viewed,
+            CTA clicks, email opens) and firmographic signals (revenue, company size, industry). Automated
+            Slack alerts fire when leads exceed a configurable threshold. Production-ready pipeline with
+            StandardScaler, OneHotEncoder, and fallback error handling.
           </p>
           <div class="metrics">
             <span class="metric">12% MQL→SQL lift</span>
@@ -679,10 +708,11 @@
             <span class="chip">scikit-learn</span>
           </div>
           <p class="project-desc">
-            Surfaced $131K in saveable MRR and flagged LinkedIn as a high-CAC channel — a full RevOps analytics
-            suite built on a churn prediction model (logistic regression, AUC 0.793) that flagged 22.8% of
-            accounts as at-risk. Layered CAC/payback analysis by channel, funnel drop-off tracking
-            (Lead &rarr; MQL &rarr; SQL &rarr; Customer), and cohort retention analysis.
+            Full-stack RevOps analytics suite built on a modeled B2B SaaS dataset. Churn prediction model
+            (logistic regression, AUC 0.793) flagged 22.8% of accounts as at-risk, surfacing $131K in
+            at-risk MRR. Layered CAC/payback analysis by channel, funnel drop-off tracking
+            (Lead &rarr; MQL &rarr; SQL &rarr; Customer), and cohort retention analysis — with LinkedIn
+            flagged as high CAC, long payback.
           </p>
           <div class="metrics">
             <span class="metric">AUC 0.793</span>
@@ -836,7 +866,6 @@
             <span class="skill-tag">CRM</span>
             <span class="skill-tag">Data Enrichment</span>
             <span class="skill-tag">Email Campaigning</span>
-            <span class="skill-tag">B2B SaaS</span>
             <span class="skill-tag">Data Sourcing</span>
             <span class="skill-tag">Go-to-Market Strategy</span>
           </div>
