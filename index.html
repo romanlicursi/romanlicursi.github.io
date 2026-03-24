@@ -461,101 +461,208 @@
     }
 
     /* ── Now sections ── */
-    .now-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-    }
+    .now-block { margin-bottom: 40px; }
+    .now-block:last-child { margin-bottom: 0; }
     .now-block-heading {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .now-block-heading .now-emoji {
-      font-size: 16px;
-      line-height: 1;
-    }
-    .now-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .now-item {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-    .now-item a {
-      color: var(--color-muted);
-      transition: color 150ms;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: color 150ms, border-color 150ms;
-    }
-    .now-item a:hover {
-      color: var(--color-text);
-      border-bottom-color: var(--color-border);
-    }
-    .now-item-meta {
-      font-size: 12px;
-      color: var(--color-border);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .now-playing-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      background: var(--color-result-bg);
-      padding: 2px 7px;
-      border-radius: 999px;
-      border: 1px solid rgba(34,197,94,0.25);
-      flex-shrink: 0;
-    }
-    .now-playing-badge::before {
-      content: '';
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      background: var(--color-accent);
-      border-radius: 50%;
-      animation: pulse 1.4s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-    .now-rating {
-      color: var(--color-accent);
       font-size: 11px;
-      opacity: 0.8;
-      flex-shrink: 0;
-    }
-    .now-empty {
-      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--color-muted);
-      font-style: italic;
-      opacity: 0.6;
+      margin-bottom: 14px;
     }
-    .now-loading {
+    .now-loading, .now-empty {
       font-size: 13px;
       color: var(--color-muted);
       opacity: 0.5;
+      font-style: italic;
     }
-    @media (max-width: 640px) {
-      .now-grid { grid-template-columns: 1fr; gap: 36px; }
+
+    /* ── Movie poster shelf ── */
+    .flicks-shelf {
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
     }
+    .flick-item {
+      position: relative;
+      flex-shrink: 0;
+      margin-left: -14px;
+      cursor: pointer;
+      transition: transform 260ms cubic-bezier(0.34, 1.4, 0.64, 1), z-index 0ms;
+      perspective: 700px;
+    }
+    .flick-item:first-child { margin-left: 0; }
+    .flick-item:hover {
+      transform: translateY(-14px) scale(1.13) rotateY(-7deg);
+      z-index: 10;
+    }
+    .flick-poster {
+      width: 76px;
+      height: 114px;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      box-shadow: 4px 6px 18px rgba(0,0,0,0.65), inset 1px 1px 0 rgba(255,255,255,0.07);
+    }
+    .flick-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13,13,15,0.97);
+      border: 1px solid var(--color-border);
+      border-radius: 5px;
+      padding: 6px 10px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 150ms;
+      z-index: 20;
+      text-align: center;
+    }
+    .flick-tooltip-title { font-size: 12px; font-weight: 500; color: var(--color-text); }
+    .flick-tooltip-meta  { font-size: 11px; color: var(--color-accent); margin-top: 2px; }
+    .flick-item:hover .flick-tooltip { opacity: 1; }
+
+    /* ── Jams turntable ── */
+    .jams-turntable {
+      background: linear-gradient(148deg, #f5c97c 0%, #e8a84a 38%, #d4894a 68%, #bf6e3a 100%);
+      border-radius: 10px;
+      padding: 18px 20px;
+      height: 9rem;
+      position: relative;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.38),
+        inset 0 -1px 0 rgba(0,0,0,0.12),
+        inset 0 0 0 0.75px #b87038,
+        0 2px 14px rgba(0,0,0,0.32);
+      color: #5c2e00;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .jams-turntable-text {
+      position: absolute;
+      top: 1rem;
+      left: 1.25rem;
+      width: 42%;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .jams-now-badge {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(74,30,0,0.6);
+    }
+    .jams-track-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #3d1800;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    .jams-track-artist {
+      font-size: 12px;
+      color: rgba(74,30,0,0.65);
+      margin-top: 1px;
+    }
+    .jams-vinyl-wrap {
+      position: absolute;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      width: 116px;
+      height: 116px;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.4));
+    }
+    .jams-vinyl-disc {
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      background: conic-gradient(
+        #181818 0deg, #242424 18deg, #181818 36deg, #242424 54deg,
+        #181818 72deg, #242424 90deg, #181818 108deg, #242424 126deg,
+        #181818 144deg, #242424 162deg, #181818 180deg, #242424 198deg,
+        #181818 216deg, #242424 234deg, #181818 252deg, #242424 270deg,
+        #181818 288deg, #242424 306deg, #181818 324deg, #242424 342deg, #181818 360deg
+      );
+      position: absolute;
+      top: 0; left: 0;
+      animation: spin-vinyl 8s linear infinite;
+      animation-play-state: paused;
+    }
+    .jams-vinyl.spinning .jams-vinyl-disc { animation-play-state: running; }
+    .jams-vinyl-art {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      border: 2px solid #0d0d0f;
+    }
+    .jams-vinyl-hole {
+      width: 8px;
+      height: 8px;
+      background: #111;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    @keyframes spin-vinyl {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .jams-recents {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .jam-thumb-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .jam-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 4px;
+      object-fit: cover;
+      display: block;
+      opacity: 0.7;
+      transition: opacity 150ms, transform 150ms;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .jam-thumb-wrap:hover .jam-thumb { opacity: 1; transform: scale(1.1); }
+    .jam-thumb-tooltip {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(13,13,15,0.97);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 11px;
+      white-space: nowrap;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 150ms;
+      z-index: 20;
+    }
+    .jam-thumb-wrap:hover .jam-thumb-tooltip { opacity: 1; }
 
     /* ── Contact ── */
     #contact { text-align: center; padding-bottom: 100px; }
@@ -1003,27 +1110,34 @@
   <section id="now" class="reveal">
     <div class="container">
       <h2 class="section-label">Now</h2>
-      <div class="now-grid">
 
-        <div class="now-block" id="flicks-block">
-          <div class="now-block-heading">
-            <span class="now-emoji">🎬</span> Recent flicks
-          </div>
-          <div class="now-list" id="flicks-list">
-            <span class="now-loading">Loading…</span>
-          </div>
+      <div class="now-block">
+        <div class="now-block-heading">🎬 &nbsp;Recent flicks</div>
+        <div class="flicks-shelf" id="flicks-shelf">
+          <span class="now-loading">Loading…</span>
         </div>
-
-        <div class="now-block" id="jams-block">
-          <div class="now-block-heading">
-            <span class="now-emoji">🎧</span> Recent jams
-          </div>
-          <div class="now-list" id="jams-list">
-            <span class="now-loading">Loading…</span>
-          </div>
-        </div>
-
       </div>
+
+      <div class="now-block">
+        <div class="now-block-heading">🎧 &nbsp;Recent jams</div>
+        <div class="jams-turntable" id="jams-turntable" style="display:none">
+          <div class="jams-turntable-text">
+            <div class="jams-now-badge" id="jams-badge">Now Playing</div>
+            <div class="jams-track-title" id="jams-title">—</div>
+            <div class="jams-track-artist" id="jams-artist">—</div>
+          </div>
+          <div class="jams-vinyl-wrap">
+            <div class="jams-vinyl" id="jams-vinyl">
+              <div class="jams-vinyl-disc"></div>
+              <img class="jams-vinyl-art" id="jams-art" src="" alt="">
+              <div class="jams-vinyl-hole"></div>
+            </div>
+          </div>
+        </div>
+        <div class="jams-recents" id="jams-recents"></div>
+        <span class="now-empty" id="jams-empty" style="display:none">No recent scrobbles yet.</span>
+      </div>
+
     </div>
   </section>
 
@@ -1089,68 +1203,106 @@
 
     // ── Now: Recent flicks (Letterboxd RSS) ──
     async function loadFlicks() {
-      const el = document.getElementById('flicks-list');
+      const shelf = document.getElementById('flicks-shelf');
       try {
         const proxy = 'https://api.allorigins.win/raw?url=';
         const feed  = 'https://letterboxd.com/romanlicursi/rss/';
         const res   = await fetch(proxy + encodeURIComponent(feed));
         if (!res.ok) throw new Error('fetch failed');
         const text  = await res.text();
-        const xml   = new DOMParser().parseFromString(text, 'text/xml');
-        const ns    = 'https://letterboxd.com';
+        const xml   = new DOMParser().parseFromString(text, 'application/xml');
         const items = [...xml.querySelectorAll('item')].slice(0, 5);
-        if (!items.length) { el.innerHTML = '<span class="now-empty">No films logged yet.</span>'; return; }
-        el.innerHTML = items.map(item => {
-          const titleRaw  = item.querySelector('title')?.textContent || '';
-          const link      = item.querySelector('link')?.nextSibling?.textContent?.trim()
-                         || item.querySelector('guid')?.textContent || '#';
-          // Letterboxd title format: "Film Name, Year - ★★★½"
-          const titleMatch = titleRaw.match(/^(.+?),\s*(\d{4})/);
-          const name  = titleMatch ? titleMatch[1].trim() : titleRaw.replace(/,\s*\d{4}.*$/, '').trim();
-          const year  = titleMatch ? titleMatch[2] : '';
-          const ratingMatch = titleRaw.match(/(★[★½]*)/);
-          const rating = ratingMatch ? ratingMatch[1] : '';
-          return `<div class="now-item">
-            <a href="${link}" target="_blank" rel="noopener">${name}</a>
-            <span class="now-item-meta">${year}</span>
-            ${rating ? `<span class="now-rating">${rating}</span>` : ''}
+        if (!items.length) { shelf.innerHTML = '<span class="now-empty">No films logged yet.</span>'; return; }
+
+        shelf.innerHTML = items.map(item => {
+          // Use letterboxd namespace elements, fall back to parsing title text
+          const ns        = 'https://letterboxd.com';
+          const filmTitle = item.getElementsByTagNameNS(ns, 'filmTitle')[0]?.textContent
+                         || item.querySelector('title')?.textContent?.replace(/,\s*\d{4}.*$/, '').trim()
+                         || 'Unknown';
+          const filmYear  = item.getElementsByTagNameNS(ns, 'filmYear')[0]?.textContent || '';
+          const ratingRaw = item.getElementsByTagNameNS(ns, 'memberRating')[0]?.textContent;
+          const stars     = ratingRaw
+            ? '★'.repeat(Math.floor(parseFloat(ratingRaw))) + (parseFloat(ratingRaw) % 1 ? '½' : '')
+            : '';
+
+          // Poster image is in the <description> HTML as an <img src="...">
+          const desc     = item.querySelector('description')?.textContent || '';
+          const imgMatch = desc.match(/<img[^>]+src="([^"]+)"/i);
+          const poster   = imgMatch ? imgMatch[1] : '';
+
+          const link = item.querySelector('guid')?.textContent?.trim() || '#';
+
+          const meta = [filmYear, stars].filter(Boolean).join(' · ');
+          const tooltip = `<div class="flick-tooltip">
+            <div class="flick-tooltip-title">${filmTitle}</div>
+            ${meta ? `<div class="flick-tooltip-meta">${meta}</div>` : ''}
           </div>`;
+
+          return `<a href="${link}" target="_blank" rel="noopener" class="flick-item">
+            <img class="flick-poster" src="${poster}" alt="${filmTitle}" loading="lazy">
+            ${tooltip}
+          </a>`;
         }).join('');
       } catch (e) {
-        el.innerHTML = '<span class="now-empty">Couldn\'t load flicks right now.</span>';
+        shelf.innerHTML = '<span class="now-empty">Couldn\'t load flicks right now.</span>';
       }
     }
 
     // ── Now: Recent jams (Last.fm API) ──
-    // Get a free API key at https://www.last.fm/api/account/create and replace below
     const LASTFM_API_KEY = 'dbc4003d252a868be4a864e9eba11557';
     const LASTFM_USER    = 'rlicursi';
+    const LASTFM_DEFAULT_IMG = '2a96cbd8b46e442fc41c2b86b821562f';
 
     async function loadJams() {
-      const el = document.getElementById('jams-list');
-      if (LASTFM_API_KEY === 'YOUR_LASTFM_API_KEY') {
-        el.innerHTML = '<span class="now-empty">Last.fm API key not configured.</span>';
-        return;
-      }
+      const turntable = document.getElementById('jams-turntable');
+      const recents   = document.getElementById('jams-recents');
+      const emptyEl   = document.getElementById('jams-empty');
       try {
-        const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=9`;
+        const url  = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=9`;
         const res  = await fetch(url);
         if (!res.ok) throw new Error('fetch failed');
         const data = await res.json();
-        const tracks = data?.recenttracks?.track;
-        if (!tracks || !tracks.length) { el.innerHTML = '<span class="now-empty">No recent scrobbles yet.</span>'; return; }
-        el.innerHTML = tracks.slice(0, 8).map((t, i) => {
-          const nowPlaying = t['@attr']?.nowplaying === 'true';
-          const name   = t.name || '';
-          const artist = t.artist?.['#text'] || '';
-          const trackUrl = `https://www.last.fm/user/${LASTFM_USER}`;
-          return `<div class="now-item">
-            ${nowPlaying ? '<span class="now-playing-badge">now</span>' : ''}
-            <a href="${trackUrl}" target="_blank" rel="noopener">${name} — <em>${artist}</em></a>
-          </div>`;
-        }).join('');
+        let tracks = data?.recenttracks?.track;
+        if (!tracks) { emptyEl.style.display = ''; return; }
+        if (!Array.isArray(tracks)) tracks = [tracks];
+        if (!tracks.length) { emptyEl.style.display = ''; return; }
+
+        const isNowPlaying = tracks[0]?.['@attr']?.nowplaying === 'true';
+        const featured     = tracks[0];
+        const recentTracks = tracks.slice(1, 8);
+
+        // Render turntable with featured track
+        const getImg = (track, size) =>
+          track.image?.find(i => i.size === size)?.['#text'] || '';
+        const featArt = getImg(featured, 'large') || getImg(featured, 'medium');
+        const hasArt  = featArt && !featArt.includes(LASTFM_DEFAULT_IMG);
+
+        document.getElementById('jams-title').textContent  = featured.name || '—';
+        document.getElementById('jams-artist').textContent = featured.artist?.['#text'] || '—';
+        document.getElementById('jams-badge').textContent  = isNowPlaying ? 'Now Playing' : 'Last Played';
+        const artEl = document.getElementById('jams-art');
+        if (hasArt) { artEl.src = featArt; artEl.alt = featured.name; }
+        else { artEl.style.display = 'none'; }
+        if (isNowPlaying) document.getElementById('jams-vinyl').classList.add('spinning');
+        turntable.style.display = '';
+
+        // Render recent thumbnails
+        if (recentTracks.length) {
+          recents.innerHTML = recentTracks.map(t => {
+            const art    = getImg(t, 'medium') || getImg(t, 'small');
+            const hasImg = art && !art.includes(LASTFM_DEFAULT_IMG);
+            const label  = `${t.name} — ${t.artist?.['#text'] || ''}`;
+            const href   = `https://www.last.fm/music/${encodeURIComponent(t.artist?.['#text'] || '')}/_/${encodeURIComponent(t.name || '')}`;
+            return `<a href="${href}" target="_blank" rel="noopener" class="jam-thumb-wrap">
+              ${hasImg ? `<img class="jam-thumb" src="${art}" alt="${t.name}" loading="lazy">` : `<div class="jam-thumb" style="background:var(--color-surface);border:1px solid var(--color-border)"></div>`}
+              <div class="jam-thumb-tooltip">${label}</div>
+            </a>`;
+          }).join('');
+        }
       } catch (e) {
-        el.innerHTML = '<span class="now-empty">Couldn\'t load tracks right now.</span>';
+        emptyEl.textContent = 'Couldn\'t load tracks right now.';
+        emptyEl.style.display = '';
       }
     }
 
