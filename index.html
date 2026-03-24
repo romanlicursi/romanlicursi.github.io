@@ -110,8 +110,8 @@
     .hero-text { flex: 1; min-width: 0; }
     .hero-photo-wrap { flex-shrink: 0; padding-top: 8px; }
     .hero-photo {
-      width: 140px;
-      height: 140px;
+      width: 168px;
+      height: 168px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--color-border);
@@ -1454,7 +1454,7 @@
             const r = i.getElementsByTagName('user_rating')[0]?.textContent;
             return r && parseInt(r) > 0;
           })
-          .slice(0, 3);
+          .slice(0, 4);
         if (!items.length) { shelf.innerHTML = '<span class="now-empty">No rated books yet.</span>'; return; }
 
         shelf.innerHTML = items.map(item => {
