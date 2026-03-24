@@ -678,49 +678,6 @@
       z-index: 2;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
     }
-    .jams-recents {
-      display: flex;
-      gap: 8px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .jams-recents::-webkit-scrollbar { display: none; }
-    .jam-thumb-wrap { position: relative; flex-shrink: 0; }
-    .jam-thumb {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      opacity: 0.6;
-      transition: opacity 200ms, transform 200ms;
-      border: 1.5px solid rgba(255,255,255,0.05);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-    .jam-thumb-wrap:hover .jam-thumb { opacity: 1; transform: scale(1.18); }
-    .jam-thumb-tooltip {
-      position: absolute;
-      bottom: calc(100% + 6px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(10,10,12,0.97);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 5px;
-      padding: 4px 9px;
-      font-size: 11px;
-      white-space: nowrap;
-      max-width: 200px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 150ms;
-      z-index: 20;
-      color: var(--color-text);
-      backdrop-filter: blur(8px);
-    }
-    .jam-thumb-wrap:hover .jam-thumb-tooltip { opacity: 1; }
 
     /* ── Movie poster shelf ── */
     .flicks-shelf-wrap {
@@ -1296,7 +1253,6 @@
             </div>
           </div>
         </div>
-        <div class="jams-recents" id="jams-recents"></div>
         <span class="now-empty" id="jams-empty" style="display:none">No recent scrobbles yet.</span>
       </div>
 
@@ -1304,6 +1260,16 @@
         <div class="now-block-heading">recent flicks</div>
         <div class="flicks-shelf-wrap">
           <div class="flicks-shelf" id="flicks-shelf">
+            <span class="now-loading">Loading…</span>
+          </div>
+          <div class="shelf-line"></div>
+        </div>
+      </div>
+
+      <div class="now-block">
+        <div class="now-block-heading">recent reads</div>
+        <div class="flicks-shelf-wrap">
+          <div class="flicks-shelf" id="reads-shelf">
             <span class="now-loading">Loading…</span>
           </div>
           <div class="shelf-line"></div>
@@ -1464,27 +1430,60 @@
         if (isNowPlaying) document.getElementById('jams-vinyl').classList.add('spinning');
         turntable.style.display = '';
 
-        // Render recent thumbnails
-        if (recentTracks.length) {
-          recents.innerHTML = recentTracks.map(t => {
-            const art    = getImg(t, 'medium') || getImg(t, 'small');
-            const hasImg = art && !art.includes(LASTFM_DEFAULT_IMG);
-            const label  = `${t.name} — ${t.artist?.['#text'] || ''}`;
-            const href   = `https://www.last.fm/music/${encodeURIComponent(t.artist?.['#text'] || '')}/_/${encodeURIComponent(t.name || '')}`;
-            return `<a href="${href}" target="_blank" rel="noopener" class="jam-thumb-wrap">
-              ${hasImg ? `<img class="jam-thumb" src="${art}" alt="${t.name}" loading="lazy">` : `<div class="jam-thumb" style="background:var(--color-surface);border:1px solid var(--color-border)"></div>`}
-              <div class="jam-thumb-tooltip">${label}</div>
-            </a>`;
-          }).join('');
-        }
       } catch (e) {
         emptyEl.textContent = 'Couldn\'t load tracks right now.';
         emptyEl.style.display = '';
       }
     }
 
+
+    // ── Now: Recent reads (Goodreads RSS) ──
+    async function loadReads() {
+      const shelf = document.getElementById('reads-shelf');
+      try {
+        const proxy = 'https://corsproxy.io/?url=';
+        const feed  = 'https://www.goodreads.com/review/list_rss/108552445?shelf=read&sort=date_read&order=d&per_page=20';
+        const res   = await fetch(proxy + encodeURIComponent(feed));
+        if (!res.ok) throw new Error('fetch failed');
+        const text  = await res.text();
+        const xml   = new DOMParser().parseFromString(text, 'application/xml');
+        const allItems = [...xml.querySelectorAll('item')];
+        // Only rated books
+        const items = allItems
+          .filter(i => {
+            const r = i.getElementsByTagName('user_rating')[0]?.textContent;
+            return r && parseInt(r) > 0;
+          })
+          .slice(0, 3);
+        if (!items.length) { shelf.innerHTML = '<span class="now-empty">No rated books yet.</span>'; return; }
+
+        shelf.innerHTML = items.map(item => {
+          const title  = item.querySelector('title')?.textContent?.trim() || 'Unknown';
+          const author = item.getElementsByTagName('author_name')[0]?.textContent?.trim() || '';
+          const img    = item.getElementsByTagName('book_large_image_url')[0]?.textContent?.trim()
+                      || item.getElementsByTagName('book_image_url')[0]?.textContent?.trim() || '';
+          const rating = parseInt(item.getElementsByTagName('user_rating')[0]?.textContent || '0');
+          const stars  = rating ? '★'.repeat(rating) : '';
+          const link   = item.querySelector('link')?.nextSibling?.textContent?.trim()
+                      || item.querySelector('guid')?.textContent?.trim() || '#';
+
+          const meta = [author, stars].filter(Boolean).join(' · ');
+          return `<a href="${link}" target="_blank" rel="noopener" class="flick-item">
+            <img class="flick-poster" src="${img}" alt="${title}" loading="lazy">
+            <div class="flick-tooltip">
+              <div class="flick-tooltip-title">${title}</div>
+              ${meta ? `<div class="flick-tooltip-meta">${meta}</div>` : ''}
+            </div>
+          </a>`;
+        }).join('');
+      } catch (e) {
+        shelf.innerHTML = '<span class="now-empty">Couldn\'t load books right now.</span>';
+      }
+    }
+
     loadFlicks();
     loadJams();
+    loadReads();
   </script>
 
 </body>
