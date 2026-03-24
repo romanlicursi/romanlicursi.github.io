@@ -461,197 +461,253 @@
     }
 
     /* ── Now sections ── */
-    .now-block { margin-bottom: 40px; }
+    .now-block { margin-bottom: 44px; }
     .now-block:last-child { margin-bottom: 0; }
     .now-block-heading {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--color-muted);
-      margin-bottom: 14px;
+      color: rgba(122,122,138,0.4);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .now-block-heading::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--color-border), transparent);
     }
     .now-loading, .now-empty {
       font-size: 13px;
       color: var(--color-muted);
-      opacity: 0.5;
+      opacity: 0.4;
       font-style: italic;
     }
 
-    /* ── Movie poster shelf ── */
-    .flicks-shelf {
-      display: flex;
-      align-items: flex-end;
-      gap: 0;
-    }
-    .flick-item {
-      position: relative;
-      flex-shrink: 0;
-      margin-left: -14px;
-      cursor: pointer;
-      transition: transform 260ms cubic-bezier(0.34, 1.4, 0.64, 1), z-index 0ms;
-      perspective: 700px;
-    }
-    .flick-item:first-child { margin-left: 0; }
-    .flick-item:hover {
-      transform: translateY(-14px) scale(1.13) rotateY(-7deg);
-      z-index: 10;
-    }
-    .flick-poster {
-      width: 76px;
-      height: 114px;
-      object-fit: cover;
-      border-radius: 3px;
-      display: block;
-      box-shadow: 4px 6px 18px rgba(0,0,0,0.65), inset 1px 1px 0 rgba(255,255,255,0.07);
-    }
-    .flick-tooltip {
-      position: absolute;
-      bottom: calc(100% + 10px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(13,13,15,0.97);
-      border: 1px solid var(--color-border);
-      border-radius: 5px;
-      padding: 6px 10px;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 150ms;
-      z-index: 20;
-      text-align: center;
-    }
-    .flick-tooltip-title { font-size: 12px; font-weight: 500; color: var(--color-text); }
-    .flick-tooltip-meta  { font-size: 11px; color: var(--color-accent); margin-top: 2px; }
-    .flick-item:hover .flick-tooltip { opacity: 1; }
-
     /* ── Jams turntable ── */
     .jams-turntable {
-      background: linear-gradient(148deg, #f5c97c 0%, #e8a84a 38%, #d4894a 68%, #bf6e3a 100%);
-      border-radius: 10px;
-      padding: 18px 20px;
-      height: 9rem;
       position: relative;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.38),
-        inset 0 -1px 0 rgba(0,0,0,0.12),
-        inset 0 0 0 0.75px #b87038,
-        0 2px 14px rgba(0,0,0,0.32);
-      color: #5c2e00;
+      height: 160px;
+      border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
+      background:
+        repeating-linear-gradient(
+          91deg,
+          transparent 0px, transparent 3px,
+          rgba(0,0,0,0.035) 3px, rgba(0,0,0,0.035) 4px,
+          transparent 4px, transparent 10px,
+          rgba(0,0,0,0.02) 10px, rgba(0,0,0,0.02) 11px
+        ),
+        linear-gradient(155deg, #f0be68 0%, #e49a38 26%, #cd8132 54%, #b56725 100%);
+      box-shadow:
+        inset 0 1.5px 0 rgba(255,255,255,0.42),
+        inset 0 -1px 0 rgba(0,0,0,0.2),
+        inset 0 0 0 1px rgba(155,85,15,0.65),
+        0 4px 28px rgba(0,0,0,0.45),
+        0 1px 3px rgba(0,0,0,0.25);
+    }
+    .jams-turntable::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 18% 45%, rgba(255,215,130,0.22) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
     }
     .jams-turntable-text {
       position: absolute;
-      top: 1rem;
-      left: 1.25rem;
-      width: 42%;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 1.5rem;
+      width: 40%;
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 6px;
+      z-index: 1;
     }
     .jams-now-badge {
-      font-size: 9px;
+      font-size: 8.5px;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(74,30,0,0.6);
+      color: rgba(50,18,0,0.48);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .jams-now-badge.is-live::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background: #b83030;
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: live-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.45; transform: scale(0.65); }
     }
     .jams-track-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #3d1800;
-      line-height: 1.3;
+      font-size: 16px;
+      font-weight: 700;
+      color: #271000;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.22);
     }
     .jams-track-artist {
       font-size: 12px;
-      color: rgba(74,30,0,0.65);
-      margin-top: 1px;
+      font-weight: 500;
+      color: rgba(45,16,0,0.58);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.18);
     }
     .jams-vinyl-wrap {
       position: absolute;
       top: 50%;
-      right: 1.5rem;
+      right: 1.75rem;
       transform: translateY(-50%);
-      width: 116px;
-      height: 116px;
-      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.4));
+      width: 144px;
+      height: 144px;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+      z-index: 1;
     }
-    .jams-vinyl-disc {
-      width: 116px;
-      height: 116px;
-      border-radius: 50%;
-      background: conic-gradient(
-        #181818 0deg, #242424 18deg, #181818 36deg, #242424 54deg,
-        #181818 72deg, #242424 90deg, #181818 108deg, #242424 126deg,
-        #181818 144deg, #242424 162deg, #181818 180deg, #242424 198deg,
-        #181818 216deg, #242424 234deg, #181818 252deg, #242424 270deg,
-        #181818 288deg, #242424 306deg, #181818 324deg, #242424 342deg, #181818 360deg
-      );
+    .jams-vinyl-wrap::after {
+      content: '';
       position: absolute;
-      top: 0; left: 0;
-      animation: spin-vinyl 8s linear infinite;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 75%;
+      height: 14px;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .jams-vinyl {
+      width: 144px;
+      height: 144px;
+      position: relative;
+      animation: spin-vinyl 1.9s linear infinite;
       animation-play-state: paused;
     }
-    .jams-vinyl.spinning .jams-vinyl-disc { animation-play-state: running; }
-    .jams-vinyl-art {
-      width: 54px;
-      height: 54px;
+    .jams-vinyl.spinning { animation-play-state: running; }
+    @keyframes spin-vinyl {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .jams-vinyl-disc {
+      width: 144px;
+      height: 144px;
       border-radius: 50%;
-      object-fit: cover;
+      position: absolute;
+      top: 0; left: 0;
+      background: conic-gradient(
+        #131313 0deg,   #202020 6deg,   #131313 12deg,  #1d1d1d 18deg,
+        #131313 24deg,  #212121 30deg,  #131313 36deg,  #1e1e1e 42deg,
+        #131313 48deg,  #202020 54deg,  #131313 60deg,  #1d1d1d 66deg,
+        #131313 72deg,  #212121 78deg,  #131313 84deg,  #1e1e1e 90deg,
+        #131313 96deg,  #202020 102deg, #131313 108deg, #1d1d1d 114deg,
+        #131313 120deg, #212121 126deg, #131313 132deg, #1e1e1e 138deg,
+        #131313 144deg, #202020 150deg, #131313 156deg, #1d1d1d 162deg,
+        #131313 168deg, #212121 174deg, #131313 180deg, #1e1e1e 186deg,
+        #131313 192deg, #202020 198deg, #131313 204deg, #1d1d1d 210deg,
+        #131313 216deg, #212121 222deg, #131313 228deg, #1e1e1e 234deg,
+        #131313 240deg, #202020 246deg, #131313 252deg, #1d1d1d 258deg,
+        #131313 264deg, #212121 270deg, #131313 276deg, #1e1e1e 282deg,
+        #131313 288deg, #202020 294deg, #131313 300deg, #1d1d1d 306deg,
+        #131313 312deg, #212121 318deg, #131313 324deg, #1e1e1e 330deg,
+        #131313 336deg, #202020 342deg, #131313 348deg, #1d1d1d 354deg, #131313 360deg
+      );
+    }
+    .jams-vinyl-disc::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle at center,
+        transparent 0%,           transparent 26%,
+        rgba(255,255,255,0.055) 26%, rgba(255,255,255,0.055) 27%,
+        transparent 27%,           transparent 32%,
+        rgba(255,255,255,0.04)  32%, rgba(255,255,255,0.04)  33%,
+        transparent 33%,           transparent 38%,
+        rgba(255,255,255,0.032) 38%, rgba(255,255,255,0.032) 39%,
+        transparent 39%,           transparent 44%,
+        rgba(255,255,255,0.025) 44%, rgba(255,255,255,0.025) 45%,
+        transparent 45%,           transparent 49%,
+        rgba(255,255,255,0.018) 49%, rgba(255,255,255,0.018) 50%,
+        transparent 50%
+      );
+      pointer-events: none;
+    }
+    .jams-vinyl-label {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #1a1a2e;
       z-index: 1;
-      border: 2px solid #0d0d0f;
+      border: 1.5px solid rgba(0,0,0,0.5);
+    }
+    .jams-vinyl-art {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
     }
     .jams-vinyl-hole {
-      width: 8px;
-      height: 8px;
-      background: #111;
+      width: 7px;
+      height: 7px;
+      background: #0d0d0f;
       border-radius: 50%;
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       z-index: 2;
-    }
-    @keyframes spin-vinyl {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
     }
     .jams-recents {
       display: flex;
       gap: 8px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-    .jam-thumb-wrap {
-      position: relative;
-      flex-shrink: 0;
-    }
+    .jams-recents::-webkit-scrollbar { display: none; }
+    .jam-thumb-wrap { position: relative; flex-shrink: 0; }
     .jam-thumb {
-      width: 44px;
-      height: 44px;
-      border-radius: 4px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
       object-fit: cover;
       display: block;
-      opacity: 0.7;
-      transition: opacity 150ms, transform 150ms;
-      border: 1px solid rgba(255,255,255,0.04);
+      opacity: 0.6;
+      transition: opacity 200ms, transform 200ms;
+      border: 1.5px solid rgba(255,255,255,0.05);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
-    .jam-thumb-wrap:hover .jam-thumb { opacity: 1; transform: scale(1.1); }
+    .jam-thumb-wrap:hover .jam-thumb { opacity: 1; transform: scale(1.18); }
     .jam-thumb-tooltip {
       position: absolute;
       bottom: calc(100% + 6px);
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(13,13,15,0.97);
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
-      padding: 4px 8px;
+      background: rgba(10,10,12,0.97);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 5px;
+      padding: 4px 9px;
       font-size: 11px;
       white-space: nowrap;
       max-width: 200px;
@@ -661,8 +717,117 @@
       opacity: 0;
       transition: opacity 150ms;
       z-index: 20;
+      color: var(--color-text);
+      backdrop-filter: blur(8px);
     }
     .jam-thumb-wrap:hover .jam-thumb-tooltip { opacity: 1; }
+
+    /* ── Movie poster shelf ── */
+    .flicks-shelf-wrap {
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .flicks-shelf-wrap::before,
+    .flicks-shelf-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 10px;
+      width: 28px;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .flicks-shelf-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, var(--color-bg), transparent);
+    }
+    .flicks-shelf-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, var(--color-bg), transparent);
+    }
+    .shelf-line {
+      position: absolute;
+      bottom: 0;
+      left: -24px; right: -24px;
+      height: 2px;
+      background: linear-gradient(to right,
+        transparent 0%,
+        rgba(255,255,255,0.07) 15%,
+        rgba(255,255,255,0.11) 50%,
+        rgba(255,255,255,0.07) 85%,
+        transparent 100%
+      );
+    }
+    .shelf-line::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 0; right: 0;
+      height: 8px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.22), transparent);
+    }
+    .flicks-shelf {
+      display: flex;
+      align-items: flex-end;
+      gap: 0;
+      padding-bottom: 8px;
+    }
+    .flick-item {
+      position: relative;
+      flex-shrink: 0;
+      margin-left: -18px;
+      cursor: pointer;
+      transform: perspective(500px) rotateY(-14deg);
+      transform-origin: bottom center;
+      transition: transform 290ms cubic-bezier(0.34, 1.38, 0.64, 1);
+    }
+    .flick-item:first-child { margin-left: 0; }
+    .flick-item:hover {
+      transform: perspective(500px) rotateY(0deg) translateY(-18px) scale(1.1);
+      z-index: 10;
+    }
+    .flick-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 9px;
+      background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.12), transparent);
+      border-radius: 3px 0 0 3px;
+      z-index: 1;
+      pointer-events: none;
+      transition: opacity 200ms;
+    }
+    .flick-item:hover::before { opacity: 0; }
+    .flick-poster {
+      width: 88px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+      box-shadow:
+        6px 10px 28px rgba(0,0,0,0.72),
+        0 2px 4px rgba(0,0,0,0.35),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .flick-tooltip {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10,10,12,0.96);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 7px 12px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 150ms;
+      z-index: 20;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .flick-tooltip-title { font-size: 12px; font-weight: 500; color: #e8e8ec; }
+    .flick-tooltip-meta  { font-size: 11px; color: var(--color-accent); margin-top: 3px; }
+    .flick-item:hover .flick-tooltip { opacity: 1; }
 
     /* ── Contact ── */
     #contact { text-align: center; padding-bottom: 100px; }
@@ -1113,20 +1278,21 @@
   <!-- ── Now ── -->
   <section id="now" class="reveal">
     <div class="container">
-      <h2 class="section-label">Now</h2>
 
       <div class="now-block">
-        <div class="now-block-heading">🎧 &nbsp;Recent jams</div>
+        <div class="now-block-heading">recent jams</div>
         <div class="jams-turntable" id="jams-turntable" style="display:none">
           <div class="jams-turntable-text">
-            <div class="jams-now-badge" id="jams-badge">Now Playing</div>
+            <div class="jams-now-badge" id="jams-badge">Last Played</div>
             <div class="jams-track-title" id="jams-title">—</div>
             <div class="jams-track-artist" id="jams-artist">—</div>
           </div>
           <div class="jams-vinyl-wrap">
             <div class="jams-vinyl" id="jams-vinyl">
               <div class="jams-vinyl-disc"></div>
-              <img class="jams-vinyl-art" id="jams-art" src="" alt="">
+              <div class="jams-vinyl-label">
+                <img class="jams-vinyl-art" id="jams-art" src="" alt="">
+              </div>
               <div class="jams-vinyl-hole"></div>
             </div>
           </div>
@@ -1136,9 +1302,12 @@
       </div>
 
       <div class="now-block">
-        <div class="now-block-heading">🎬 &nbsp;Recent flicks</div>
-        <div class="flicks-shelf" id="flicks-shelf">
-          <span class="now-loading">Loading…</span>
+        <div class="now-block-heading">recent flicks</div>
+        <div class="flicks-shelf-wrap">
+          <div class="flicks-shelf" id="flicks-shelf">
+            <span class="now-loading">Loading…</span>
+          </div>
+          <div class="shelf-line"></div>
         </div>
       </div>
 
@@ -1287,7 +1456,9 @@
 
         document.getElementById('jams-title').textContent  = featured.name || '—';
         document.getElementById('jams-artist').textContent = featured.artist?.['#text'] || '—';
-        document.getElementById('jams-badge').textContent  = isNowPlaying ? 'Now Playing' : 'Last Played';
+        const badge = document.getElementById('jams-badge');
+        badge.textContent = isNowPlaying ? 'Now Playing' : 'Last Played';
+        if (isNowPlaying) badge.classList.add('is-live');
         const artEl = document.getElementById('jams-art');
         if (hasArt) { artEl.src = featArt; artEl.alt = featured.name; }
         else { artEl.style.display = 'none'; }
