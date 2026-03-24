@@ -1112,13 +1112,6 @@
       <h2 class="section-label">Now</h2>
 
       <div class="now-block">
-        <div class="now-block-heading">🎬 &nbsp;Recent flicks</div>
-        <div class="flicks-shelf" id="flicks-shelf">
-          <span class="now-loading">Loading…</span>
-        </div>
-      </div>
-
-      <div class="now-block">
         <div class="now-block-heading">🎧 &nbsp;Recent jams</div>
         <div class="jams-turntable" id="jams-turntable" style="display:none">
           <div class="jams-turntable-text">
@@ -1136,6 +1129,13 @@
         </div>
         <div class="jams-recents" id="jams-recents"></div>
         <span class="now-empty" id="jams-empty" style="display:none">No recent scrobbles yet.</span>
+      </div>
+
+      <div class="now-block">
+        <div class="now-block-heading">🎬 &nbsp;Recent flicks</div>
+        <div class="flicks-shelf" id="flicks-shelf">
+          <span class="now-loading">Loading…</span>
+        </div>
       </div>
 
     </div>
@@ -1211,12 +1211,15 @@
         if (!res.ok) throw new Error('fetch failed');
         const text  = await res.text();
         const xml   = new DOMParser().parseFromString(text, 'application/xml');
-        const items = [...xml.querySelectorAll('item')].slice(0, 5);
-        if (!items.length) { shelf.innerHTML = '<span class="now-empty">No films logged yet.</span>'; return; }
+        const ns       = 'https://letterboxd.com';
+        const allItems = [...xml.querySelectorAll('item')];
+        // Only rated films (have a memberRating element)
+        const items    = allItems
+          .filter(i => i.getElementsByTagNameNS(ns, 'memberRating')[0]?.textContent)
+          .slice(0, 5);
+        if (!items.length) { shelf.innerHTML = '<span class="now-empty">No rated films yet.</span>'; return; }
 
         shelf.innerHTML = items.map(item => {
-          // Use letterboxd namespace elements, fall back to parsing title text
-          const ns        = 'https://letterboxd.com';
           const filmTitle = item.getElementsByTagNameNS(ns, 'filmTitle')[0]?.textContent
                          || item.querySelector('title')?.textContent?.replace(/,\s*\d{4}.*$/, '').trim()
                          || 'Unknown';
