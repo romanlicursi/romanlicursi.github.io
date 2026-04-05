@@ -1,0 +1,70 @@
+name: Update Recent Flicks
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch:         # manual trigger
+
+jobs:
+  update-flicks:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch and parse Letterboxd RSS
+        run: |
+          python3 << 'EOF'
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          import json
+          import re
+
+          url = 'https://letterboxd.com/romanlicursi/rss/'
+          req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+          with urllib.request.urlopen(req, timeout=15) as r:
+              data = r.read().decode('utf-8')
+
+          ns = 'https://letterboxd.com'
+          root = ET.fromstring(data)
+
+          flicks = []
+          for item in root.findall('.//item'):
+              rating_el = item.find(f'{{{ns}}}memberRating')
+              if rating_el is None:
+                  continue
+
+              title_el = item.find(f'{{{ns}}}filmTitle')
+              year_el  = item.find(f'{{{ns}}}filmYear')
+              desc_el  = item.find('description')
+              guid_el  = item.find('guid')
+
+              title  = title_el.text if title_el  is not None else 'Unknown'
+              year   = year_el.text  if year_el   is not None else ''
+              rating = float(rating_el.text)
+              link   = guid_el.text.strip() if guid_el is not None else '#'
+
+              poster = ''
+              if desc_el is not None and desc_el.text:
+                  m = re.search(r'<img[^>]+src="([^"]+)"', desc_el.text)
+                  if m:
+                      poster = m.group(1)
+
+              flicks.append({'title': title, 'year': year, 'rating': rating,
+                             'poster': poster, 'link': link})
+              if len(flicks) == 5:
+                  break
+
+          with open('flicks.json', 'w') as f:
+              json.dump(flicks, f)
+          print(f"Wrote {len(flicks)} flicks to flicks.json")
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add flicks.json
+          git diff --staged --quiet || git commit -m "chore: update recent flicks"
+          git push

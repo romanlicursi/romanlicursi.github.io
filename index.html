@@ -1381,40 +1381,19 @@
     );
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // ── Now: Recent flicks (Letterboxd RSS) ──
+    // ── Now: Recent flicks (pre-built JSON, updated by GitHub Actions) ──
     async function loadFlicks() {
       const shelf = document.getElementById('flicks-shelf');
       try {
-        const proxy = 'https://api.allorigins.win/raw?url=';
-        const feed  = 'https://letterboxd.com/romanlicursi/rss/';
-        const res   = await fetch(proxy + encodeURIComponent(feed));
+        const res   = await fetch('./flicks.json');
         if (!res.ok) throw new Error('fetch failed');
-        const text  = await res.text();
-        const xml   = new DOMParser().parseFromString(text, 'application/xml');
-        const ns       = 'https://letterboxd.com';
-        const allItems = [...xml.querySelectorAll('item')];
-        // Only rated films (have a memberRating element)
-        const items    = allItems
-          .filter(i => i.getElementsByTagNameNS(ns, 'memberRating')[0]?.textContent)
-          .slice(0, 5);
+        const items = await res.json();
         if (!items.length) { shelf.innerHTML = '<span class="now-empty">No rated films yet.</span>'; return; }
 
-        shelf.innerHTML = items.map(item => {
-          const filmTitle = item.getElementsByTagNameNS(ns, 'filmTitle')[0]?.textContent
-                         || item.querySelector('title')?.textContent?.replace(/,\s*\d{4}.*$/, '').trim()
-                         || 'Unknown';
-          const filmYear  = item.getElementsByTagNameNS(ns, 'filmYear')[0]?.textContent || '';
-          const ratingRaw = item.getElementsByTagNameNS(ns, 'memberRating')[0]?.textContent;
-          const stars     = ratingRaw
-            ? '★'.repeat(Math.floor(parseFloat(ratingRaw))) + (parseFloat(ratingRaw) % 1 ? '½' : '')
+        shelf.innerHTML = items.map(({ title: filmTitle, year: filmYear, rating: ratingRaw, poster, link }) => {
+          const stars = ratingRaw
+            ? '★'.repeat(Math.floor(ratingRaw)) + (ratingRaw % 1 ? '½' : '')
             : '';
-
-          // Poster image is in the <description> HTML as an <img src="...">
-          const desc     = item.querySelector('description')?.textContent || '';
-          const imgMatch = desc.match(/<img[^>]+src="([^"]+)"/i);
-          const poster   = imgMatch ? imgMatch[1] : '';
-
-          const link = item.querySelector('guid')?.textContent?.trim() || '#';
 
           const meta = [filmYear, stars].filter(Boolean).join(' · ');
           const tooltip = `<div class="flick-tooltip">
