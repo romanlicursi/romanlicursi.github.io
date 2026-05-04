@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Roman Licursi</title>
-  <meta name="description" content="Roman Licursi — CS junior at UW–Madison who designs data systems that make B2B revenue teams faster and more accurate." />
-  <meta property="og:title" content="Roman Licursi — RevOps & GTM Engineer" />
-  <meta property="og:description" content="CS junior at UW–Madison building data-driven revenue systems — SQL, Python, ML, and GTM strategy." />
+  <meta name="description" content="Roman Licursi builds AI-powered GTM systems, RevOps automations, agentic workflows, and revenue data infrastructure." />
+  <meta property="og:title" content="Roman Licursi | AI GTM Systems Builder" />
+  <meta property="og:description" content="CS student at UW–Madison building RevOps, GTM analytics, agentic workflows, and AI-powered revenue systems." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://romanlicursi.github.io" />
-  <meta property="og:image" content="https://romanlicursi.github.io/photo.jpg" />
+  <meta property="og:image" content="https://romanlicursi.github.io/linkedin_headshot.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -28,6 +28,18 @@
       --font-sans: 'Inter', system-ui, sans-serif;
       --font-mono: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
       --max-w: 768px;
+      --motion-slow: 0px;
+      --motion-mid: 0px;
+      --motion-fast: 0px;
+      --motion-rotate: 0deg;
+      --motion-vector-rotate: 0deg;
+      --motion-opacity: 0.96;
+      --motion-depth: 0px;
+      --motion-primary: 74, 222, 128;
+      --motion-secondary: 96, 165, 250;
+      --motion-warm: 245, 158, 11;
+      --spotlight-x: 88%;
+      --spotlight-y: 14%;
     }
 
     /* ── Reset ── */
@@ -41,8 +53,338 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+    body.motion-preview {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(var(--motion-primary), 0.12), transparent 30rem),
+        var(--color-bg);
+    }
+    body.motion-preview::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.026) 1px, transparent 1px);
+      background-size: 42px 42px;
+      background-position:
+        0 var(--motion-depth),
+        var(--motion-depth) 0;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.75), rgba(0,0,0,0.24) 42%, transparent 82%);
+    }
+    body.motion-preview::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle 30rem at var(--spotlight-x) var(--spotlight-y), rgba(var(--motion-primary),0.09), transparent 64%),
+        radial-gradient(circle 20rem at 8% 72%, rgba(var(--motion-secondary),0.06), transparent 68%);
+      mix-blend-mode: screen;
+      opacity: 0.46;
+      transition: background 420ms ease;
+    }
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
+
+    /* ── Scroll motion preview layer ── */
+    .motion-stage {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: var(--motion-opacity);
+      contain: layout paint style;
+    }
+    .motion-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.62;
+    }
+    .motion-vector {
+      position: absolute;
+      inset: -8vh -8vw;
+      width: 116vw;
+      height: 116vh;
+      opacity: 0.68;
+      transform: translate3d(0, var(--motion-slow), 0) rotate(var(--motion-vector-rotate));
+      transform-origin: center;
+      filter: drop-shadow(0 0 18px rgba(74,222,128,0.12));
+    }
+    .motion-path {
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.15;
+      stroke-dasharray: 280 52;
+      animation: signal-flow 30s linear infinite;
+    }
+    .motion-path--green {
+      stroke: rgba(var(--motion-primary),0.46);
+    }
+    .motion-path--blue {
+      stroke: rgba(var(--motion-secondary),0.34);
+      animation-duration: 38s;
+      animation-direction: reverse;
+    }
+    .motion-path--muted {
+      stroke: rgba(232,232,236,0.17);
+      stroke-dasharray: 120 90;
+      animation-duration: 46s;
+    }
+    .motion-dot {
+      fill: rgba(var(--motion-primary),0.62);
+      filter: drop-shadow(0 0 12px rgba(var(--motion-primary),0.3));
+      animation: node-breathe 4.8s ease-in-out infinite;
+    }
+    .motion-dot--blue {
+      fill: rgba(var(--motion-secondary),0.54);
+      filter: drop-shadow(0 0 12px rgba(var(--motion-secondary),0.24));
+      animation-delay: -1.6s;
+    }
+    .motion-packet {
+      fill: rgba(var(--motion-primary),0.9);
+      filter: drop-shadow(0 0 10px rgba(var(--motion-primary),0.58));
+      opacity: 0.86;
+    }
+    .motion-packet--blue {
+      fill: rgba(var(--motion-secondary),0.88);
+      filter: drop-shadow(0 0 10px rgba(var(--motion-secondary),0.5));
+    }
+    .motion-packet--warm {
+      fill: rgba(var(--motion-warm),0.8);
+      filter: drop-shadow(0 0 10px rgba(var(--motion-warm),0.38));
+      opacity: 0.68;
+    }
+    .motion-vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(13,13,15,0.64), transparent 18%, transparent 82%, rgba(13,13,15,0.62)),
+        linear-gradient(180deg, transparent 0%, rgba(13,13,15,0.14) 48%, rgba(13,13,15,0.52) 100%);
+    }
+    .motion-beam {
+      position: absolute;
+      width: 78vw;
+      height: 18vh;
+      min-height: 140px;
+      border-radius: 999px;
+      filter: blur(34px);
+      opacity: 0.34;
+      mix-blend-mode: screen;
+      transform-origin: center;
+      background: linear-gradient(90deg, transparent, rgba(var(--motion-primary),0.36), rgba(var(--motion-secondary),0.18), transparent);
+      animation: beam-breathe 11s ease-in-out infinite;
+    }
+    .motion-beam--one {
+      top: 10vh;
+      left: -20vw;
+      transform: translate3d(0, var(--motion-mid), 0) rotate(-18deg);
+    }
+    .motion-beam--two {
+      right: -24vw;
+      bottom: 24vh;
+      opacity: 0.24;
+      transform: translate3d(0, var(--motion-slow), 0) rotate(22deg);
+      animation-delay: -4.5s;
+    }
+    .motion-beam--three {
+      left: 16vw;
+      bottom: -5vh;
+      height: 14vh;
+      opacity: 0.18;
+      transform: translate3d(0, var(--motion-fast), 0) rotate(-7deg);
+      animation-delay: -7s;
+    }
+    .motion-glow {
+      position: absolute;
+      width: 42vw;
+      height: 42vw;
+      min-width: 360px;
+      min-height: 360px;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.2;
+      transform: translate3d(0, var(--motion-mid), 0);
+      background: radial-gradient(circle, rgba(var(--motion-primary),0.75), transparent 70%);
+    }
+    .motion-glow--one {
+      top: -16vw;
+      left: 18vw;
+    }
+    .motion-glow--two {
+      right: -10vw;
+      bottom: 18vh;
+      background: radial-gradient(circle, rgba(var(--motion-secondary),0.68), transparent 70%);
+      transform: translate3d(0, var(--motion-slow), 0);
+    }
+    .motion-thread {
+      position: absolute;
+      width: 36vw;
+      height: 120vh;
+      min-width: 320px;
+      border: 1px solid rgba(var(--motion-primary), 0.17);
+      border-left-color: rgba(var(--motion-primary), 0.52);
+      border-radius: 999px;
+      filter: blur(0.2px);
+      opacity: 0.96;
+      transform-origin: center;
+    }
+    .motion-thread::before,
+    .motion-thread::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(var(--motion-primary), 0.52);
+      box-shadow: 0 0 24px rgba(var(--motion-primary), 0.28);
+    }
+    .motion-thread::before {
+      width: 7px;
+      height: 7px;
+      top: 18%;
+      left: 18%;
+    }
+    .motion-thread::after {
+      width: 4px;
+      height: 4px;
+      right: 24%;
+      bottom: 26%;
+      background: rgba(232,232,236,0.42);
+    }
+    .motion-thread--one {
+      top: -22vh;
+      left: -13vw;
+      transform: translate3d(0, var(--motion-slow), 0) rotate(calc(-18deg + var(--motion-rotate)));
+    }
+    .motion-thread--two {
+      right: -18vw;
+      top: 18vh;
+      border-color: rgba(var(--motion-secondary), 0.18);
+      border-right-color: rgba(var(--motion-secondary), 0.48);
+      transform: translate3d(0, var(--motion-mid), 0) rotate(calc(16deg - var(--motion-rotate)));
+    }
+    .motion-thread--two::before {
+      background: rgba(var(--motion-secondary), 0.5);
+      box-shadow: 0 0 24px rgba(var(--motion-secondary), 0.28);
+    }
+    .motion-ribbon {
+      position: absolute;
+      left: 4vw;
+      right: 4vw;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.13), rgba(var(--motion-primary),0.52), rgba(var(--motion-secondary),0.24), rgba(255,255,255,0.1), transparent);
+      transform: translate3d(0, var(--motion-fast), 0);
+      display: none;
+      opacity: 0;
+    }
+    .motion-ribbon::after {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 12%;
+      width: 16%;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, rgba(var(--motion-primary),0.7), transparent);
+      animation: ribbon-sweep 9s ease-in-out infinite;
+      opacity: 0.72;
+    }
+    .motion-ribbon--one { top: 34vh; }
+    .motion-ribbon--two {
+      top: 72vh;
+      opacity: 0.34;
+      transform: translate3d(0, var(--motion-mid), 0);
+    }
+    .motion-ribbon--two::after {
+      animation-delay: -4s;
+      background: linear-gradient(90deg, transparent, rgba(var(--motion-secondary),0.56), transparent);
+    }
+    .motion-panel {
+      position: absolute;
+      width: 210px;
+      height: 116px;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        rgba(255,255,255,0.028);
+      background-size: 22px 22px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+      opacity: 0.64;
+    }
+    .motion-panel::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      background:
+        linear-gradient(90deg, rgba(74,222,128,0.18) 38%, transparent 38% 100%),
+        linear-gradient(90deg, rgba(96,165,250,0.16) 58%, transparent 58% 100%),
+        linear-gradient(90deg, rgba(255,255,255,0.12) 28%, transparent 28% 100%);
+      background-size: 100% 1px;
+      background-position: 0 0, 0 16px, 0 32px;
+      background-repeat: no-repeat;
+      opacity: 0.38;
+    }
+    .motion-panel--one {
+      top: 16vh;
+      right: 7vw;
+      transform: translate3d(0, var(--motion-slow), 0) rotate(3deg);
+    }
+    .motion-panel--two {
+      bottom: 10vh;
+      left: 7vw;
+      transform: translate3d(0, var(--motion-mid), 0) rotate(-4deg);
+    }
+    .motion-panel--three {
+      top: 54vh;
+      right: 18vw;
+      width: 150px;
+      height: 86px;
+      opacity: 0.28;
+      transform: translate3d(0, var(--motion-fast), 0) rotate(6deg);
+    }
+    .motion-scan {
+      position: absolute;
+      inset: -20% 0 auto;
+      height: 34vh;
+      background: linear-gradient(180deg, transparent, rgba(34,197,94,0.035), transparent);
+      transform: translate3d(0, var(--motion-fast), 0);
+      mix-blend-mode: screen;
+      display: none;
+      opacity: 0;
+    }
+
+    nav,
+    section,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes signal-flow {
+      to { stroke-dashoffset: -664; }
+    }
+    @keyframes node-breathe {
+      0%, 100% { opacity: 0.34; transform: scale(0.9); }
+      50% { opacity: 0.75; transform: scale(1.45); }
+    }
+    @keyframes ribbon-sweep {
+      0%, 100% { transform: translateX(-18vw); opacity: 0; }
+      18%, 72% { opacity: 0.48; }
+      100% { transform: translateX(72vw); }
+    }
+    @keyframes beam-breathe {
+      0%, 100% { opacity: 0.18; filter: blur(38px); }
+      42% { opacity: 0.42; filter: blur(30px); }
+    }
+    @keyframes portrait-orbit {
+      to { transform: rotate(360deg); }
+    }
 
     /* ── Layout helpers ── */
     .container {
@@ -59,6 +401,11 @@
       padding: 16px 0;
       transition: border-color 200ms, backdrop-filter 200ms, background 200ms;
       border-bottom: 1px solid transparent;
+    }
+    body.motion-preview nav {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(13,13,15,0.72), rgba(13,13,15,0.48));
     }
     nav.scrolled {
       backdrop-filter: blur(12px);
@@ -108,7 +455,27 @@
       gap: 40px;
     }
     .hero-text { flex: 1; min-width: 0; }
-    .hero-photo-wrap { flex-shrink: 0; padding-top: 8px; }
+    .hero-photo-wrap {
+      flex-shrink: 0;
+      padding-top: 8px;
+      position: relative;
+      isolation: isolate;
+    }
+    .hero-photo-wrap::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: -9px;
+      width: calc(100% + 18px);
+      height: calc(100% + 18px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(from 120deg, rgba(74,222,128,0.48), rgba(96,165,250,0.18), rgba(255,255,255,0.06), rgba(74,222,128,0.48));
+      opacity: 0.34;
+      filter: blur(0.2px);
+      animation: portrait-orbit 22s linear infinite;
+      z-index: -1;
+    }
     .hero-photo {
       width: 168px;
       height: 168px;
@@ -117,6 +484,7 @@
       border: 2px solid var(--color-border);
       display: block;
       transition: border-color 200ms;
+      box-shadow: 0 18px 54px rgba(0,0,0,0.35);
     }
     .hero-photo:hover { border-color: var(--color-accent); }
     .hero-name {
@@ -201,13 +569,17 @@
       gap: 20px;
     }
     .project-card {
-      background: var(--color-surface);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.018), transparent 52%),
+        var(--color-surface);
       border: 1px solid var(--color-border);
       border-left: 2px solid var(--color-accent);
       border-radius: 8px;
       padding: 24px 24px 20px;
       transition: box-shadow 200ms, transform 200ms;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
     .project-card:hover {
       box-shadow: 0 8px 32px rgba(0,0,0,0.4);
@@ -215,7 +587,33 @@
     }
     .project-card--featured {
       border-left-width: 3px;
-      background: #13181e;
+      background:
+        linear-gradient(145deg, rgba(74,222,128,0.048), transparent 50%),
+        #13181e;
+    }
+    .project-card--featured::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, transparent 0 58%, rgba(74,222,128,0.05) 58% 60%, transparent 60%),
+        radial-gradient(circle at 100% 0%, rgba(34,197,94,0.08), transparent 22rem);
+      opacity: 0.75;
+    }
+    .project-card--featured::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(74,222,128,0.5), transparent);
+      opacity: 0.42;
+    }
+    .project-card > * {
+      position: relative;
+      z-index: 1;
     }
     .project-header {
       display: flex;
@@ -299,6 +697,101 @@
       background: var(--color-result-bg);
       color: var(--color-result-text);
       border-radius: 4px;
+    }
+
+    /* ── Clay project visuals ── */
+    .fete-pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 16px 0 12px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .fete-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      min-width: 0;
+    }
+    .fete-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .fete-icon--find     { background: linear-gradient(135deg, #6366f1, #818cf8); }
+    .fete-icon--enrich   { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+    .fete-icon--transform{ background: linear-gradient(135deg, #22c55e, #4ade80); }
+    .fete-icon--export   { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+    .fete-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      text-align: center;
+    }
+    .fete-arrow {
+      color: var(--color-border);
+      font-size: 14px;
+      flex-shrink: 0;
+      margin: 0 2px;
+      align-self: center;
+      margin-bottom: 18px;
+    }
+    .clay-tables {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0 16px;
+    }
+    .clay-table {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      position: relative;
+    }
+    .clay-table::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 6px 6px 0 0;
+    }
+    .clay-table--companies::before { background: linear-gradient(90deg, #6366f1, #818cf8); }
+    .clay-table--jobs::before      { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .clay-table--people::before    { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .clay-table-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+    .clay-table-fields {
+      font-size: 10px;
+      color: var(--color-muted);
+      line-height: 1.5;
+      font-family: var(--font-mono);
+    }
+    .clay-connector {
+      display: none;
+    }
+    @media (max-width: 500px) {
+      .clay-tables { grid-template-columns: 1fr; }
+      .fete-icon { width: 34px; height: 34px; font-size: 15px; }
+      .fete-label { font-size: 9px; }
     }
 
     /* ── Experience timeline ── */
@@ -847,6 +1340,9 @@
       #hero { padding: 72px 0 60px; }
       .hero-inner { flex-direction: column-reverse; gap: 20px; }
       .hero-photo { width: 96px; height: 96px; }
+      .motion-vector { opacity: 0.28; }
+      .motion-thread { opacity: 0.48; }
+      .motion-panel { opacity: 0.2; }
       .skills-grid { grid-template-columns: 1fr; gap: 20px; }
       .nav-links { gap: 18px; }
       .cert-item { flex-direction: column; align-items: flex-start; }
@@ -858,9 +1354,53 @@
       .hero-ctas { flex-direction: column; }
       .cta-pill { justify-content: center; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      .motion-stage { display: none; }
+    }
   </style>
 </head>
-<body>
+<body class="motion-preview">
+
+  <div class="motion-stage" aria-hidden="true">
+    <canvas class="motion-canvas" id="motion-canvas"></canvas>
+    <div class="motion-beam motion-beam--one"></div>
+    <div class="motion-beam motion-beam--two"></div>
+    <div class="motion-beam motion-beam--three"></div>
+    <svg class="motion-vector" viewBox="0 0 1200 900" preserveAspectRatio="none">
+      <path class="motion-path motion-path--green" d="M-80 210 C140 80 240 250 390 175 S650 40 810 170 S1040 360 1280 180" />
+      <path class="motion-path motion-path--blue" d="M-60 610 C120 480 260 580 410 520 S660 410 810 530 S990 730 1260 560" />
+      <path class="motion-path motion-path--muted" d="M160 -60 C210 140 370 210 335 390 S315 660 455 760 S705 855 780 980" />
+      <path class="motion-path motion-path--muted" d="M1040 -80 C925 105 980 265 865 390 S690 555 760 720 S960 865 915 980" />
+      <circle class="motion-packet" r="4.5">
+        <animateMotion dur="8.5s" repeatCount="indefinite" path="M-80 210 C140 80 240 250 390 175 S650 40 810 170 S1040 360 1280 180" />
+      </circle>
+      <circle class="motion-packet motion-packet--blue" r="4">
+        <animateMotion dur="11s" begin="-3s" repeatCount="indefinite" path="M-60 610 C120 480 260 580 410 520 S660 410 810 530 S990 730 1260 560" />
+      </circle>
+      <circle class="motion-packet motion-packet--warm" r="3.5">
+        <animateMotion dur="13s" begin="-6s" repeatCount="indefinite" path="M160 -60 C210 140 370 210 335 390 S315 660 455 760 S705 855 780 980" />
+      </circle>
+      <circle class="motion-packet motion-packet--blue" r="3.2">
+        <animateMotion dur="14.5s" begin="-8s" repeatCount="indefinite" path="M1040 -80 C925 105 980 265 865 390 S690 555 760 720 S960 865 915 980" />
+      </circle>
+      <circle class="motion-dot" cx="154" cy="186" r="4" />
+      <circle class="motion-dot motion-dot--blue" cx="742" cy="132" r="5" />
+      <circle class="motion-dot" cx="412" cy="526" r="3.5" />
+      <circle class="motion-dot motion-dot--blue" cx="985" cy="604" r="4" />
+      <circle class="motion-dot" cx="752" cy="724" r="3" />
+    </svg>
+    <div class="motion-glow motion-glow--one"></div>
+    <div class="motion-glow motion-glow--two"></div>
+    <div class="motion-scan"></div>
+    <div class="motion-thread motion-thread--one"></div>
+    <div class="motion-thread motion-thread--two"></div>
+    <div class="motion-ribbon motion-ribbon--one"></div>
+    <div class="motion-ribbon motion-ribbon--two"></div>
+    <div class="motion-panel motion-panel--one"></div>
+    <div class="motion-panel motion-panel--two"></div>
+    <div class="motion-panel motion-panel--three"></div>
+    <div class="motion-vignette"></div>
+  </div>
 
   <!-- ── Navigation ── -->
   <nav id="nav">
@@ -880,12 +1420,13 @@
       <div class="hero-inner">
         <div class="hero-text">
           <h1 class="hero-name">Roman Licursi</h1>
-          <p class="hero-tagline">Automation · Analytics · AI</p>
+          <p class="hero-tagline">AI GTM Systems · RevOps · Agentic Workflows</p>
           <p class="hero-open">Incoming GTM Systems Analyst Intern &middot; Together AI &middot; Summer 2026</p>
           <p class="hero-bio">
-            I build automation, analytics, and AI workflows that drive B2B growth —
-            CRM systems, GTM data pipelines, lead scoring models, and the AI-native
-            infrastructure modern revenue teams run on.
+            I build AI-powered GTM systems that help revenue teams work faster,
+            make better decisions, and turn messy data into execution. My work
+            combines RevOps, analytics, automation, and agentic workflows to build
+            the AI-native infrastructure modern revenue teams run on.
           </p>
           <div class="hero-stats">
             <span>7,984 data issues caught</span>
@@ -908,7 +1449,7 @@
           </div>
         </div>
         <div class="hero-photo-wrap">
-          <img src="photo.jpg" alt="Roman Licursi" class="hero-photo" loading="lazy" />
+          <img src="linkedin_headshot.jpg" alt="Roman Licursi" class="hero-photo" loading="lazy" />
         </div>
       </div>
     </div>
@@ -952,6 +1493,83 @@
             <span class="metric">LinkedIn scraping</span>
             <span class="metric">Auto-updated CRM</span>
             <span class="metric">GitHub Actions</span>
+          </div>
+        </div>
+
+        <div class="project-card project-card--featured">
+          <div class="project-header">
+            <div class="project-header-left">
+              <span class="project-title">Clay GTM Account Prioritization Workflow</span>
+              <span class="project-date">May 2026</span>
+            </div>
+            <div class="project-header-right">
+              <span class="featured-badge">Featured</span>
+              <a href="https://app.clay.com/shared-workbook/share_0teizlx2uUspNHFm4Tx" target="_blank" rel="noopener" class="project-link">View public Clay template &rarr;</a>
+            </div>
+          </div>
+          <div class="stack-chips">
+            <span class="chip">Clay</span>
+            <span class="chip">Claygent</span>
+            <span class="chip">Formulas</span>
+            <span class="chip">Waterfall Enrichment</span>
+            <span class="chip">Linked Tables</span>
+            <span class="chip">Account Scoring</span>
+          </div>
+
+          <!-- FETE pipeline visualization -->
+          <div class="fete-pipeline">
+            <div class="fete-step">
+              <div class="fete-icon fete-icon--find">F</div>
+              <span class="fete-label">Find</span>
+            </div>
+            <span class="fete-arrow">&rsaquo;</span>
+            <div class="fete-step">
+              <div class="fete-icon fete-icon--enrich">E</div>
+              <span class="fete-label">Enrich</span>
+            </div>
+            <span class="fete-arrow">&rsaquo;</span>
+            <div class="fete-step">
+              <div class="fete-icon fete-icon--transform">T</div>
+              <span class="fete-label">Transform</span>
+            </div>
+            <span class="fete-arrow">&rsaquo;</span>
+            <div class="fete-step">
+              <div class="fete-icon fete-icon--export">E</div>
+              <span class="fete-label">Export</span>
+            </div>
+          </div>
+
+          <p class="project-desc">
+            Built a Clay workbook that finds high-fit software companies, enriches them with hiring, funding,
+            product, and infrastructure signals, then turns the research into a ranked account list for a
+            technical sales team. Claygent handles web research on model usage and infrastructure needs,
+            formulas drive scoring and tiering, linked Jobs and People tables surface buying signals and
+            decision-makers, and a work email waterfall makes the best accounts actionable.
+          </p>
+
+          <!-- Linked-table architecture -->
+          <div class="clay-tables">
+            <div class="clay-table clay-table--companies">
+              <div class="clay-table-name">Companies</div>
+              <div class="clay-table-fields">Fit signals, growth, funding stage, readiness score, tier, why&nbsp;now</div>
+            </div>
+            <div class="clay-table clay-table--jobs">
+              <div class="clay-table-name">Jobs</div>
+              <div class="clay-table-fields">Recent ML / inference / applied AI hiring as buying signal</div>
+            </div>
+            <div class="clay-table clay-table--people">
+              <div class="clay-table-name">People</div>
+              <div class="clay-table-fields">Decision-makers, email waterfall, opening lines</div>
+            </div>
+          </div>
+
+          <div class="metrics">
+            <span class="metric">FETE framework</span>
+            <span class="metric">Claygent research</span>
+            <span class="metric">Scoring formulas</span>
+            <span class="metric">3 linked tables</span>
+            <span class="metric">Email waterfall</span>
+            <span class="metric">Outbound-ready shortlist</span>
           </div>
         </div>
 
@@ -1086,7 +1704,7 @@
         <div class="project-card">
           <div class="project-header">
             <div class="project-header-left">
-              <span class="project-title">PodBot — AI Podcast Discovery</span>
+              <span class="project-title">PodBot: AI Podcast Discovery</span>
               <span class="project-date">Apr 2026</span>
             </div>
             <div class="project-header-right">
@@ -1233,7 +1851,7 @@
   <section id="skills" class="reveal">
     <div class="container">
       <h2 class="section-label">Skills</h2>
-      <p class="skills-intro">I combine technical depth with business fluency — every system I build ties to real revenue outcomes.</p>
+      <p class="skills-intro">I combine technical depth with business fluency. Every system I build ties to real revenue outcomes.</p>
       <div class="skills-grid">
 
         <div>
@@ -1302,8 +1920,8 @@
         <div class="jams-turntable" id="jams-turntable" style="display:none">
           <div class="jams-turntable-text">
             <div class="jams-now-badge" id="jams-badge">Last Played</div>
-            <div class="jams-track-title" id="jams-title">—</div>
-            <div class="jams-track-artist" id="jams-artist">—</div>
+            <div class="jams-track-title" id="jams-title">Loading</div>
+            <div class="jams-track-artist" id="jams-artist">Last.fm</div>
           </div>
           <div class="jams-vinyl-wrap">
             <div class="jams-vinyl" id="jams-vinyl">
@@ -1346,8 +1964,8 @@
     <div class="container">
       <h2 class="contact-heading">Let's connect.</h2>
       <p class="contact-bio">
-        If you're building a data-driven GTM or RevOps function — or just want
-        to trade notes — I'm easy to reach.
+        If you're building a data-driven GTM or RevOps function, or just want
+        to trade notes, I'm easy to reach.
       </p>
       <div class="contact-links">
         <a href="mailto:romanlicursi@gmail.com" class="cta-pill">Email</a>
@@ -1400,6 +2018,159 @@
       { rootMargin: '0px 0px -60px 0px' }
     );
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Subtle scroll-linked motion for the preview background.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const rootStyle = document.documentElement.style;
+    const motionThemes = {
+      hero:       { primary: '74, 222, 128',  secondary: '96, 165, 250', hueA: 140, hueB: 210, x: '88%', y: '14%' },
+      projects:   { primary: '74, 222, 128',  secondary: '96, 165, 250', hueA: 140, hueB: 210, x: '92%', y: '22%' },
+      experience: { primary: '245, 158, 11',  secondary: '74, 222, 128', hueA: 38,  hueB: 140, x: '8%',  y: '28%' },
+      skills:     { primary: '96, 165, 250',  secondary: '74, 222, 128', hueA: 210, hueB: 140, x: '90%', y: '24%' },
+      contact:    { primary: '232, 232, 236', secondary: '74, 222, 128', hueA: 0,   hueB: 140, x: '50%', y: '12%' }
+    };
+    let motionHueA = motionThemes.hero.hueA;
+    let motionHueB = motionThemes.hero.hueB;
+    let motionFrame = null;
+    function updateMotionVars() {
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const y = window.scrollY;
+      const progress = Math.min(1, Math.max(0, y / maxScroll));
+      rootStyle.setProperty('--motion-slow', `${y * -0.05}px`);
+      rootStyle.setProperty('--motion-mid', `${y * -0.09}px`);
+      rootStyle.setProperty('--motion-fast', `${y * -0.16}px`);
+      rootStyle.setProperty('--motion-rotate', `${progress * 18}deg`);
+      rootStyle.setProperty('--motion-vector-rotate', `${progress * -7}deg`);
+      rootStyle.setProperty('--motion-opacity', `${Math.max(0.48, 0.96 - progress * 0.26)}`);
+      rootStyle.setProperty('--motion-depth', `${y * -0.04}px`);
+      motionFrame = null;
+    }
+    function queueMotionUpdate() {
+      if (!motionFrame && !reduceMotion.matches) {
+        motionFrame = requestAnimationFrame(updateMotionVars);
+      }
+    }
+    updateMotionVars();
+    window.addEventListener('scroll', queueMotionUpdate, { passive: true });
+    window.addEventListener('resize', queueMotionUpdate);
+
+    const motionThemeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const theme = motionThemes[entry.target.id];
+          if (!theme) return;
+          rootStyle.setProperty('--motion-primary', theme.primary);
+          rootStyle.setProperty('--motion-secondary', theme.secondary);
+          rootStyle.setProperty('--spotlight-x', theme.x);
+          rootStyle.setProperty('--spotlight-y', theme.y);
+          motionHueA = theme.hueA;
+          motionHueB = theme.hueB;
+        });
+      },
+      { rootMargin: '-35% 0px -45% 0px', threshold: 0.01 }
+    );
+    sections.forEach(section => motionThemeObserver.observe(section));
+
+    const motionCanvas = document.getElementById('motion-canvas');
+    const motionCtx = motionCanvas?.getContext('2d');
+    const motionPoints = [
+      { x: 0.08, y: 0.18, r: 1.8, dx: 0.014, dy: 0.018, tone: 'primary' },
+      { x: 0.18, y: 0.42, r: 1.4, dx: -0.010, dy: 0.013, tone: 'secondary' },
+      { x: 0.25, y: 0.70, r: 2.0, dx: -0.012, dy: 0.014, tone: 'primary' },
+      { x: 0.36, y: 0.28, r: 1.3, dx: 0.009, dy: -0.016, tone: 'secondary' },
+      { x: 0.47, y: 0.56, r: 1.5, dx: -0.014, dy: 0.011, tone: 'primary' },
+      { x: 0.58, y: 0.78, r: 1.9, dx: -0.015, dy: -0.010, tone: 'secondary' },
+      { x: 0.66, y: 0.24, r: 1.4, dx: 0.012, dy: 0.012, tone: 'primary' },
+      { x: 0.76, y: 0.48, r: 2.1, dx: 0.011, dy: 0.011, tone: 'secondary' },
+      { x: 0.88, y: 0.58, r: 1.9, dx: -0.010, dy: 0.016, tone: 'secondary' },
+      { x: 0.16, y: 0.88, r: 1.2, dx: 0.015, dy: -0.012, tone: 'primary' },
+      { x: 0.38, y: 0.90, r: 1.1, dx: -0.010, dy: -0.013, tone: 'secondary' },
+      { x: 0.63, y: 0.08, r: 1.2, dx: 0.011, dy: 0.015, tone: 'primary' },
+      { x: 0.83, y: 0.84, r: 1.5, dx: -0.013, dy: -0.014, tone: 'secondary' },
+      { x: 0.95, y: 0.20, r: 1.0, dx: -0.014, dy: 0.012, tone: 'primary' }
+    ];
+    let motionCanvasFrame = null;
+    let motionStart = performance.now();
+
+    function resizeMotionCanvas() {
+      if (!motionCanvas || !motionCtx) return;
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const { innerWidth: width, innerHeight: height } = window;
+      motionCanvas.width = Math.floor(width * ratio);
+      motionCanvas.height = Math.floor(height * ratio);
+      motionCanvas.style.width = `${width}px`;
+      motionCanvas.style.height = `${height}px`;
+      motionCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    function drawMotionCanvas(now) {
+      if (!motionCanvas || !motionCtx || reduceMotion.matches) return;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const time = (now - motionStart) / 1000;
+      const scroll = window.scrollY;
+      motionCtx.clearRect(0, 0, width, height);
+      motionCtx.lineCap = 'round';
+
+      const points = motionPoints.map((point, index) => {
+        const driftX = Math.sin(time * 0.32 + index) * width * point.dx;
+        const driftY = Math.cos(time * 0.26 + index * 0.7) * height * point.dy - scroll * 0.018;
+        return {
+          x: point.x * width + driftX,
+          y: ((point.y * height + driftY) % (height + 80)) - 40,
+          r: point.r,
+          hue: point.tone === 'primary' ? motionHueA : motionHueB
+        };
+      });
+
+      points.forEach((point, index) => {
+        for (let next = index + 1; next < points.length; next += 1) {
+          const other = points[next];
+          const distance = Math.hypot(point.x - other.x, point.y - other.y);
+          if (distance > 430) continue;
+          const strength = (1 - distance / 430) * 0.2;
+          const gradient = motionCtx.createLinearGradient(point.x, point.y, other.x, other.y);
+          gradient.addColorStop(0, `hsla(${point.hue}, 75%, 62%, ${strength})`);
+          gradient.addColorStop(1, `hsla(${other.hue}, 75%, 62%, ${strength * 0.8})`);
+          motionCtx.strokeStyle = gradient;
+          motionCtx.lineWidth = 1.15;
+          motionCtx.beginPath();
+          motionCtx.moveTo(point.x, point.y);
+          motionCtx.lineTo(other.x, other.y);
+          motionCtx.stroke();
+        }
+      });
+
+      points.forEach((point, index) => {
+        const pulse = 0.65 + Math.sin(time * 1.1 + index) * 0.35;
+        motionCtx.shadowBlur = 14;
+        motionCtx.shadowColor = `hsla(${point.hue}, 78%, 64%, 0.32)`;
+        motionCtx.fillStyle = `hsla(${point.hue}, 78%, 64%, ${0.46 + pulse * 0.2})`;
+        motionCtx.beginPath();
+        motionCtx.arc(point.x, point.y, point.r + pulse * 1.7, 0, Math.PI * 2);
+        motionCtx.fill();
+      });
+      motionCtx.shadowBlur = 0;
+
+      motionCanvasFrame = requestAnimationFrame(drawMotionCanvas);
+    }
+
+    if (motionCanvas && motionCtx && !reduceMotion.matches) {
+      resizeMotionCanvas();
+      motionCanvasFrame = requestAnimationFrame(drawMotionCanvas);
+      window.addEventListener('resize', resizeMotionCanvas);
+    }
+    reduceMotion.addEventListener?.('change', () => {
+      if (reduceMotion.matches && motionCanvasFrame) {
+        cancelAnimationFrame(motionCanvasFrame);
+        motionCanvasFrame = null;
+      } else if (!reduceMotion.matches && !motionCanvasFrame) {
+        resizeMotionCanvas();
+        motionStart = performance.now();
+        motionCanvasFrame = requestAnimationFrame(drawMotionCanvas);
+      }
+    });
 
     // ── Now: Recent flicks (pre-built JSON, updated by GitHub Actions) ──
     async function loadFlicks() {
@@ -1460,8 +2231,8 @@
         const featArt = getImg(featured, 'large') || getImg(featured, 'medium');
         const hasArt  = featArt && !featArt.includes(LASTFM_DEFAULT_IMG);
 
-        document.getElementById('jams-title').textContent  = featured.name || '—';
-        document.getElementById('jams-artist').textContent = featured.artist?.['#text'] || '—';
+        document.getElementById('jams-title').textContent  = featured.name || 'Loading';
+        document.getElementById('jams-artist').textContent = featured.artist?.['#text'] || 'Last.fm';
         const badge = document.getElementById('jams-badge');
         badge.textContent = isNowPlaying ? 'Now Playing' : 'Last Played';
         if (isNowPlaying) badge.classList.add('is-live');
