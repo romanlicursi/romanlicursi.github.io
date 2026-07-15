@@ -3,18 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roman Licursi</title>
-  <meta name="description" content="Roman Licursi builds AI-powered GTM systems, RevOps automations, agentic workflows, and revenue data infrastructure." />
-  <meta property="og:title" content="Roman Licursi | AI GTM Systems Builder" />
-  <meta property="og:description" content="CS student at UW-Madison building RevOps, GTM analytics, agentic workflows, and AI-powered revenue systems." />
+  <title>Roman Licursi | GTM Engineer &amp; Applied AI Builder</title>
+  <meta name="description" content="Roman Licursi builds production AI agents, Salesforce and Clay automation, evaluation systems, and revenue infrastructure for modern GTM teams." />
+  <meta property="og:title" content="Roman Licursi | GTM Engineer &amp; Applied AI Builder" />
+  <meta property="og:description" content="Production AI agents, revenue systems, evals, Salesforce automation, and GTM infrastructure." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://romanlicursi.github.io" />
   <meta property="og:image" content="https://romanlicursi.github.io/linkedin_headshot.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400..600&display=swap" rel="stylesheet" />
+  <link rel="preload" href="assets/fonts/HubotSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/MonaSansVF.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/MonaSansMonoVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <script>
+    const requestedTheme = new URLSearchParams(window.location.search).get('theme');
+    document.documentElement.dataset.theme = requestedTheme === 'neumorphism'
+      ? 'neumorphism'
+      : 'liquid-glass';
+  </script>
   <style>
+    @font-face {
+      font-family: 'Mona Sans';
+      src: url('assets/fonts/MonaSansVF.woff2') format('woff2');
+      font-style: normal;
+      font-weight: 200 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Hubot Sans';
+      src: url('assets/fonts/HubotSans-SemiBold.woff2') format('woff2');
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Mona Sans Mono';
+      src: url('assets/fonts/MonaSansMonoVF.woff2') format('woff2');
+      font-style: normal;
+      font-weight: 200 900;
+      font-stretch: 75% 125%;
+      font-display: swap;
+    }
+
     /* ── Design tokens ── */
     :root {
       --color-bg:            #0d0d0f;
@@ -30,9 +59,9 @@
       --color-accent-soft:   rgba(209, 191, 174, 0.13);
       --color-accent-2:      #45b48d;
       --color-on-accent:     #0d0d0f;
-      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-      --font-sans:    'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      --font-mono:    'JetBrains Mono', 'SFMono-Regular', 'Consolas', monospace;
+      --font-display: 'Hubot Sans', 'Mona Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-sans:    'Mona Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-mono:    'Mona Sans Mono', 'SFMono-Regular', 'Consolas', monospace;
       --max-w: 748px;
     }
 
@@ -43,6 +72,7 @@
       background: var(--color-bg);
       color: var(--color-text);
       font-family: var(--font-sans);
+      font-optical-sizing: auto;
       font-size: 15.5px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -531,8 +561,19 @@
       height: 1px;
       background: var(--color-accent-2);
     }
+    .timeline-earlier {
+      margin-left: 30px;
+      padding-top: 4px;
+      color: var(--color-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .timeline-earlier strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
 
-    /* ── Education & Certs ── */
+    /* ── Education styles ── */
     .edu-block {
       margin-bottom: 36px;
     }
@@ -997,8 +1038,15 @@
       * { transition-duration: 0.001ms !important; }
     }
   </style>
+  <link rel="stylesheet" href="effects.css" />
 </head>
 <body>
+
+  <a class="skip-link" href="#projects">Skip to projects</a>
+  <div class="ambient-field" aria-hidden="true">
+    <span class="ambient-orb ambient-orb--green"></span>
+    <span class="ambient-orb ambient-orb--gold"></span>
+  </div>
 
   <!-- ── Navigation ── -->
   <nav id="nav">
@@ -1012,24 +1060,27 @@
     </div>
   </nav>
 
+  <main id="main-content">
+
   <!-- ── Hero ── -->
   <section id="hero">
     <div class="container">
       <div class="hero-inner">
         <div class="hero-text">
           <h1 class="hero-name">Roman Licursi</h1>
-          <p class="hero-tagline">AI GTM Systems / RevOps / Agentic Workflows</p>
-          <p class="hero-open">GTM Systems Analyst Intern at Together AI &middot; San Francisco</p>
+          <p class="hero-tagline scramble-text" data-scramble aria-label="GTM Engineer / Production AI Agents / Revenue Systems">
+            <span aria-hidden="true">GTM Engineer / Production AI Agents / Revenue Systems</span>
+          </p>
+          <p class="hero-open">GTM Systems Analyst Intern at Together AI &middot; Computer Science at UW-Madison</p>
           <p class="hero-bio">
-            I build AI-powered GTM systems that help revenue teams work faster,
-            make better decisions, and turn messy data into execution. My work
-            combines RevOps, analytics, automation, and agentic workflows to build
-            the AI-native infrastructure modern revenue teams run on.
+            I build production AI agents and revenue systems for GTM teams, from Salesforce and Clay
+            automation to evals, entity resolution, data pipelines, and security controls. I focus on systems
+            that are measurable, grounded, and useful inside the rep&rsquo;s workflow.
           </p>
           <div class="hero-stats">
-            <span>7,984 data issues caught</span>
-            <span>6-layer autonomous pipeline</span>
-            <span>YC-backed startup</span>
+            <span>26x faster inference</span>
+            <span>6 live data lanes</span>
+            <span>+7.5pp answer accuracy</span>
           </div>
           <div class="hero-ctas">
             <a href="mailto:romanlicursi@gmail.com" class="cta-pill cta-pill--primary">
@@ -1044,10 +1095,36 @@
             <a href="https://medium.com/@romanlicursi" target="_blank" rel="noopener" class="cta-pill">
               Writing &rarr;
             </a>
+            <a href="Roman-Licursi-Resume-GTM-Engineer.pdf" target="_blank" rel="noopener" class="cta-pill">
+              Resume &rarr;
+            </a>
           </div>
         </div>
         <div class="hero-photo-wrap">
-          <img src="linkedin_headshot.jpg" alt="Roman Licursi" class="hero-photo" loading="lazy" />
+          <a
+            href="linkedin_headshot.jpg"
+            class="hero-photo-button"
+            data-lightbox-src="linkedin_headshot.jpg"
+            data-lightbox-title="Roman Licursi"
+            data-lightbox-group="portrait"
+            aria-label="Open portrait of Roman Licursi"
+          >
+            <img src="linkedin_headshot.jpg" alt="Roman Licursi" class="hero-photo" fetchpriority="high" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Capabilities marquee ── -->
+  <section class="capability-marquee" aria-label="Tools and systems Roman works with">
+    <div class="marquee-window">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span>
         </div>
       </div>
     </div>
@@ -1057,42 +1134,10 @@
   <section id="projects" class="reveal">
     <div class="container">
       <h2 class="section-label">Projects</h2>
-      <div class="project-grid">
-
-        <div class="project-card project-card--featured">
-          <div class="project-header">
-            <div class="project-header-left">
-              <span class="project-title">Career OS</span>
-              <span class="project-date">Mar 2026</span>
-            </div>
-            <div class="project-header-right">
-              <span class="featured-badge">Featured</span>
-              <a href="https://github.com/romanlicursi/career-os-public" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
-            </div>
-          </div>
-          <div class="stack-chips">
-            <span class="chip">Python</span>
-            <span class="chip">Claude API</span>
-            <span class="chip">Apify</span>
-            <span class="chip">GitHub Actions</span>
-            <span class="chip">Context Engineering</span>
-          </div>
-          <p class="project-desc">
-            Automated career research, scoring, and personalized outreach end-to-end: a 6-layer pipeline that
-            runs weekly on GitHub Actions and delivers a digest to inbox. Scrapes live LinkedIn job postings and
-            professional profiles via Apify, processes them through a staged Claude pipeline (raw data &rarr;
-            structured summaries &rarr; sprint plans &rarr; contact dossiers &rarr; personalized outreach drafts),
-            with a personal CRM updated automatically each run and a decision framework that filters all
-            recommendations against explicit career optimization targets.
-          </p>
-          <div class="metrics">
-            <span class="metric">6-layer pipeline</span>
-            <span class="metric">Autonomous weekly runs</span>
-            <span class="metric">LinkedIn scraping</span>
-            <span class="metric">Auto-updated CRM</span>
-            <span class="metric">GitHub Actions</span>
-          </div>
-        </div>
+      <div id="project-carousel" class="project-carousel" aria-label="Selected projects" aria-roledescription="carousel" tabindex="0">
+        <button type="button" class="project-carousel-control project-carousel-prev" aria-label="Previous project">&larr;</button>
+        <div class="project-carousel-viewport">
+          <div class="project-grid">
 
         <div class="project-card project-card--featured">
           <div class="project-header">
@@ -1202,100 +1247,64 @@
           </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card project-card--featured">
           <div class="project-header">
             <div class="project-header-left">
-              <span class="project-title">B2B SaaS RevOps Dashboard (Case Study)</span>
-              <span class="project-date">Jul-Aug 2025</span>
+              <span class="project-title">Career OS</span>
+              <span class="project-date">Mar 2026</span>
             </div>
             <div class="project-header-right">
-              <a href="https://github.com/romanlicursi/nimbushr-revops-dashboard" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+              <span class="featured-badge">Featured</span>
+              <a href="https://github.com/romanlicursi/career-os-public" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
             </div>
           </div>
           <div class="stack-chips">
-            <span class="chip">SQL</span>
             <span class="chip">Python</span>
-            <span class="chip">dbt</span>
-            <span class="chip">Snowflake</span>
-            <span class="chip">Tableau</span>
-            <span class="chip">scikit-learn</span>
+            <span class="chip">Claude</span>
+            <span class="chip">REST APIs</span>
+            <span class="chip">GitHub Actions</span>
+            <span class="chip">Webhooks</span>
           </div>
           <p class="project-desc">
-            Full-stack RevOps analytics suite built on a modeled B2B SaaS dataset. Churn prediction model
-            (logistic regression, AUC 0.793) flagged 22.8% of accounts as at-risk, surfacing $131K in
-            at-risk MRR. Layered CAC/payback analysis by channel, funnel drop-off tracking
-            (Lead &rarr; MQL &rarr; SQL &rarr; Customer), and cohort retention analysis, with LinkedIn
-            flagged as high CAC, long payback.
+            A six-layer AI workflow that converts live job-market data into structured research, skill-gap
+            analysis, sprint plans, and human-reviewed outreach drafts on an automated cadence.
           </p>
           <div class="metrics">
-            <span class="metric">AUC 0.793</span>
-            <span class="metric">22.8% at-risk flagged</span>
-            <span class="metric">$131K saveable MRR</span>
-            <span class="metric">ROAS 2.8 &rarr; 3.3</span>
+            <span class="metric">Six-layer workflow</span>
+            <span class="metric">Live job-market data</span>
+            <span class="metric">Structured research</span>
+            <span class="metric">Human-reviewed drafts</span>
+            <span class="metric">Automated cadence</span>
           </div>
         </div>
 
         <div class="project-card">
           <div class="project-header">
             <div class="project-header-left">
-              <span class="project-title">Lead Scoring Automation System</span>
-              <span class="project-date">Aug-Sep 2025</span>
+              <span class="project-title">Agent Telegram Notifier</span>
             </div>
             <div class="project-header-right">
-              <a href="https://github.com/romanlicursi/lead-scoring-automation" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+              <a href="https://github.com/romanlicursi/agent-telegram-runner" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+              <a href="https://medium.com/@romanlicursi/i-built-a-little-machine-that-lets-me-ship-from-my-phone-bbadbcdd8703" target="_blank" rel="noopener" class="project-link">Read the article &rarr;</a>
             </div>
           </div>
           <div class="stack-chips">
-            <span class="chip">Python</span>
-            <span class="chip">scikit-learn</span>
-            <span class="chip">SQL</span>
-            <span class="chip">Slack API</span>
-            <span class="chip">pandas</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">Codex</span>
+            <span class="chip">Claude Code</span>
+            <span class="chip">Telegram</span>
+            <span class="chip">Local Hooks</span>
           </div>
           <p class="project-desc">
-            Dual-model lead scoring system combining rule-based logic and logistic regression, modeled to
-            project a 12% MQL&rarr;SQL conversion lift. Scores leads on behavioral attributes (pages viewed,
-            CTA clicks, email opens) and firmographic signals (revenue, company size, industry). Automated
-            Slack alerts fire when leads exceed a configurable threshold. Production-ready pipeline with
-            StandardScaler, OneHotEncoder, and fallback error handling.
+            A local-first notification layer for Codex and Claude Code runs. Hooks detect completion, failure,
+            and needs-input states, redact common secret patterns, preserve desktop notifications, and send
+            structured Telegram updates so long-running agent work can be monitored away from the terminal.
           </p>
           <div class="metrics">
-            <span class="metric">12% MQL&rarr;SQL lift</span>
-            <span class="metric">Rule-based + ML</span>
-            <span class="metric">Automated Slack alerts</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-header-left">
-              <span class="project-title">E-Commerce Data Quality Pipeline</span>
-              <span class="project-date">Nov 2025</span>
-            </div>
-            <div class="project-header-right">
-              <a href="https://github.com/romanlicursi/ecommerce-data-pipeline" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
-            </div>
-          </div>
-          <div class="stack-chips">
-            <span class="chip">Python</span>
-            <span class="chip">dbt</span>
-            <span class="chip">DuckDB</span>
-            <span class="chip">Snowflake</span>
-            <span class="chip">SQL</span>
-            <span class="chip">AWS</span>
-          </div>
-          <p class="project-desc">
-            End-to-end ETL pipeline across a 50,000-order multi-source e-commerce dataset, catching and
-            resolving 7,984 data quality issues before they reached analytics consumers. Five analytics tables
-            built with CTEs and window functions: fct_orders (47K rows), dim_customers (11K),
-            product_performance, marketing_attribution, and daily_metrics.
-            Designed for AWS production deployment (S3 &rarr; Glue &rarr; Athena &rarr; QuickSight).
-          </p>
-          <div class="metrics">
-            <span class="metric">50K orders processed</span>
-            <span class="metric">7,984 issues resolved</span>
-            <span class="metric">5 analytics tables</span>
-            <span class="metric">&lt;30s execution</span>
+            <span class="metric">Codex + Claude hooks</span>
+            <span class="metric">Secret redaction</span>
+            <span class="metric">Local-first</span>
+            <span class="metric">Dry-run test path</span>
           </div>
         </div>
 
@@ -1333,6 +1342,13 @@
           </div>
         </div>
 
+          </div>
+        </div>
+        <button type="button" class="project-carousel-control project-carousel-next" aria-label="Next project">&rarr;</button>
+        <div class="project-carousel-footer">
+          <div id="project-carousel-indicators" class="project-carousel-indicators" aria-label="Choose a project"></div>
+          <p id="project-carousel-status" class="project-carousel-status" aria-live="polite"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -1350,8 +1366,9 @@
             <div class="exp-company">Together AI</div>
             <div class="exp-meta">Apr 2026 - Present &middot; San Francisco Bay Area</div>
             <ul class="exp-bullets">
-              <li>GTM systems and revenue infrastructure at one of the leading AI inference platforms</li>
-              <li>Building and optimizing the data pipelines, CRM workflows, and automation that power revenue operations</li>
+              <li>Shipped a Salesforce-embedded production AI answer engine spanning six live data lanes, including Salesforce, product usage, Gong calls, and buying signals; rebuilt its inference path to cut compound-query latency from 165 seconds to 6.3 seconds, a 26x speedup.</li>
+              <li>Built an adversarial agent-evaluation system with synthetic questions and an independent LLM judge; used paired statistical testing to select the production model and shipped a grounding selector that improved answer accuracy by 7.5 percentage points.</li>
+              <li>Engineered deterministic grounding and security controls, then automated Gong call insights, intent routing, closed-lost re-engagement, and lead scoring across Clay, Slack, Hex, Snowflake, and Salesforce.</li>
             </ul>
           </div>
         </div>
@@ -1371,7 +1388,7 @@
         <div class="timeline-item">
           <div class="timeline-line"></div>
           <div>
-            <div class="exp-role">Growth Intern</div>
+            <div class="exp-role">Growth</div>
             <div class="exp-company">Roger <span style="color:var(--color-muted);font-weight:400">(YC S24)</span></div>
             <div class="exp-meta">Dec 2025 - Mar 2026</div>
             <ul class="exp-bullets">
@@ -1385,13 +1402,13 @@
         <div class="timeline-item">
           <div class="timeline-line"></div>
           <div>
-            <div class="exp-role">Growth</div>
+            <div class="exp-role">GTM Engineer</div>
             <div class="exp-company">College and University Healthcare Education Consortium <span style="color:var(--color-muted);font-weight:400">(CAUHEC)</span></div>
             <div class="exp-meta">Sep 2025 - Present &middot; Part-time &middot; Remote</div>
             <ul class="exp-bullets">
               <li>Built and own CAUHEC's outbound GTM infrastructure end to end, from lead sourcing and enrichment through deliverability and funnel reporting, as a one-person system</li>
               <li>Designed AI-native sourcing and enrichment pipelines in Python, using local LLMs and public data to produce verified, high-intent contacts at scale without paid data vendors</li>
-              <li>Treated deliverability as an engineering problem, targeting sub-5% bounce and protecting sender reputation across a multi-mailbox, multi-persona campaign system</li>
+              <li>Treated deliverability as an engineering problem, maintained bounce below 5%, and protected sender reputation across a multi-mailbox, multi-persona campaign system</li>
               <li>Automated funnel and conversion reporting so growth decisions run on live data, and partner with the founder on segmentation and go-to-market strategy</li>
             </ul>
           </div>
@@ -1402,7 +1419,7 @@
           <div>
             <div class="exp-role">Data Analytics Intern</div>
             <div class="exp-company">Community Action Partnership of Ramsey &amp; Washington Counties</div>
-            <div class="exp-meta">Jul-Aug 2025</div>
+            <div class="exp-meta">Jul 2025 - Aug 2025</div>
             <ul class="exp-bullets">
               <li>Built dashboards tracking 100+ active community partnerships, filterable by engagement tier, department, and staff lead</li>
               <li>Analyzed historical data to surface engagement gaps and regional disparities</li>
@@ -1411,27 +1428,16 @@
           </div>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-line"></div>
-          <div>
-            <div class="exp-role">Website Director</div>
-            <div class="exp-company">TEDxUWMadison</div>
-            <div class="exp-meta">Oct 2024 - Aug 2025</div>
-            <ul class="exp-bullets">
-              <li>Led full website redesign, improving UX and accessibility</li>
-              <li>Kept site current with event details, ticketing, and speaker lineups</li>
-            </ul>
-          </div>
-        </div>
+        <p class="timeline-earlier"><strong>Earlier leadership:</strong> Website Director, TEDxUWMadison (Oct 2024 - Aug 2025)</p>
 
       </div>
     </div>
   </section>
 
-  <!-- ── Education & Certs ── -->
+  <!-- ── Education and credentials ── -->
   <section id="education" class="reveal">
     <div class="container">
-      <h2 class="section-label">Education &amp; Certifications</h2>
+      <h2 class="section-label">Education &amp; Credentials</h2>
 
       <div class="edu-block">
         <div class="edu-school">University of Wisconsin-Madison</div>
@@ -1442,20 +1448,20 @@
 
       <ul class="cert-list">
         <li class="cert-item">
-          <span class="cert-name">Revenue Operations</span>
-          <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
-        </li>
-        <li class="cert-item">
-          <span class="cert-name">HubSpot Sales Hub Software</span>
-          <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
-        </li>
-        <li class="cert-item">
           <span class="cert-name">Agentic AI</span>
           <span class="cert-meta">DeepLearning.AI &middot; May 2026</span>
         </li>
         <li class="cert-item">
-          <span class="cert-name">Claude Code in Action</span>
-          <span class="cert-meta">Anthropic &middot; Mar 2026</span>
+          <span class="cert-name">Revenue Operations</span>
+          <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
+        </li>
+        <li class="cert-item">
+          <span class="cert-name">Salesforce Admin Fundamentals</span>
+          <span class="cert-meta">Trailhead</span>
+        </li>
+        <li class="cert-item">
+          <span class="cert-name">Clay GTM Cohort</span>
+          <span class="cert-meta">Clay</span>
         </li>
       </ul>
     </div>
@@ -1469,55 +1475,65 @@
       <div class="skills-grid">
 
         <div>
-          <div class="skill-group-label">Data &amp; Analytics</div>
+          <div class="skill-group-label">AI Engineering</div>
           <div class="skill-tags">
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">dbt</span>
-            <span class="skill-tag">Snowflake</span>
-            <span class="skill-tag">Tableau</span>
-            <span class="skill-tag">Excel</span>
-            <span class="skill-tag">ETL</span>
-            <span class="skill-tag">Scikit-learn</span>
-            <span class="skill-tag">Logistic Regression</span>
+            <span class="skill-tag">AI Agents</span>
+            <span class="skill-tag">LLM Application Development</span>
+            <span class="skill-tag">Evals</span>
+            <span class="skill-tag">RAG / Retrieval</span>
+            <span class="skill-tag">MCP</span>
+            <span class="skill-tag">Grounding</span>
+            <span class="skill-tag">Guardrails</span>
+            <span class="skill-tag">Prompt Engineering</span>
+            <span class="skill-tag">Claude Code</span>
           </div>
         </div>
 
         <div>
-          <div class="skill-group-label">Automation &amp; Engineering</div>
+          <div class="skill-group-label">GTM Systems</div>
           <div class="skill-tags">
-            <span class="skill-tag">GitHub Actions</span>
-            <span class="skill-tag">Data Scraping</span>
-            <span class="skill-tag">n8n</span>
+            <span class="skill-tag">Salesforce</span>
+            <span class="skill-tag">SOQL</span>
+            <span class="skill-tag">Salesforce Flows</span>
+            <span class="skill-tag">Clay</span>
+            <span class="skill-tag">HubSpot</span>
+            <span class="skill-tag">Apollo</span>
+            <span class="skill-tag">Gong</span>
+            <span class="skill-tag">Lead Scoring</span>
+            <span class="skill-tag">Intent Signals</span>
+            <span class="skill-tag">Data Enrichment</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">Automation &amp; Integration</div>
+          <div class="skill-tags">
             <span class="skill-tag">REST APIs</span>
             <span class="skill-tag">Webhooks</span>
-            <span class="skill-tag">Salesforce Flows</span>
+            <span class="skill-tag">OAuth</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">Slack Workflows</span>
             <span class="skill-tag">Zapier</span>
             <span class="skill-tag">Make</span>
           </div>
         </div>
 
         <div>
-          <div class="skill-group-label">GTM &amp; CRM</div>
+          <div class="skill-group-label">Engineering &amp; Data</div>
           <div class="skill-tags">
-            <span class="skill-tag">Salesforce</span>
-            <span class="skill-tag">HubSpot</span>
-            <span class="skill-tag">Clay</span>
-            <span class="skill-tag">Apollo</span>
-            <span class="skill-tag">CRM Automation</span>
-            <span class="skill-tag">Data Enrichment</span>
-            <span class="skill-tag">Outbound Sequencing</span>
-          </div>
-        </div>
-
-        <div>
-          <div class="skill-group-label">SaaS Economics</div>
-          <div class="skill-tags">
-            <span class="skill-tag">CAC</span>
-            <span class="skill-tag">LTV</span>
-            <span class="skill-tag">Churn Analysis</span>
-            <span class="skill-tag">Payback Period</span>
-            <span class="skill-tag">Funnel Analytics</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">JavaScript / TypeScript</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">React / Next.js</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Supabase</span>
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">Snowflake</span>
+            <span class="skill-tag">Hex</span>
+            <span class="skill-tag">dbt</span>
+            <span class="skill-tag">Census</span>
+            <span class="skill-tag">Tableau</span>
           </div>
         </div>
 
@@ -1578,8 +1594,8 @@
     <div class="container">
       <h2 class="contact-heading">Let's connect.</h2>
       <p class="contact-bio">
-        If you're building a data-driven GTM or RevOps function, or just want
-        to trade notes, I'm easy to reach.
+        If you are hiring for GTM Engineering or Applied AI, or building production systems across AI,
+        CRM, data, and automation, I would be glad to compare notes.
       </p>
       <div class="contact-links">
         <a href="mailto:romanlicursi@gmail.com" class="cta-pill">Email</a>
@@ -1590,12 +1606,33 @@
     </div>
   </section>
 
+  </main>
+
   <!-- ── Footer ── -->
   <footer>
     <div class="container">
       &copy; 2026 Roman Licursi &middot; Built with <a href="https://claude.ai/claude-code" target="_blank" rel="noopener" style="color:var(--color-muted);text-decoration:underline;text-underline-offset:3px;transition:color 150ms" onmouseover="this.style.color='var(--color-accent)'" onmouseout="this.style.color='var(--color-muted)'">Claude Code</a>
     </div>
   </footer>
+
+  <!-- ── Native lightbox ── -->
+  <dialog id="lightbox" class="lightbox" aria-modal="true" aria-labelledby="lightbox-title">
+    <div class="lightbox-shell">
+      <button type="button" class="lightbox-control lightbox-close" aria-label="Close image viewer">&times;</button>
+      <button type="button" class="lightbox-control lightbox-prev" aria-label="Previous image">&larr;</button>
+      <figure class="lightbox-figure" data-state="idle">
+        <div class="lightbox-stage">
+          <img id="lightbox-image" class="lightbox-image" alt="" />
+          <div id="lightbox-status" class="lightbox-status" role="status" aria-live="polite"></div>
+        </div>
+        <figcaption class="lightbox-caption">
+          <span id="lightbox-title"></span>
+          <a id="lightbox-source" href="#" target="_blank" rel="noopener">Open source &nearr;</a>
+        </figcaption>
+      </figure>
+      <button type="button" class="lightbox-control lightbox-next" aria-label="Next image">&rarr;</button>
+    </div>
+  </dialog>
 
   <!-- ── JS: nav scroll + smooth behavior ── -->
   <script>
@@ -1648,12 +1685,13 @@
             : '';
 
           const meta = [filmYear, stars].filter(Boolean).join(' · ');
+          const sourceLink = /^https?:\/\//.test(link) ? link : '';
           const tooltip = `<div class="flick-tooltip">
             <div class="flick-tooltip-title">${filmTitle}</div>
             ${meta ? `<div class="flick-tooltip-meta">${meta}</div>` : ''}
           </div>`;
 
-          return `<a href="${link}" target="_blank" rel="noopener" class="flick-item">
+          return `<a href="${link}" target="_blank" rel="noopener" class="flick-item" data-lightbox-src="${encodeURIComponent(poster)}" data-lightbox-title="${encodeURIComponent(filmTitle)}" data-lightbox-link="${encodeURIComponent(sourceLink)}" data-lightbox-group="culture" aria-label="View ${filmTitle} poster">
             <img class="flick-poster" src="${poster}" alt="${filmTitle}" loading="lazy">
             ${tooltip}
           </a>`;
@@ -1741,7 +1779,7 @@
                       || item.querySelector('guid')?.textContent?.trim() || '#';
 
           const meta = [author, stars].filter(Boolean).join(' · ');
-          return `<a href="${link}" target="_blank" rel="noopener" class="flick-item">
+          return `<a href="${link}" target="_blank" rel="noopener" class="flick-item" data-lightbox-src="${encodeURIComponent(img)}" data-lightbox-title="${encodeURIComponent(title)}" data-lightbox-link="${encodeURIComponent(link)}" data-lightbox-group="culture" aria-label="View ${title} cover">
             <img class="flick-poster" src="${img}" alt="${title}" loading="lazy">
             <div class="flick-tooltip">
               <div class="flick-tooltip-title">${title}</div>
@@ -1758,6 +1796,7 @@
     loadJams();
     loadReads();
   </script>
+  <script src="effects.js"></script>
 
 </body>
 </html>
