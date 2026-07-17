@@ -160,7 +160,6 @@ nav .container {
   transition: right 420ms var(--spring-ease);
 }
 
-.nav-links a:hover::after,
 .nav-links a:focus-visible::after {
   right: 0;
 }
@@ -230,10 +229,6 @@ section + section {
   transition: transform 620ms var(--spring-ease);
 }
 
-.hero-photo-button:hover {
-  transform: translateY(-5px) scale(1.025);
-}
-
 .hero-photo-button:active {
   transform: translateY(1px) scale(0.97);
 }
@@ -267,10 +262,6 @@ section + section {
     box-shadow 280ms ease;
 }
 
-.cta-pill:hover {
-  transform: translateY(-2px);
-}
-
 .cta-pill:active {
   transform: translateY(1px) scale(0.96);
 }
@@ -285,11 +276,6 @@ section + section {
     background 180ms ease,
     border-color 180ms ease,
     box-shadow 240ms ease;
-}
-
-.skill-tag:hover {
-  z-index: 3;
-  transform: translateY(-8px) scale(1.15);
 }
 
 .skill-tag:active {
@@ -308,10 +294,6 @@ section + section {
     box-shadow 300ms ease,
     border-color 240ms ease,
     background 240ms ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px) scale(1.004);
 }
 
 .project-card:active {
@@ -370,7 +352,6 @@ section + section {
   will-change: transform;
 }
 
-.marquee-window:hover .marquee-track,
 .marquee-window:focus-within .marquee-track {
   animation-play-state: paused;
 }
@@ -561,12 +542,6 @@ section + section {
     transform 520ms var(--spring-ease),
     color 180ms ease,
     background 180ms ease;
-}
-
-.lightbox-control:hover {
-  color: var(--color-on-accent);
-  background: var(--color-accent-2);
-  transform: scale(1.08);
 }
 
 .lightbox-control:active {
@@ -1161,12 +1136,6 @@ section + section {
   display: none;
 }
 
-.project-carousel-control:hover {
-  color: var(--color-on-accent);
-  background: var(--color-accent);
-  transform: translateY(-50%) scale(1.08);
-}
-
 .project-carousel-control:active {
   transform: translateY(-50%) scale(0.92);
 }
@@ -1202,11 +1171,6 @@ section + section {
     width 460ms var(--spring-ease),
     background 160ms ease,
     transform 460ms var(--spring-ease);
-}
-
-.project-carousel-indicator:hover {
-  background: rgba(8, 118, 109, 0.5);
-  transform: scale(1.2);
 }
 
 .project-carousel-indicator[aria-current="true"] {
@@ -1354,8 +1318,10 @@ section + section {
     transform: none;
   }
 
-  .project-carousel-control:hover {
-    transform: scale(1.06);
+  @media (hover: hover) and (pointer: fine) {
+    .project-carousel-control:hover {
+      transform: scale(1.06);
+    }
   }
 
   .project-carousel-control:active {
@@ -1444,6 +1410,51 @@ section + section {
 
   .lightbox-prev { grid-column: 1; }
   .lightbox-next { grid-column: 2; }
+}
+
+/* Hover-only motion, gated so a tap on touch can't leave an element stuck lifted/scaled. */
+@media (hover: hover) and (pointer: fine) {
+  .nav-links a:hover::after {
+    right: 0;
+  }
+
+  .hero-photo-button:hover {
+    transform: translateY(-5px) scale(1.025);
+  }
+
+  .cta-pill:hover {
+    transform: translateY(-2px);
+  }
+
+  .skill-tag:hover {
+    z-index: 3;
+    transform: translateY(-8px) scale(1.15);
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px) scale(1.004);
+  }
+
+  .marquee-window:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .lightbox-control:hover {
+    color: var(--color-on-accent);
+    background: var(--color-accent-2);
+    transform: scale(1.08);
+  }
+
+  .project-carousel-control:hover {
+    color: var(--color-on-accent);
+    background: var(--color-accent);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .project-carousel-indicator:hover {
+    background: rgba(8, 118, 109, 0.5);
+    transform: scale(1.2);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
