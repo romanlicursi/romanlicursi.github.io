@@ -10,1060 +10,22 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://romanlicursi.github.io" />
   <meta property="og:image" content="https://romanlicursi.github.io/linkedin_headshot.jpg" />
+  <meta name="theme-color" content="#0c0c0e" />
   <link rel="preload" href="assets/fonts/HubotSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/MonaSansVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/MonaSansMonoVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-  <script>
-    const requestedTheme = new URLSearchParams(window.location.search).get('theme');
-    document.documentElement.dataset.theme = requestedTheme === 'neumorphism'
-      ? 'neumorphism'
-      : 'liquid-glass';
-  </script>
-  <style>
-    @font-face {
-      font-family: 'Mona Sans';
-      src: url('assets/fonts/MonaSansVF.woff2') format('woff2');
-      font-style: normal;
-      font-weight: 200 900;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Hubot Sans';
-      src: url('assets/fonts/HubotSans-SemiBold.woff2') format('woff2');
-      font-style: normal;
-      font-weight: 600;
-      font-display: swap;
-    }
-    @font-face {
-      font-family: 'Mona Sans Mono';
-      src: url('assets/fonts/MonaSansMonoVF.woff2') format('woff2');
-      font-style: normal;
-      font-weight: 200 900;
-      font-stretch: 75% 125%;
-      font-display: swap;
-    }
-
-    /* ── Design tokens ── */
-    :root {
-      --color-bg:            #0d0d0f;
-      --color-surface:       #16171b;
-      --color-surface-2:     #1c1d22;
-      --color-border:        #2a2b31;
-      --color-border-strong: #3a3b43;
-      --color-text:          #e8e7e2;
-      --color-muted:         #93939c;
-      --color-faint:         #7c7c85;
-      --color-accent:        #d1bfae;
-      --color-accent-hover:  #e0d1bb;
-      --color-accent-soft:   rgba(209, 191, 174, 0.13);
-      --color-accent-2:      #45b48d;
-      --color-on-accent:     #0d0d0f;
-      --font-display: 'Hubot Sans', 'Mona Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      --font-sans:    'Mona Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      --font-mono:    'Mona Sans Mono', 'SFMono-Regular', 'Consolas', monospace;
-      --max-w: 748px;
-    }
-
-    /* ── Reset ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
-    body {
-      background: var(--color-bg);
-      color: var(--color-text);
-      font-family: var(--font-sans);
-      font-optical-sizing: auto;
-      font-size: 15.5px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    a { color: inherit; text-decoration: none; }
-    ul { list-style: none; }
-
-    nav, section, footer { position: relative; }
-
-    @keyframes live-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.45; transform: scale(0.65); }
-    }
-    @keyframes spin-vinyl {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    /* ── Layout helpers ── */
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ── Navigation ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 18px 0;
-      transition: border-color 220ms, backdrop-filter 220ms, background 220ms;
-      border-bottom: 1px solid transparent;
-    }
-    nav.scrolled {
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      background: rgba(13, 13, 15, 0.85);
-      border-bottom-color: var(--color-border);
-    }
-    nav .container {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
-    .nav-links {
-      display: flex;
-      gap: 26px;
-    }
-    .nav-links a {
-      font-size: 13px;
-      color: var(--color-muted);
-      transition: color 150ms;
-    }
-    .nav-links a:hover { color: var(--color-accent-2); }
-
-    /* ── Sections ── */
-    section { padding: 88px 0; }
-    section + section { border-top: 1px solid var(--color-border); }
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-      margin-bottom: 36px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .section-label::before {
-      content: "";
-      width: 20px;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--color-accent);
-      flex-shrink: 0;
-    }
-
-    /* ── Hero ── */
-    #hero { padding: 104px 0 84px; border-bottom: 1px solid var(--color-border); }
-    .hero-inner {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 44px;
-    }
-    .hero-text { flex: 1; min-width: 0; }
-    .hero-photo-wrap {
-      flex-shrink: 0;
-      padding-top: 6px;
-    }
-    .hero-photo {
-      width: 172px;
-      height: 172px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid var(--color-border-strong);
-      display: block;
-      transition: border-color 620ms var(--spring-ease), box-shadow 620ms var(--spring-ease);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
-    }
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: clamp(42px, 7vw, 70px);
-      font-weight: 600;
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-    }
-    .hero-tagline {
-      font-family: var(--font-sans);
-      font-size: clamp(14px, 1.7vw, 17px);
-      font-weight: 600;
-      color: var(--color-accent-2);
-      margin-bottom: 10px;
-      letter-spacing: 0.01em;
-    }
-    .hero-open {
-      font-size: 14px;
-      color: var(--color-muted);
-      margin-top: 6px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .hero-open::before {
-      content: "";
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      background: var(--color-accent-2);
-      border-radius: 50%;
-      flex-shrink: 0;
-      animation: live-pulse 1.4s ease-in-out infinite;
-    }
-    .hero-bio {
-      font-size: 15.5px;
-      color: var(--color-muted);
-      line-height: 1.72;
-      margin-bottom: 26px;
-      max-width: 62ch;
-    }
-    .hero-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 22px;
-      font-size: 13px;
-      color: var(--color-muted);
-      margin-bottom: 30px;
-    }
-    .hero-stats span::before {
-      content: '↗ ';
-      color: var(--color-accent-2);
-      font-size: 11px;
-    }
-    .hero-ctas {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    /* ── CTA pills ── */
-    .cta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      border: 1px solid var(--color-border-strong);
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-text);
-      background: var(--color-surface);
-      transition: border-color 150ms, color 150ms, background 150ms, transform 150ms;
-    }
-    .cta-pill:hover {
-      border-color: var(--color-accent-2);
-      color: var(--color-accent-2);
-    }
-    .cta-pill--primary {
-      background: var(--color-accent);
-      color: var(--color-on-accent);
-      border-color: var(--color-accent);
-      font-weight: 600;
-    }
-    .cta-pill--primary:hover {
-      background: var(--color-accent-hover);
-      border-color: var(--color-accent-hover);
-      color: var(--color-on-accent);
-    }
-
-    /* ── Project cards ── */
-    .project-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .project-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 14px;
-      padding: 26px 26px 22px;
-      transition: box-shadow 220ms, transform 220ms, border-color 220ms;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-card:hover {
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.42);
-      border-color: var(--color-border-strong);
-    }
-    .project-card--featured {
-      border-color: rgba(209, 191, 174, 0.42);
-    }
-    .project-card--featured::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 2px;
-      background: var(--color-accent);
-      opacity: 0.9;
-    }
-    .project-card > * {
-      position: relative;
-      z-index: 1;
-    }
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-    .project-header-left {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .project-title {
-      font-size: 15.5px;
-      font-weight: 600;
-      color: var(--color-text);
-    }
-    .project-date {
-      font-size: 12px;
-      color: var(--color-faint);
-      white-space: nowrap;
-      margin-top: 2px;
-      font-family: var(--font-mono);
-    }
-    .project-header-right {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-    .featured-badge {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-      background: var(--color-accent-soft);
-      padding: 2px 8px;
-      border-radius: 6px;
-      border: 1px solid rgba(209, 191, 174, 0.3);
-    }
-    .project-link {
-      font-size: 12px;
-      color: var(--color-muted);
-      transition: color 150ms;
-      white-space: nowrap;
-    }
-    .project-link:hover { color: var(--color-accent-2); }
-    .project-desc {
-      font-size: 14px;
-      color: var(--color-muted);
-      line-height: 1.68;
-      margin-bottom: 16px;
-    }
-    .stack-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 14px;
-    }
-    .chip {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      padding: 3px 8px;
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-border);
-      border-radius: 6px;
-      color: var(--color-muted);
-    }
-    .metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .metric {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 4px 10px;
-      background: var(--color-surface-2);
-      color: var(--color-text);
-      border-radius: 6px;
-    }
-
-    /* ── Clay project visuals ── */
-    .fete-pipeline {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      margin: 16px 0 12px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-    .fete-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      flex: 1;
-      min-width: 0;
-    }
-    .fete-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 17px;
-      font-weight: 700;
-      font-family: var(--font-display);
-      color: var(--color-text);
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-border-strong);
-      flex-shrink: 0;
-    }
-    .fete-icon--export { background: var(--color-accent); color: var(--color-on-accent); border-color: var(--color-accent); }
-    .fete-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--color-muted);
-      text-align: center;
-    }
-    .fete-arrow {
-      color: var(--color-border-strong);
-      font-size: 14px;
-      flex-shrink: 0;
-      margin: 0 2px;
-      align-self: center;
-      margin-bottom: 18px;
-    }
-    .clay-tables {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin: 12px 0 16px;
-    }
-    .clay-table {
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      position: relative;
-      overflow: hidden;
-    }
-    .clay-table::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--color-accent);
-      opacity: 0.85;
-    }
-    .clay-table-name {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 4px;
-    }
-    .clay-table-fields {
-      font-size: 10px;
-      color: var(--color-muted);
-      line-height: 1.5;
-      font-family: var(--font-mono);
-    }
-    @media (max-width: 500px) {
-      .clay-tables { grid-template-columns: 1fr; }
-      .fete-icon { width: 34px; height: 34px; font-size: 15px; }
-      .fete-label { font-size: 9px; }
-    }
-
-    /* ── Experience timeline ── */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 34px;
-    }
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 1px 1fr;
-      gap: 0 22px;
-    }
-    .timeline-line {
-      position: relative;
-    }
-    .timeline-line::before {
-      content: '';
-      position: absolute;
-      top: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--color-accent-2);
-    }
-    .timeline-line::after {
-      content: '';
-      position: absolute;
-      top: 17px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 1px;
-      height: calc(100% - 10px);
-      background: var(--color-border-strong);
-    }
-    .timeline-item:last-child .timeline-line::after { display: none; }
-    .exp-role {
-      font-size: 15.5px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .exp-company {
-      font-size: 13px;
-      color: var(--color-accent);
-      font-weight: 500;
-    }
-    .exp-meta {
-      font-size: 12px;
-      color: var(--color-faint);
-      margin-bottom: 10px;
-      margin-top: 2px;
-      font-family: var(--font-mono);
-    }
-    .exp-bullets {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .exp-bullets li {
-      font-size: 13px;
-      color: var(--color-muted);
-      padding-left: 16px;
-      position: relative;
-      line-height: 1.62;
-    }
-    .exp-bullets li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 9px;
-      width: 6px;
-      height: 1px;
-      background: var(--color-accent-2);
-    }
-    .timeline-earlier {
-      margin-left: 30px;
-      padding-top: 4px;
-      color: var(--color-muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-    .timeline-earlier strong {
-      color: var(--color-text);
-      font-weight: 600;
-    }
-
-    /* ── Education styles ── */
-    .edu-block {
-      margin-bottom: 36px;
-    }
-    .edu-school {
-      font-size: 15.5px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .edu-degree {
-      font-size: 13px;
-      color: var(--color-muted);
-      margin-bottom: 4px;
-    }
-    .edu-dates {
-      font-size: 12px;
-      color: var(--color-faint);
-      margin-bottom: 8px;
-      font-family: var(--font-mono);
-    }
-    .edu-activities {
-      font-size: 13px;
-      color: var(--color-muted);
-    }
-    .cert-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .cert-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 16px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 10px;
-    }
-    .cert-name {
-      font-size: 13px;
-      font-weight: 500;
-    }
-    .cert-meta {
-      font-size: 12px;
-      color: var(--color-faint);
-      text-align: right;
-      white-space: nowrap;
-      font-family: var(--font-mono);
-    }
-
-    /* ── Skills ── */
-    .skills-intro {
-      font-size: 14px;
-      color: var(--color-muted);
-      line-height: 1.65;
-      margin-bottom: 30px;
-      max-width: 600px;
-    }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 26px;
-    }
-    .skill-group-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: 12px;
-      letter-spacing: 0.02em;
-    }
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .skill-tag {
-      font-size: 12px;
-      padding: 4px 10px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border-strong);
-      border-radius: 6px;
-      color: var(--color-text);
-    }
-
-    /* ── Now sections ── */
-    .now-block { margin-bottom: 44px; }
-    .now-block:last-child { margin-bottom: 0; }
-    .now-block-heading {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--color-faint);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .now-block-heading::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--color-border-strong), transparent);
-    }
-    .now-loading, .now-empty {
-      font-size: 13px;
-      color: var(--color-muted);
-      opacity: 0.6;
-      font-style: italic;
-    }
-
-    /* ── Jams turntable ── */
-    .jams-turntable {
-      position: relative;
-      height: 160px;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 14px;
-      background:
-        repeating-linear-gradient(
-          91deg,
-          transparent 0px, transparent 3px,
-          rgba(0,0,0,0.035) 3px, rgba(0,0,0,0.035) 4px,
-          transparent 4px, transparent 10px,
-          rgba(0,0,0,0.02) 10px, rgba(0,0,0,0.02) 11px
-        ),
-        linear-gradient(155deg, #f0be68 0%, #e49a38 26%, #cd8132 54%, #b56725 100%);
-      box-shadow:
-        inset 0 1.5px 0 rgba(255,255,255,0.42),
-        inset 0 -1px 0 rgba(0,0,0,0.2),
-        inset 0 0 0 1px rgba(155,85,15,0.65),
-        0 4px 22px rgba(120,80,20,0.28),
-        0 1px 3px rgba(0,0,0,0.18);
-    }
-    .jams-turntable::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 18% 45%, rgba(255,215,130,0.22) 0%, transparent 55%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .jams-turntable-text {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 1.5rem;
-      width: 40%;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      z-index: 1;
-    }
-    .jams-now-badge {
-      font-size: 8.5px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(50,18,0,0.48);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .jams-now-badge.is-live::before {
-      content: '';
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      background: var(--color-accent-2);
-      border-radius: 50%;
-      flex-shrink: 0;
-      animation: live-pulse 1.4s ease-in-out infinite;
-    }
-    .jams-track-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #271000;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.22);
-    }
-    .jams-track-artist {
-      font-size: 12px;
-      font-weight: 500;
-      color: rgba(45,16,0,0.58);
-      text-shadow: 0 1px 0 rgba(255,255,255,0.18);
-    }
-    .jams-vinyl-wrap {
-      position: absolute;
-      top: 50%;
-      right: 1.75rem;
-      transform: translateY(-50%);
-      width: 144px;
-      height: 144px;
-      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
-      z-index: 1;
-    }
-    .jams-vinyl-wrap::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 75%;
-      height: 14px;
-      background: radial-gradient(ellipse, rgba(0,0,0,0.28) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .jams-vinyl {
-      width: 144px;
-      height: 144px;
-      position: relative;
-      animation: spin-vinyl 1.9s linear infinite;
-      animation-play-state: paused;
-    }
-    .jams-vinyl.spinning { animation-play-state: running; }
-    .jams-vinyl-disc {
-      width: 144px;
-      height: 144px;
-      border-radius: 50%;
-      position: absolute;
-      top: 0; left: 0;
-      background: conic-gradient(
-        #131313 0deg,   #202020 6deg,   #131313 12deg,  #1d1d1d 18deg,
-        #131313 24deg,  #212121 30deg,  #131313 36deg,  #1e1e1e 42deg,
-        #131313 48deg,  #202020 54deg,  #131313 60deg,  #1d1d1d 66deg,
-        #131313 72deg,  #212121 78deg,  #131313 84deg,  #1e1e1e 90deg,
-        #131313 96deg,  #202020 102deg, #131313 108deg, #1d1d1d 114deg,
-        #131313 120deg, #212121 126deg, #131313 132deg, #1e1e1e 138deg,
-        #131313 144deg, #202020 150deg, #131313 156deg, #1d1d1d 162deg,
-        #131313 168deg, #212121 174deg, #131313 180deg, #1e1e1e 186deg,
-        #131313 192deg, #202020 198deg, #131313 204deg, #1d1d1d 210deg,
-        #131313 216deg, #212121 222deg, #131313 228deg, #1e1e1e 234deg,
-        #131313 240deg, #202020 246deg, #131313 252deg, #1d1d1d 258deg,
-        #131313 264deg, #212121 270deg, #131313 276deg, #1e1e1e 282deg,
-        #131313 288deg, #202020 294deg, #131313 300deg, #1d1d1d 306deg,
-        #131313 312deg, #212121 318deg, #131313 324deg, #1e1e1e 330deg,
-        #131313 336deg, #202020 342deg, #131313 348deg, #1d1d1d 354deg, #131313 360deg
-      );
-    }
-    .jams-vinyl-disc::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle at center,
-        transparent 0%,           transparent 26%,
-        rgba(255,255,255,0.055) 26%, rgba(255,255,255,0.055) 27%,
-        transparent 27%,           transparent 32%,
-        rgba(255,255,255,0.04)  32%, rgba(255,255,255,0.04)  33%,
-        transparent 33%,           transparent 38%,
-        rgba(255,255,255,0.032) 38%, rgba(255,255,255,0.032) 39%,
-        transparent 39%,           transparent 44%,
-        rgba(255,255,255,0.025) 44%, rgba(255,255,255,0.025) 45%,
-        transparent 45%,           transparent 49%,
-        rgba(255,255,255,0.018) 49%, rgba(255,255,255,0.018) 50%,
-        transparent 50%
-      );
-      pointer-events: none;
-    }
-    .jams-vinyl-label {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      overflow: hidden;
-      background: #1a1a2e;
-      z-index: 1;
-      border: 1.5px solid rgba(0,0,0,0.5);
-    }
-    .jams-vinyl-art {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      display: block;
-    }
-    .jams-vinyl-hole {
-      width: 7px;
-      height: 7px;
-      background: #0d0d0f;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
-    }
-
-    /* ── Movie poster shelf ── */
-    .flicks-shelf-wrap {
-      position: relative;
-      padding-bottom: 10px;
-    }
-    .flicks-shelf-wrap::before,
-    .flicks-shelf-wrap::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 10px;
-      width: 28px;
-      z-index: 5;
-      pointer-events: none;
-    }
-    .flicks-shelf-wrap::before {
-      left: 0;
-      background: linear-gradient(to right, var(--color-bg), transparent);
-    }
-    .flicks-shelf-wrap::after {
-      right: 0;
-      background: linear-gradient(to left, var(--color-bg), transparent);
-    }
-    .shelf-line {
-      position: absolute;
-      bottom: 0;
-      left: -24px; right: -24px;
-      height: 2px;
-      background: linear-gradient(to right,
-        transparent 0%,
-        rgba(255,255,255,0.08) 15%,
-        rgba(255,255,255,0.14) 50%,
-        rgba(255,255,255,0.08) 85%,
-        transparent 100%
-      );
-    }
-    .shelf-line::after {
-      content: '';
-      position: absolute;
-      top: 2px; left: 0; right: 0;
-      height: 8px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.35), transparent);
-    }
-    .flicks-shelf {
-      display: flex;
-      align-items: flex-end;
-      gap: 0;
-      padding-bottom: 8px;
-    }
-    .flick-item {
-      position: relative;
-      flex-shrink: 0;
-      margin-left: -18px;
-      cursor: pointer;
-      transform: perspective(500px) rotateY(-14deg);
-      transform-origin: bottom center;
-      transition: transform 290ms cubic-bezier(0.34, 1.38, 0.64, 1);
-    }
-    .flick-item:first-child { margin-left: 0; }
-    .flick-item::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 9px;
-      background: linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0.12), transparent);
-      border-radius: 3px 0 0 3px;
-      z-index: 1;
-      pointer-events: none;
-      transition: opacity 200ms;
-    }
-    .flick-item:hover::before { opacity: 0; }
-    .flick-poster {
-      width: 88px;
-      height: 130px;
-      object-fit: cover;
-      border-radius: 3px;
-      display: block;
-      box-shadow:
-        6px 10px 26px rgba(0,0,0,0.5),
-        0 2px 4px rgba(0,0,0,0.3),
-        inset 0 0 0 1px rgba(255,255,255,0.05);
-    }
-    .flick-tooltip {
-      position: absolute;
-      bottom: calc(100% + 12px);
-      left: 50%;
-      transform: translateX(-50%) translateY(4px);
-      background: rgba(15, 15, 17, 0.97);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 7px 12px;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 150ms, transform 150ms;
-      z-index: 20;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .flick-tooltip-title { font-size: 12px; font-weight: 500; color: #f5f5f3; }
-    .flick-tooltip-meta  { font-size: 11px; color: var(--color-accent); margin-top: 3px; }
-    .flick-item:hover .flick-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    /* ── Contact ── */
-    #contact { text-align: center; padding-bottom: 104px; }
-    .contact-heading {
-      font-family: var(--font-display);
-      font-size: clamp(26px, 4.5vw, 38px);
-      font-weight: 600;
-      letter-spacing: -0.025em;
-      margin-bottom: 14px;
-    }
-    .contact-bio {
-      font-size: 14px;
-      color: var(--color-muted);
-      max-width: 480px;
-      margin: 0 auto 32px;
-      line-height: 1.7;
-    }
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* ── Scroll reveal ── */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 460ms ease, transform 460ms ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* Individual items inside a .reveal section, staggered via inline transition-delay. */
-    .stagger-item { opacity: 0; transform: translateY(16px); transition: opacity 460ms ease, transform 460ms ease; }
-    .reveal.visible .stagger-item { opacity: 1; transform: none; }
-
-    /* Async "Now" content (jams/flicks/reads) fades in once loaded instead of popping in. */
-    .now-reveal { opacity: 0; transform: translateY(8px); transition: opacity 400ms ease, transform 400ms ease; }
-    .now-reveal.is-visible { opacity: 1; transform: none; }
-
-    /* Hover-only motion, gated so a tap on touch can't leave an element stuck lifted. */
-    @media (hover: hover) and (pointer: fine) {
-      .hero-photo:hover {
-        border-color: var(--color-accent);
-        box-shadow: 0 14px 44px rgba(209, 191, 174, 0.22);
-      }
-
-      .flick-item:hover {
-        transform: perspective(500px) rotateY(0deg) translateY(-18px) scale(1.1);
-        z-index: 10;
-      }
-    }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--color-border);
-      padding: 26px 0;
-      text-align: center;
-      font-size: 12px;
-      color: var(--color-faint);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      section { padding: 64px 0; }
-      #hero { padding: 76px 0 60px; }
-      .hero-inner { flex-direction: column-reverse; gap: 22px; }
-      .hero-photo { width: 104px; height: 104px; }
-      .skills-grid { grid-template-columns: 1fr; gap: 22px; }
-      .nav-links { gap: 18px; }
-      .cert-item { flex-direction: column; align-items: flex-start; }
-      .cert-meta { text-align: left; }
-    }
-    @media (max-width: 400px) {
-      .container { padding: 0 16px; }
-      .nav-links a { font-size: 12px; }
-      .hero-ctas { flex-direction: column; align-items: stretch; }
-      .cta-pill { justify-content: center; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .reveal, .stagger-item, .now-reveal { opacity: 1; transform: none; transition: none; }
-      .jams-vinyl { animation: none; }
-      .jams-now-badge.is-live::before { animation: none; }
-      .hero-open::before { animation: none; }
-      * { transition-duration: 0.001ms !important; }
-    }
-  </style>
-  <link rel="stylesheet" href="effects.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
   <a class="skip-link" href="#projects">Skip to projects</a>
-  <div class="ambient-field" aria-hidden="true">
-    <span class="ambient-orb ambient-orb--green"></span>
-    <span class="ambient-orb ambient-orb--gold"></span>
-  </div>
+  <div class="atmosphere" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- ── Navigation ── -->
-  <nav id="nav">
-    <div class="container">
+  <nav id="nav" class="nav" aria-label="Primary">
+    <div class="container nav-inner">
       <ul class="nav-links">
         <li><a href="#projects">Projects</a></li>
         <li><a href="#experience">Experience</a></li>
@@ -1075,556 +37,547 @@
 
   <main id="main-content">
 
-  <!-- ── Hero ── -->
-  <section id="hero">
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <h1 class="hero-name">Roman Licursi</h1>
-          <p class="hero-tagline scramble-text" data-scramble aria-label="GTM Engineer / Production AI Agents / Revenue Systems">
-            <span aria-hidden="true">GTM Engineer / Production AI Agents / Revenue Systems</span>
+    <!-- ── Hero ── -->
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <p class="hero-status" data-enter style="--enter-delay:0ms">Open to GTM Engineering &amp; Applied AI roles</p>
+          <h1 class="hero-name" data-enter style="--enter-delay:90ms"><span>Roman</span><span>Licursi</span></h1>
+          <p class="hero-role" data-enter style="--enter-delay:180ms"><span data-scramble aria-label="GTM Engineer"><span aria-hidden="true">GTM Engineer</span></span><span class="cursor" aria-hidden="true"></span></p>
+          <p class="hero-bio" data-enter style="--enter-delay:270ms">
+            I build production AI agents and revenue systems for GTM teams: measurable,
+            grounded, and useful inside the rep&rsquo;s workflow.
           </p>
-          <p class="hero-open">GTM Systems Analyst Intern at Together AI &middot; Computer Science at UW-Madison</p>
-          <p class="hero-bio">
-            I build production AI agents and revenue systems for GTM teams, from Salesforce and Clay
-            automation to evals, entity resolution, data pipelines, and security controls. I focus on systems
-            that are measurable, grounded, and useful inside the rep&rsquo;s workflow.
-          </p>
-          <div class="hero-stats">
-            <span>26x faster inference</span>
-            <span>6 live data lanes</span>
-            <span>+7.5pp answer accuracy</span>
-          </div>
-          <div class="hero-ctas">
-            <a href="mailto:romanlicursi@gmail.com" class="cta-pill cta-pill--primary">
-              Email &rarr;
-            </a>
-            <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="cta-pill">
-              LinkedIn &rarr;
-            </a>
-            <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="cta-pill">
-              GitHub &rarr;
-            </a>
-            <a href="https://medium.com/@romanlicursi" target="_blank" rel="noopener" class="cta-pill">
-              Writing &rarr;
-            </a>
-            <a href="Roman-Licursi-Resume-GTM-Engineer.pdf" target="_blank" rel="noopener" class="cta-pill">
-              Resume &rarr;
-            </a>
+          <div class="hero-ctas" data-enter style="--enter-delay:360ms">
+            <a href="mailto:romanlicursi@gmail.com" class="btn btn--primary">Email</a>
+            <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="btn">LinkedIn <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
+            <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="btn">GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
+            <a href="Roman-Licursi-Resume-GTM-Engineer.pdf" target="_blank" rel="noopener" class="btn">Resume <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
           </div>
         </div>
-        <div class="hero-photo-wrap">
+        <div class="hero-aside" data-enter style="--enter-delay:320ms">
           <a
             href="linkedin_headshot.jpg"
-            class="hero-photo-button"
+            class="hero-portrait"
             data-lightbox-src="linkedin_headshot.jpg"
             data-lightbox-title="Roman Licursi"
             data-lightbox-group="portrait"
             aria-label="Open portrait of Roman Licursi"
           >
-            <img src="linkedin_headshot.jpg" alt="Roman Licursi" class="hero-photo" fetchpriority="high" />
+            <img src="linkedin_headshot.jpg" alt="Roman Licursi" fetchpriority="high" />
           </a>
+          <p class="hero-caption">
+            <strong>GTM Systems Analyst Intern, Together AI</strong>
+            B.S. Computer Science, UW-Madison
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Proof band ── -->
+    <section class="proof" aria-label="Impact highlights">
+      <div class="container proof-grid">
+        <div class="proof-item">
+          <span class="proof-value">26<em>x</em></span>
+          <span class="proof-label">faster compound-query inference, 165s down to 6.3s in production</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-value">6</span>
+          <span class="proof-label">live data lanes behind the Salesforce-embedded answer engine</span>
+        </div>
+        <div class="proof-item">
+          <span class="proof-value">+7.5<em>pp</em></span>
+          <span class="proof-label">answer accuracy gained by shipping a grounding selector</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Capabilities marquee ── -->
+    <div class="marquee" aria-label="Tools and systems Roman works with">
+      <div class="marquee-window">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span><span>LLM evals</span><span>RAG / Retrieval</span><span>MCP</span><span>Claude Code</span><span>Lead scoring</span><span>Intent signals</span><span>Data enrichment</span><span>Webhooks</span><span>GitHub Actions</span><span>TypeScript</span><span>Next.js</span><span>Tableau</span>
+          </div>
+          <div class="marquee-group" aria-hidden="true">
+            <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span><span>LLM evals</span><span>RAG / Retrieval</span><span>MCP</span><span>Claude Code</span><span>Lead scoring</span><span>Intent signals</span><span>Data enrichment</span><span>Webhooks</span><span>GitHub Actions</span><span>TypeScript</span><span>Next.js</span><span>Tableau</span>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ── Capabilities marquee ── -->
-  <section class="capability-marquee" aria-label="Tools and systems Roman works with">
-    <div class="marquee-window">
-      <div class="marquee-track">
-        <div class="marquee-group">
-          <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span>
+    <!-- ── Projects ── -->
+    <section id="projects" class="reveal">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Projects</h2>
         </div>
-        <div class="marquee-group" aria-hidden="true">
-          <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ── Projects ── -->
-  <section id="projects" class="reveal">
-    <div class="container">
-      <h2 class="section-label">Projects</h2>
-      <div id="project-carousel" class="project-carousel" aria-label="Selected projects" aria-roledescription="carousel" tabindex="0">
-        <button type="button" class="project-carousel-control project-carousel-prev" aria-label="Previous project">&larr;</button>
-        <div class="project-carousel-viewport">
-          <div class="project-grid">
-
-        <div class="project-card project-card--featured">
-          <div class="project-header">
-            <div class="project-header-left">
+        <div class="projects-featured">
+          <article class="card card--featured">
+            <div class="project-top">
               <span class="project-title">Clay GTM Account Prioritization Workflow</span>
               <span class="project-date">May 2026</span>
             </div>
-            <div class="project-header-right">
-              <span class="featured-badge">Featured</span>
-              <a href="https://app.clay.com/shared-workbook/share_0teizlx2uUspNHFm4Tx" target="_blank" rel="noopener" class="project-link">View public Clay template &rarr;</a>
+            <div class="project-links">
+              <a href="https://app.clay.com/shared-workbook/share_0teizlx2uUspNHFm4Tx" target="_blank" rel="noopener" class="project-link">View public Clay template <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
             </div>
-          </div>
-          <div class="stack-chips">
-            <span class="chip">Clay</span>
-            <span class="chip">Claygent</span>
-            <span class="chip">Formulas</span>
-            <span class="chip">Waterfall Enrichment</span>
-            <span class="chip">Linked Tables</span>
-            <span class="chip">Account Scoring</span>
-          </div>
-
-          <!-- FETE pipeline visualization -->
-          <div class="fete-pipeline">
-            <div class="fete-step">
-              <div class="fete-icon fete-icon--find">F</div>
-              <span class="fete-label">Find</span>
+            <div class="featured-body">
+              <div class="featured-content">
+                <div class="stack-chips">
+                  <span class="chip">Clay</span>
+                  <span class="chip">Claygent</span>
+                  <span class="chip">Formulas</span>
+                  <span class="chip">Waterfall Enrichment</span>
+                  <span class="chip">Linked Tables</span>
+                  <span class="chip">Account Scoring</span>
+                </div>
+                <p class="project-desc">
+                  Built a Clay workbook that finds high-fit software companies, enriches them with hiring, funding,
+                  product, and infrastructure signals, then turns the research into a ranked account list for a
+                  technical sales team. Claygent handles web research on model usage and infrastructure needs,
+                  formulas drive scoring and tiering, linked Jobs and People tables surface buying signals and
+                  decision-makers, and a work email waterfall makes the best accounts actionable.
+                </p>
+                <div class="project-metrics">
+                  <span>FETE framework</span>
+                  <span>Claygent research</span>
+                  <span>Scoring formulas</span>
+                  <span>3 linked tables</span>
+                  <span>Email waterfall</span>
+                  <span>Outbound-ready shortlist</span>
+                </div>
+              </div>
+              <div class="featured-visual">
+                <div class="fete-pipeline" aria-label="Find, Enrich, Transform, Export">
+                  <div class="fete-step">
+                    <span class="fete-key">F</span>
+                    <span class="fete-label">Find</span>
+                  </div>
+                  <div class="fete-step">
+                    <span class="fete-key">E</span>
+                    <span class="fete-label">Enrich</span>
+                  </div>
+                  <div class="fete-step">
+                    <span class="fete-key">T</span>
+                    <span class="fete-label">Transform</span>
+                  </div>
+                  <div class="fete-step fete-step--export">
+                    <span class="fete-key">E</span>
+                    <span class="fete-label">Export</span>
+                  </div>
+                </div>
+                <div class="clay-tables">
+                  <div class="clay-table">
+                    <span class="clay-table-name">Companies</span>
+                    <span class="clay-table-fields">Fit signals, growth, funding stage, readiness score, tier, why now</span>
+                  </div>
+                  <div class="clay-table">
+                    <span class="clay-table-name">Jobs</span>
+                    <span class="clay-table-fields">Recent ML / inference / applied AI hiring as buying signal</span>
+                  </div>
+                  <div class="clay-table">
+                    <span class="clay-table-name">People</span>
+                    <span class="clay-table-fields">Decision-makers, email waterfall, opening lines</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <span class="fete-arrow">&rsaquo;</span>
-            <div class="fete-step">
-              <div class="fete-icon fete-icon--enrich">E</div>
-              <span class="fete-label">Enrich</span>
-            </div>
-            <span class="fete-arrow">&rsaquo;</span>
-            <div class="fete-step">
-              <div class="fete-icon fete-icon--transform">T</div>
-              <span class="fete-label">Transform</span>
-            </div>
-            <span class="fete-arrow">&rsaquo;</span>
-            <div class="fete-step">
-              <div class="fete-icon fete-icon--export">E</div>
-              <span class="fete-label">Export</span>
-            </div>
-          </div>
-
-          <p class="project-desc">
-            Built a Clay workbook that finds high-fit software companies, enriches them with hiring, funding,
-            product, and infrastructure signals, then turns the research into a ranked account list for a
-            technical sales team. Claygent handles web research on model usage and infrastructure needs,
-            formulas drive scoring and tiering, linked Jobs and People tables surface buying signals and
-            decision-makers, and a work email waterfall makes the best accounts actionable.
-          </p>
-
-          <!-- Linked-table architecture -->
-          <div class="clay-tables">
-            <div class="clay-table clay-table--companies">
-              <div class="clay-table-name">Companies</div>
-              <div class="clay-table-fields">Fit signals, growth, funding stage, readiness score, tier, why&nbsp;now</div>
-            </div>
-            <div class="clay-table clay-table--jobs">
-              <div class="clay-table-name">Jobs</div>
-              <div class="clay-table-fields">Recent ML / inference / applied AI hiring as buying signal</div>
-            </div>
-            <div class="clay-table clay-table--people">
-              <div class="clay-table-name">People</div>
-              <div class="clay-table-fields">Decision-makers, email waterfall, opening lines</div>
-            </div>
-          </div>
-
-          <div class="metrics">
-            <span class="metric">FETE framework</span>
-            <span class="metric">Claygent research</span>
-            <span class="metric">Scoring formulas</span>
-            <span class="metric">3 linked tables</span>
-            <span class="metric">Email waterfall</span>
-            <span class="metric">Outbound-ready shortlist</span>
-          </div>
+          </article>
         </div>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-header-left">
+        <div class="projects-grid">
+          <article class="card stagger-item" style="transition-delay:0ms">
+            <div class="project-top">
               <span class="project-title">Salesforce Lead Routing &amp; Scoring Pipeline</span>
               <span class="project-date">Mar 2026</span>
             </div>
-            <div class="project-header-right">
-              <a href="https://github.com/romanlicursi/salesforce-lead-routing-pipeline" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+            <div class="project-links">
+              <a href="https://github.com/romanlicursi/salesforce-lead-routing-pipeline" target="_blank" rel="noopener" class="project-link">View on GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
             </div>
-          </div>
-          <div class="stack-chips">
-            <span class="chip">Python</span>
-            <span class="chip">Salesforce</span>
-            <span class="chip">simple_salesforce</span>
-            <span class="chip">scikit-learn</span>
-            <span class="chip">SFDC Flows</span>
-          </div>
-          <p class="project-desc">
-            End-to-end Salesforce RevOps automation: Python logistic regression pipeline scores 100+ leads,
-            syncs scores back to Salesforce CRM via REST API, and triggers native Record-Triggered Flows
-            that route hot leads to a dedicated SDR queue and auto-create follow-up tasks, fully closing
-            the loop from data ingestion to CRM workflow execution.
-          </p>
-          <div class="metrics">
-            <span class="metric">100 leads scored</span>
-            <span class="metric">Hot / Warm / Cold routing</span>
-            <span class="metric">Bidirectional SFDC sync</span>
-            <span class="metric">Zero manual steps</span>
-          </div>
-        </div>
+            <div class="stack-chips">
+              <span class="chip">Python</span>
+              <span class="chip">Salesforce</span>
+              <span class="chip">simple_salesforce</span>
+              <span class="chip">scikit-learn</span>
+              <span class="chip">SFDC Flows</span>
+            </div>
+            <p class="project-desc">
+              End-to-end Salesforce RevOps automation: Python logistic regression pipeline scores 100+ leads,
+              syncs scores back to Salesforce CRM via REST API, and triggers native Record-Triggered Flows
+              that route hot leads to a dedicated SDR queue and auto-create follow-up tasks, fully closing
+              the loop from data ingestion to CRM workflow execution.
+            </p>
+            <div class="project-metrics">
+              <span>100 leads scored</span>
+              <span>Hot / Warm / Cold routing</span>
+              <span>Bidirectional SFDC sync</span>
+              <span>Zero manual steps</span>
+            </div>
+          </article>
 
-        <div class="project-card project-card--featured">
-          <div class="project-header">
-            <div class="project-header-left">
+          <article class="card stagger-item" style="transition-delay:70ms">
+            <div class="project-top">
               <span class="project-title">Career OS</span>
               <span class="project-date">Mar 2026</span>
             </div>
-            <div class="project-header-right">
-              <span class="featured-badge">Featured</span>
-              <a href="https://github.com/romanlicursi/career-os-public" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+            <div class="project-links">
+              <a href="https://github.com/romanlicursi/career-os-public" target="_blank" rel="noopener" class="project-link">View on GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
             </div>
-          </div>
-          <div class="stack-chips">
-            <span class="chip">Python</span>
-            <span class="chip">Claude</span>
-            <span class="chip">REST APIs</span>
-            <span class="chip">GitHub Actions</span>
-            <span class="chip">Webhooks</span>
-          </div>
-          <p class="project-desc">
-            A six-layer AI workflow that converts live job-market data into structured research, skill-gap
-            analysis, sprint plans, and human-reviewed outreach drafts on an automated cadence.
-          </p>
-          <div class="metrics">
-            <span class="metric">Six-layer workflow</span>
-            <span class="metric">Live job-market data</span>
-            <span class="metric">Structured research</span>
-            <span class="metric">Human-reviewed drafts</span>
-            <span class="metric">Automated cadence</span>
-          </div>
-        </div>
+            <div class="stack-chips">
+              <span class="chip">Python</span>
+              <span class="chip">Claude</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">GitHub Actions</span>
+              <span class="chip">Webhooks</span>
+            </div>
+            <p class="project-desc">
+              A six-layer AI workflow that converts live job-market data into structured research, skill-gap
+              analysis, sprint plans, and human-reviewed outreach drafts on an automated cadence.
+            </p>
+            <div class="project-metrics">
+              <span>Six-layer workflow</span>
+              <span>Live job-market data</span>
+              <span>Structured research</span>
+              <span>Human-reviewed drafts</span>
+              <span>Automated cadence</span>
+            </div>
+          </article>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-header-left">
+          <article class="card stagger-item" style="transition-delay:140ms">
+            <div class="project-top">
               <span class="project-title">Agent Telegram Notifier</span>
             </div>
-            <div class="project-header-right">
-              <a href="https://github.com/romanlicursi/agent-telegram-runner" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
-              <a href="https://medium.com/@romanlicursi/i-built-a-little-machine-that-lets-me-ship-from-my-phone-bbadbcdd8703" target="_blank" rel="noopener" class="project-link">Read the article &rarr;</a>
+            <div class="project-links">
+              <a href="https://github.com/romanlicursi/agent-telegram-runner" target="_blank" rel="noopener" class="project-link">View on GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
+              <a href="https://medium.com/@romanlicursi/i-built-a-little-machine-that-lets-me-ship-from-my-phone-bbadbcdd8703" target="_blank" rel="noopener" class="project-link">Read the article <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
             </div>
-          </div>
-          <div class="stack-chips">
-            <span class="chip">TypeScript</span>
-            <span class="chip">Codex</span>
-            <span class="chip">Claude Code</span>
-            <span class="chip">Telegram</span>
-            <span class="chip">Local Hooks</span>
-          </div>
-          <p class="project-desc">
-            A local-first notification layer for Codex and Claude Code runs. Hooks detect completion, failure,
-            and needs-input states, redact common secret patterns, preserve desktop notifications, and send
-            structured Telegram updates so long-running agent work can be monitored away from the terminal.
-          </p>
-          <div class="metrics">
-            <span class="metric">Codex + Claude hooks</span>
-            <span class="metric">Secret redaction</span>
-            <span class="metric">Local-first</span>
-            <span class="metric">Dry-run test path</span>
-          </div>
-        </div>
+            <div class="stack-chips">
+              <span class="chip">TypeScript</span>
+              <span class="chip">Codex</span>
+              <span class="chip">Claude Code</span>
+              <span class="chip">Telegram</span>
+              <span class="chip">Local Hooks</span>
+            </div>
+            <p class="project-desc">
+              A local-first notification layer for Codex and Claude Code runs. Hooks detect completion, failure,
+              and needs-input states, redact common secret patterns, preserve desktop notifications, and send
+              structured Telegram updates so long-running agent work can be monitored away from the terminal.
+            </p>
+            <div class="project-metrics">
+              <span>Codex + Claude hooks</span>
+              <span>Secret redaction</span>
+              <span>Local-first</span>
+              <span>Dry-run test path</span>
+            </div>
+          </article>
 
-        <div class="project-card">
-          <div class="project-header">
-            <div class="project-header-left">
+          <article class="card stagger-item" style="transition-delay:210ms">
+            <div class="project-top">
               <span class="project-title">PodBot: AI Podcast Discovery</span>
               <span class="project-date">Apr 2026</span>
             </div>
-            <div class="project-header-right">
-              <a href="https://podbot.guru" target="_blank" rel="noopener" class="project-link">View the app &rarr;</a>
-              <a href="https://github.com/romanlicursi/PodBot---AI-Podcast-Discovery" target="_blank" rel="noopener" class="project-link">GitHub &rarr;</a>
+            <div class="project-links">
+              <a href="https://podbot.guru" target="_blank" rel="noopener" class="project-link">View the app <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
+              <a href="https://github.com/romanlicursi/PodBot---AI-Podcast-Discovery" target="_blank" rel="noopener" class="project-link">GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
+            </div>
+            <div class="stack-chips">
+              <span class="chip">React</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Supabase</span>
+              <span class="chip">Spotify API</span>
+              <span class="chip">OAuth 2.0</span>
+              <span class="chip">TanStack Query</span>
+              <span class="chip">Tailwind CSS</span>
+            </div>
+            <p class="project-desc">
+              Full-stack AI recommendation app that connects to Spotify via OAuth 2.0, analyzes a user's podcast
+              listening history and completion patterns, and surfaces personalized episode picks, not by category tags,
+              but by actual behavioral signal. Taste profile is built from play rates, skip patterns, and listening
+              cadence, then fed into an AI layer that ranks and explains each recommendation. Users can save any pick
+              directly to a Spotify playlist. Backend runs on Supabase edge functions with PostgreSQL persistence.
+            </p>
+            <div class="project-metrics">
+              <span>OAuth 2.0 + token refresh</span>
+              <span>Behavioral taste profiling</span>
+              <span>AI-ranked recommendations</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Experience ── -->
+    <section id="experience" class="reveal">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Experience</h2>
+        </div>
+        <div class="timeline">
+
+          <div class="timeline-item stagger-item" style="transition-delay:0ms">
+            <div class="timeline-line"></div>
+            <div>
+              <div class="exp-role">GTM Systems Analyst Intern</div>
+              <div class="exp-company">Together AI</div>
+              <div class="exp-meta">Apr 2026 - Present &middot; San Francisco Bay Area</div>
+              <ul class="exp-bullets">
+                <li>Shipped a Salesforce-embedded production AI answer engine spanning six live data lanes, including Salesforce, product usage, Gong calls, and buying signals; rebuilt its inference path to cut compound-query latency from 165 seconds to 6.3 seconds, a 26x speedup.</li>
+                <li>Built an adversarial agent-evaluation system with synthetic questions and an independent LLM judge; used paired statistical testing to select the production model and shipped a grounding selector that improved answer accuracy by 7.5 percentage points.</li>
+                <li>Engineered deterministic grounding and security controls, then automated Gong call insights, intent routing, closed-lost re-engagement, and lead scoring across Clay, Slack, Hex, Snowflake, and Salesforce.</li>
+              </ul>
             </div>
           </div>
-          <div class="stack-chips">
-            <span class="chip">React</span>
-            <span class="chip">TypeScript</span>
-            <span class="chip">Supabase</span>
-            <span class="chip">Spotify API</span>
-            <span class="chip">OAuth 2.0</span>
-            <span class="chip">TanStack Query</span>
-            <span class="chip">Tailwind CSS</span>
-          </div>
-          <p class="project-desc">
-            Full-stack AI recommendation app that connects to Spotify via OAuth 2.0, analyzes a user's podcast
-            listening history and completion patterns, and surfaces personalized episode picks, not by category tags,
-            but by actual behavioral signal. Taste profile is built from play rates, skip patterns, and listening
-            cadence, then fed into an AI layer that ranks and explains each recommendation. Users can save any pick
-            directly to a Spotify playlist. Backend runs on Supabase edge functions with PostgreSQL persistence.
-          </p>
-          <div class="metrics">
-            <span class="metric">OAuth 2.0 + token refresh</span>
-            <span class="metric">Behavioral taste profiling</span>
-            <span class="metric">AI-ranked recommendations</span>
-          </div>
-        </div>
 
+          <div class="timeline-item stagger-item" style="transition-delay:60ms">
+            <div class="timeline-line"></div>
+            <div>
+              <div class="exp-role">Campus Ambassador</div>
+              <div class="exp-company">Clay</div>
+              <div class="exp-meta">Jun 2026 - Present</div>
+              <ul class="exp-bullets">
+                <li>Represent Clay, the GTM data enrichment platform, on the UW-Madison campus</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <button type="button" class="project-carousel-control project-carousel-next" aria-label="Next project">&rarr;</button>
-        <div class="project-carousel-footer">
-          <div id="project-carousel-indicators" class="project-carousel-indicators" aria-label="Choose a project"></div>
-          <p id="project-carousel-status" class="project-carousel-status" aria-live="polite"></p>
+
+          <div class="timeline-item stagger-item" style="transition-delay:120ms">
+            <div class="timeline-line"></div>
+            <div>
+              <div class="exp-role">Growth</div>
+              <div class="exp-company">Roger <span class="exp-org-note">(YC S24)</span></div>
+              <div class="exp-meta">Dec 2025 - Mar 2026</div>
+              <ul class="exp-bullets">
+                <li>Ran outbound growth experiments for a YC-backed AI SDR platform</li>
+                <li>Built prospect lists, launched campaigns across LinkedIn and email, tracked performance metrics</li>
+                <li>Created monthly content (TikTok, LinkedIn video) demonstrating product value</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item stagger-item" style="transition-delay:180ms">
+            <div class="timeline-line"></div>
+            <div>
+              <div class="exp-role">GTM Engineer</div>
+              <div class="exp-company">College and University Healthcare Education Consortium <span class="exp-org-note">(CAUHEC)</span></div>
+              <div class="exp-meta">Sep 2025 - Present, Part-time, Remote</div>
+              <ul class="exp-bullets">
+                <li>Built and own CAUHEC's outbound GTM infrastructure end to end, from lead sourcing and enrichment through deliverability and funnel reporting, as a one-person system</li>
+                <li>Designed AI-native sourcing and enrichment pipelines in Python, using local LLMs and public data to produce verified, high-intent contacts at scale without paid data vendors</li>
+                <li>Treated deliverability as an engineering problem, maintained bounce below 5%, and protected sender reputation across a multi-mailbox, multi-persona campaign system</li>
+                <li>Automated funnel and conversion reporting so growth decisions run on live data, and partner with the founder on segmentation and go-to-market strategy</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item stagger-item" style="transition-delay:240ms">
+            <div class="timeline-line"></div>
+            <div>
+              <div class="exp-role">Data Analytics Intern</div>
+              <div class="exp-company">Community Action Partnership of Ramsey &amp; Washington Counties</div>
+              <div class="exp-meta">Jul 2025 - Aug 2025</div>
+              <ul class="exp-bullets">
+                <li>Built dashboards tracking 100+ active community partnerships, filterable by engagement tier, department, and staff lead</li>
+                <li>Analyzed historical data to surface engagement gaps and regional disparities</li>
+                <li>Presented findings to agency staff to improve outreach equity and strategy</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="timeline-earlier"><strong>Earlier leadership:</strong> Website Director, TEDxUWMadison (Oct 2024 - Aug 2025)</p>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── Experience ── -->
-  <section id="experience" class="reveal">
-    <div class="container">
-      <h2 class="section-label">Experience</h2>
-      <div class="timeline">
-
-        <div class="timeline-item stagger-item" style="transition-delay:0ms">
-          <div class="timeline-line"></div>
-          <div>
-            <div class="exp-role">GTM Systems Analyst Intern</div>
-            <div class="exp-company">Together AI</div>
-            <div class="exp-meta">Apr 2026 - Present &middot; San Francisco Bay Area</div>
-            <ul class="exp-bullets">
-              <li>Shipped a Salesforce-embedded production AI answer engine spanning six live data lanes, including Salesforce, product usage, Gong calls, and buying signals; rebuilt its inference path to cut compound-query latency from 165 seconds to 6.3 seconds, a 26x speedup.</li>
-              <li>Built an adversarial agent-evaluation system with synthetic questions and an independent LLM judge; used paired statistical testing to select the production model and shipped a grounding selector that improved answer accuracy by 7.5 percentage points.</li>
-              <li>Engineered deterministic grounding and security controls, then automated Gong call insights, intent routing, closed-lost re-engagement, and lead scoring across Clay, Slack, Hex, Snowflake, and Salesforce.</li>
-            </ul>
-          </div>
+    <!-- ── Education & credentials ── -->
+    <section id="education" class="reveal">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Education &amp; Credentials</h2>
         </div>
-
-        <div class="timeline-item stagger-item" style="transition-delay:60ms">
-          <div class="timeline-line"></div>
+        <div class="edu-grid">
           <div>
-            <div class="exp-role">Campus Ambassador</div>
-            <div class="exp-company">Clay</div>
-            <div class="exp-meta">Jun 2026 - Present</div>
-            <ul class="exp-bullets">
-              <li>Represent Clay, the GTM data enrichment platform, on the UW-Madison campus</li>
-            </ul>
+            <div class="edu-school">University of Wisconsin-Madison</div>
+            <div class="edu-degree">B.S. Computer Science</div>
+            <div class="edu-dates">Sep 2023 - May 2027</div>
+            <div class="edu-activities">Chi Psi Fraternity, Informatics Skunkworks Machine Learning, Data Science Club</div>
           </div>
+          <ul class="cert-grid">
+            <li class="cert-item">
+              <span class="cert-name">Agentic AI</span>
+              <span class="cert-meta">DeepLearning.AI &middot; May 2026</span>
+            </li>
+            <li class="cert-item">
+              <span class="cert-name">Revenue Operations</span>
+              <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
+            </li>
+            <li class="cert-item">
+              <span class="cert-name">Salesforce Admin Fundamentals</span>
+              <span class="cert-meta">Trailhead</span>
+            </li>
+            <li class="cert-item">
+              <span class="cert-name">Clay GTM Cohort</span>
+              <span class="cert-meta">Clay</span>
+            </li>
+          </ul>
         </div>
-
-        <div class="timeline-item stagger-item" style="transition-delay:120ms">
-          <div class="timeline-line"></div>
-          <div>
-            <div class="exp-role">Growth</div>
-            <div class="exp-company">Roger <span style="color:var(--color-muted);font-weight:400">(YC S24)</span></div>
-            <div class="exp-meta">Dec 2025 - Mar 2026</div>
-            <ul class="exp-bullets">
-              <li>Ran outbound growth experiments for a YC-backed AI SDR platform</li>
-              <li>Built prospect lists, launched campaigns across LinkedIn and email, tracked performance metrics</li>
-              <li>Created monthly content (TikTok, LinkedIn video) demonstrating product value</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item stagger-item" style="transition-delay:180ms">
-          <div class="timeline-line"></div>
-          <div>
-            <div class="exp-role">GTM Engineer</div>
-            <div class="exp-company">College and University Healthcare Education Consortium <span style="color:var(--color-muted);font-weight:400">(CAUHEC)</span></div>
-            <div class="exp-meta">Sep 2025 - Present &middot; Part-time &middot; Remote</div>
-            <ul class="exp-bullets">
-              <li>Built and own CAUHEC's outbound GTM infrastructure end to end, from lead sourcing and enrichment through deliverability and funnel reporting, as a one-person system</li>
-              <li>Designed AI-native sourcing and enrichment pipelines in Python, using local LLMs and public data to produce verified, high-intent contacts at scale without paid data vendors</li>
-              <li>Treated deliverability as an engineering problem, maintained bounce below 5%, and protected sender reputation across a multi-mailbox, multi-persona campaign system</li>
-              <li>Automated funnel and conversion reporting so growth decisions run on live data, and partner with the founder on segmentation and go-to-market strategy</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item stagger-item" style="transition-delay:240ms">
-          <div class="timeline-line"></div>
-          <div>
-            <div class="exp-role">Data Analytics Intern</div>
-            <div class="exp-company">Community Action Partnership of Ramsey &amp; Washington Counties</div>
-            <div class="exp-meta">Jul 2025 - Aug 2025</div>
-            <ul class="exp-bullets">
-              <li>Built dashboards tracking 100+ active community partnerships, filterable by engagement tier, department, and staff lead</li>
-              <li>Analyzed historical data to surface engagement gaps and regional disparities</li>
-              <li>Presented findings to agency staff to improve outreach equity and strategy</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="timeline-earlier"><strong>Earlier leadership:</strong> Website Director, TEDxUWMadison (Oct 2024 - Aug 2025)</p>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── Education and credentials ── -->
-  <section id="education" class="reveal">
-    <div class="container">
-      <h2 class="section-label">Education &amp; Credentials</h2>
+    <!-- ── Skills ── -->
+    <section id="skills" class="reveal">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Skills</h2>
+          <p class="section-sub">I combine technical depth with business fluency. Every system I build ties to real revenue outcomes.</p>
+        </div>
+        <div class="skills-grid">
 
-      <div class="edu-block">
-        <div class="edu-school">University of Wisconsin-Madison</div>
-        <div class="edu-degree">B.S. Computer Science</div>
-        <div class="edu-dates">Sep 2023 - May 2027</div>
-        <div class="edu-activities">Chi Psi Fraternity &middot; Informatics Skunkworks Machine Learning &middot; Data Science Club</div>
+          <div class="skill-group stagger-item" style="transition-delay:0ms">
+            <div class="skill-group-label">AI Engineering</div>
+            <div class="skill-tags">
+              <span class="skill-tag">AI Agents</span>
+              <span class="skill-tag">LLM Application Development</span>
+              <span class="skill-tag">Evals</span>
+              <span class="skill-tag">RAG / Retrieval</span>
+              <span class="skill-tag">MCP</span>
+              <span class="skill-tag">Grounding</span>
+              <span class="skill-tag">Guardrails</span>
+              <span class="skill-tag">Prompt Engineering</span>
+              <span class="skill-tag">Claude Code</span>
+            </div>
+          </div>
+
+          <div class="skill-group stagger-item" style="transition-delay:70ms">
+            <div class="skill-group-label">GTM Systems</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Salesforce</span>
+              <span class="skill-tag">SOQL</span>
+              <span class="skill-tag">Salesforce Flows</span>
+              <span class="skill-tag">Clay</span>
+              <span class="skill-tag">HubSpot</span>
+              <span class="skill-tag">Apollo</span>
+              <span class="skill-tag">Gong</span>
+              <span class="skill-tag">Lead Scoring</span>
+              <span class="skill-tag">Intent Signals</span>
+              <span class="skill-tag">Data Enrichment</span>
+            </div>
+          </div>
+
+          <div class="skill-group stagger-item" style="transition-delay:140ms">
+            <div class="skill-group-label">Automation &amp; Integration</div>
+            <div class="skill-tags">
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">Webhooks</span>
+              <span class="skill-tag">OAuth</span>
+              <span class="skill-tag">GitHub Actions</span>
+              <span class="skill-tag">Slack Workflows</span>
+              <span class="skill-tag">Zapier</span>
+              <span class="skill-tag">Make</span>
+            </div>
+          </div>
+
+          <div class="skill-group stagger-item" style="transition-delay:210ms">
+            <div class="skill-group-label">Engineering &amp; Data</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">JavaScript / TypeScript</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">React / Next.js</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">Vercel</span>
+              <span class="skill-tag">Redis</span>
+              <span class="skill-tag">Snowflake</span>
+              <span class="skill-tag">Hex</span>
+              <span class="skill-tag">dbt</span>
+              <span class="skill-tag">Census</span>
+              <span class="skill-tag">Tableau</span>
+            </div>
+          </div>
+
+        </div>
       </div>
+    </section>
 
-      <ul class="cert-list">
-        <li class="cert-item">
-          <span class="cert-name">Agentic AI</span>
-          <span class="cert-meta">DeepLearning.AI &middot; May 2026</span>
-        </li>
-        <li class="cert-item">
-          <span class="cert-name">Revenue Operations</span>
-          <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
-        </li>
-        <li class="cert-item">
-          <span class="cert-name">Salesforce Admin Fundamentals</span>
-          <span class="cert-meta">Trailhead</span>
-        </li>
-        <li class="cert-item">
-          <span class="cert-name">Clay GTM Cohort</span>
-          <span class="cert-meta">Clay</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ── Skills ── -->
-  <section id="skills" class="reveal">
-    <div class="container">
-      <h2 class="section-label">Skills</h2>
-      <p class="skills-intro">I combine technical depth with business fluency. Every system I build ties to real revenue outcomes.</p>
-      <div class="skills-grid">
-
-        <div class="stagger-item" style="transition-delay:0ms">
-          <div class="skill-group-label">AI Engineering</div>
-          <div class="skill-tags">
-            <span class="skill-tag">AI Agents</span>
-            <span class="skill-tag">LLM Application Development</span>
-            <span class="skill-tag">Evals</span>
-            <span class="skill-tag">RAG / Retrieval</span>
-            <span class="skill-tag">MCP</span>
-            <span class="skill-tag">Grounding</span>
-            <span class="skill-tag">Guardrails</span>
-            <span class="skill-tag">Prompt Engineering</span>
-            <span class="skill-tag">Claude Code</span>
-          </div>
+    <!-- ── Now ── -->
+    <section id="now" class="reveal">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Now</h2>
         </div>
+        <div class="now-blocks">
 
-        <div class="stagger-item" style="transition-delay:70ms">
-          <div class="skill-group-label">GTM Systems</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Salesforce</span>
-            <span class="skill-tag">SOQL</span>
-            <span class="skill-tag">Salesforce Flows</span>
-            <span class="skill-tag">Clay</span>
-            <span class="skill-tag">HubSpot</span>
-            <span class="skill-tag">Apollo</span>
-            <span class="skill-tag">Gong</span>
-            <span class="skill-tag">Lead Scoring</span>
-            <span class="skill-tag">Intent Signals</span>
-            <span class="skill-tag">Data Enrichment</span>
-          </div>
-        </div>
-
-        <div class="stagger-item" style="transition-delay:140ms">
-          <div class="skill-group-label">Automation &amp; Integration</div>
-          <div class="skill-tags">
-            <span class="skill-tag">REST APIs</span>
-            <span class="skill-tag">Webhooks</span>
-            <span class="skill-tag">OAuth</span>
-            <span class="skill-tag">GitHub Actions</span>
-            <span class="skill-tag">Slack Workflows</span>
-            <span class="skill-tag">Zapier</span>
-            <span class="skill-tag">Make</span>
-          </div>
-        </div>
-
-        <div class="stagger-item" style="transition-delay:210ms">
-          <div class="skill-group-label">Engineering &amp; Data</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript / TypeScript</span>
-            <span class="skill-tag">SQL</span>
-            <span class="skill-tag">React / Next.js</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">Supabase</span>
-            <span class="skill-tag">Vercel</span>
-            <span class="skill-tag">Redis</span>
-            <span class="skill-tag">Snowflake</span>
-            <span class="skill-tag">Hex</span>
-            <span class="skill-tag">dbt</span>
-            <span class="skill-tag">Census</span>
-            <span class="skill-tag">Tableau</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Now ── -->
-  <section id="now" class="reveal">
-    <div class="container">
-
-      <div class="now-block">
-        <div class="now-block-heading">recent jams</div>
-        <div class="jams-turntable now-reveal" id="jams-turntable" style="display:none">
-          <div class="jams-turntable-text">
-            <div class="jams-now-badge" id="jams-badge">Last Played</div>
-            <div class="jams-track-title" id="jams-title">Loading</div>
-            <div class="jams-track-artist" id="jams-artist">Last.fm</div>
-          </div>
-          <div class="jams-vinyl-wrap">
-            <div class="jams-vinyl" id="jams-vinyl">
-              <div class="jams-vinyl-disc"></div>
-              <div class="jams-vinyl-label">
-                <img class="jams-vinyl-art" id="jams-art" src="" alt="">
+          <div>
+            <div class="now-label">recent jams</div>
+            <div class="turntable now-reveal" id="turntable" style="display:none">
+              <div class="turntable-text">
+                <div class="turntable-badge" id="jams-badge">Last Played</div>
+                <div class="turntable-title" id="jams-title">Loading</div>
+                <div class="turntable-artist" id="jams-artist">Last.fm</div>
               </div>
-              <div class="jams-vinyl-hole"></div>
+              <div class="vinyl-wrap">
+                <div class="vinyl" id="jams-vinyl">
+                  <div class="vinyl-disc"></div>
+                  <div class="vinyl-label">
+                    <img class="vinyl-art" id="jams-art" src="" alt="">
+                  </div>
+                  <div class="vinyl-hole"></div>
+                </div>
+              </div>
+            </div>
+            <span class="now-empty" id="jams-empty" style="display:none">No recent scrobbles yet.</span>
+          </div>
+
+          <div>
+            <div class="now-label">recent flicks</div>
+            <div class="shelf-wrap">
+              <div class="shelf" id="flicks-shelf">
+                <span class="now-loading">Loading…</span>
+              </div>
+              <div class="shelf-line"></div>
             </div>
           </div>
-        </div>
-        <span class="now-empty" id="jams-empty" style="display:none">No recent scrobbles yet.</span>
-      </div>
 
-      <div class="now-block">
-        <div class="now-block-heading">recent flicks</div>
-        <div class="flicks-shelf-wrap">
-          <div class="flicks-shelf" id="flicks-shelf">
-            <span class="now-loading">Loading…</span>
+          <div>
+            <div class="now-label">recent reads</div>
+            <div class="shelf-wrap">
+              <div class="shelf" id="reads-shelf">
+                <span class="now-loading">Loading…</span>
+              </div>
+              <div class="shelf-line"></div>
+            </div>
           </div>
-          <div class="shelf-line"></div>
+
         </div>
       </div>
+    </section>
 
-      <div class="now-block">
-        <div class="now-block-heading">recent reads</div>
-        <div class="flicks-shelf-wrap">
-          <div class="flicks-shelf" id="reads-shelf">
-            <span class="now-loading">Loading…</span>
-          </div>
-          <div class="shelf-line"></div>
+    <!-- ── Contact ── -->
+    <section id="contact" class="contact reveal">
+      <div class="container">
+        <h2 class="contact-heading">Let&rsquo;s build something <em>measurable</em>.</h2>
+        <p class="contact-bio">
+          If you are hiring for GTM Engineering or Applied AI, or building production systems across AI,
+          CRM, data, and automation, I would be glad to compare notes.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:romanlicursi@gmail.com" class="btn btn--primary">Email</a>
+          <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="btn">LinkedIn <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
+          <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="btn">GitHub <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
+          <a href="https://medium.com/@romanlicursi" target="_blank" rel="noopener" class="btn">Writing <span class="btn-arrow" aria-hidden="true">&#8599;</span></a>
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <!-- ── Contact ── -->
-  <section id="contact" class="reveal">
-    <div class="container">
-      <h2 class="contact-heading">Let's connect.</h2>
-      <p class="contact-bio">
-        If you are hiring for GTM Engineering or Applied AI, or building production systems across AI,
-        CRM, data, and automation, I would be glad to compare notes.
-      </p>
-      <div class="contact-links">
-        <a href="mailto:romanlicursi@gmail.com" class="cta-pill">Email</a>
-        <a href="https://www.linkedin.com/in/roman-licursi-3aab2a160" target="_blank" rel="noopener" class="cta-pill">LinkedIn</a>
-        <a href="https://github.com/romanlicursi" target="_blank" rel="noopener" class="cta-pill">GitHub</a>
-        <a href="https://medium.com/@romanlicursi" target="_blank" rel="noopener" class="cta-pill">Writing</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
   </main>
 
   <!-- ── Footer ── -->
   <footer>
     <div class="container">
-      &copy; 2026 Roman Licursi &middot; Built with <a href="https://claude.ai/claude-code" target="_blank" rel="noopener" style="color:var(--color-muted);text-decoration:underline;text-underline-offset:3px;transition:color 150ms" onmouseover="this.style.color='var(--color-accent)'" onmouseout="this.style.color='var(--color-muted)'">Claude Code</a>
+      <span>&copy; 2026 Roman Licursi</span>
+      <span>Built with <a href="https://claude.ai/claude-code" target="_blank" rel="noopener">Claude Code</a></span>
     </div>
   </footer>
 
@@ -1647,182 +600,7 @@
     </div>
   </dialog>
 
-  <!-- ── JS: nav scroll + smooth behavior ── -->
-  <script>
-    // Nav blur on scroll
-    const nav = document.getElementById('nav');
-    const sentinel = document.getElementById('hero');
-    const navObserver = new IntersectionObserver(
-      ([entry]) => nav.classList.toggle('scrolled', !entry.isIntersecting),
-      { threshold: 0.1 }
-    );
-    navObserver.observe(sentinel);
-
-    // Active nav link highlight on scroll
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const linkObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navLinks.forEach(a => {
-              const active = a.getAttribute('href') === '#' + entry.target.id;
-              a.style.color = active ? 'var(--color-text)' : '';
-            });
-          }
-        });
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    );
-    sections.forEach(s => linkObserver.observe(s));
-
-    // Scroll reveal
-    const revealObserver = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } }),
-      { rootMargin: '0px 0px -60px 0px' }
-    );
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    // Fades in "Now" content once it's actually ready, instead of popping in on load/error.
-    function revealShelf(el) {
-      if (!el) return;
-      el.classList.add('now-reveal');
-      if (el.style.display === 'none') el.style.display = '';
-      void el.offsetHeight; // force a layout flush so the opacity:0 start state is committed
-      el.classList.add('is-visible');
-    }
-
-    // ── Now: Recent flicks (pre-built JSON, updated by GitHub Actions) ──
-    async function loadFlicks() {
-      const shelf = document.getElementById('flicks-shelf');
-      try {
-        const res   = await fetch('./flicks.json');
-        if (!res.ok) throw new Error('fetch failed');
-        const items = await res.json();
-        if (!items.length) { shelf.innerHTML = '<span class="now-empty">No rated films yet.</span>'; revealShelf(shelf); return; }
-
-        shelf.innerHTML = items.map(({ title: filmTitle, year: filmYear, rating: ratingRaw, poster, link }) => {
-          const stars = ratingRaw
-            ? '★'.repeat(Math.floor(ratingRaw)) + (ratingRaw % 1 ? '½' : '')
-            : '';
-
-          const meta = [filmYear, stars].filter(Boolean).join(' · ');
-          const sourceLink = /^https?:\/\//.test(link) ? link : '';
-          const tooltip = `<div class="flick-tooltip">
-            <div class="flick-tooltip-title">${filmTitle}</div>
-            ${meta ? `<div class="flick-tooltip-meta">${meta}</div>` : ''}
-          </div>`;
-
-          return `<a href="${link}" target="_blank" rel="noopener" class="flick-item" data-lightbox-src="${encodeURIComponent(poster)}" data-lightbox-title="${encodeURIComponent(filmTitle)}" data-lightbox-link="${encodeURIComponent(sourceLink)}" data-lightbox-group="culture" aria-label="View ${filmTitle} poster">
-            <img class="flick-poster" src="${poster}" alt="${filmTitle}" loading="lazy">
-            ${tooltip}
-          </a>`;
-        }).join('');
-        revealShelf(shelf);
-      } catch (e) {
-        shelf.innerHTML = '<span class="now-empty">Couldn\'t load flicks right now.</span>';
-        revealShelf(shelf);
-      }
-    }
-
-    // ── Now: Recent jams (Last.fm API) ──
-    const LASTFM_API_KEY = 'dbc4003d252a868be4a864e9eba11557';
-    const LASTFM_USER    = 'rlicursi';
-    const LASTFM_DEFAULT_IMG = '2a96cbd8b46e442fc41c2b86b821562f';
-
-    async function loadJams() {
-      const turntable = document.getElementById('jams-turntable');
-      const recents   = document.getElementById('jams-recents');
-      const emptyEl   = document.getElementById('jams-empty');
-      try {
-        const url  = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=9`;
-        const res  = await fetch(url);
-        if (!res.ok) throw new Error('fetch failed');
-        const data = await res.json();
-        let tracks = data?.recenttracks?.track;
-        if (!tracks) { revealShelf(emptyEl); return; }
-        if (!Array.isArray(tracks)) tracks = [tracks];
-        if (!tracks.length) { revealShelf(emptyEl); return; }
-
-        const isNowPlaying = tracks[0]?.['@attr']?.nowplaying === 'true';
-        const featured     = tracks[0];
-        const recentTracks = tracks.slice(1, 8);
-
-        // Render turntable with featured track
-        const getImg = (track, size) =>
-          track.image?.find(i => i.size === size)?.['#text'] || '';
-        const featArt = getImg(featured, 'large') || getImg(featured, 'medium');
-        const hasArt  = featArt && !featArt.includes(LASTFM_DEFAULT_IMG);
-
-        document.getElementById('jams-title').textContent  = featured.name || 'Loading';
-        document.getElementById('jams-artist').textContent = featured.artist?.['#text'] || 'Last.fm';
-        const badge = document.getElementById('jams-badge');
-        badge.textContent = isNowPlaying ? 'Now Playing' : 'Last Played';
-        if (isNowPlaying) badge.classList.add('is-live');
-        const artEl = document.getElementById('jams-art');
-        if (hasArt) { artEl.src = featArt; artEl.alt = featured.name; }
-        else { artEl.style.display = 'none'; }
-        if (isNowPlaying) document.getElementById('jams-vinyl').classList.add('spinning');
-        revealShelf(turntable);
-
-      } catch (e) {
-        emptyEl.textContent = 'Couldn\'t load tracks right now.';
-        revealShelf(emptyEl);
-      }
-    }
-
-
-    // ── Now: Recent reads (Goodreads RSS) ──
-    async function loadReads() {
-      const shelf = document.getElementById('reads-shelf');
-      try {
-        const proxy = 'https://corsproxy.io/?url=';
-        const feed  = 'https://www.goodreads.com/review/list_rss/108552445?shelf=read&sort=date_read&order=d&per_page=20';
-        const res   = await fetch(proxy + encodeURIComponent(feed));
-        if (!res.ok) throw new Error('fetch failed');
-        const text  = await res.text();
-        const xml   = new DOMParser().parseFromString(text, 'application/xml');
-        const allItems = [...xml.querySelectorAll('item')];
-        // Only rated books
-        const items = allItems
-          .filter(i => {
-            const r = i.getElementsByTagName('user_rating')[0]?.textContent;
-            return r && parseInt(r) > 0;
-          })
-          .slice(0, 4);
-        if (!items.length) { shelf.innerHTML = '<span class="now-empty">No rated books yet.</span>'; revealShelf(shelf); return; }
-
-        shelf.innerHTML = items.map(item => {
-          const title  = item.querySelector('title')?.textContent?.trim() || 'Unknown';
-          const author = item.getElementsByTagName('author_name')[0]?.textContent?.trim() || '';
-          const img    = item.getElementsByTagName('book_large_image_url')[0]?.textContent?.trim()
-                      || item.getElementsByTagName('book_image_url')[0]?.textContent?.trim() || '';
-          const rating = parseInt(item.getElementsByTagName('user_rating')[0]?.textContent || '0');
-          const stars  = rating ? '★'.repeat(rating) : '';
-          const link   = item.querySelector('link')?.nextSibling?.textContent?.trim()
-                      || item.querySelector('guid')?.textContent?.trim() || '#';
-
-          const meta = [author, stars].filter(Boolean).join(' · ');
-          return `<a href="${link}" target="_blank" rel="noopener" class="flick-item" data-lightbox-src="${encodeURIComponent(img)}" data-lightbox-title="${encodeURIComponent(title)}" data-lightbox-link="${encodeURIComponent(link)}" data-lightbox-group="culture" aria-label="View ${title} cover">
-            <img class="flick-poster" src="${img}" alt="${title}" loading="lazy">
-            <div class="flick-tooltip">
-              <div class="flick-tooltip-title">${title}</div>
-              ${meta ? `<div class="flick-tooltip-meta">${meta}</div>` : ''}
-            </div>
-          </a>`;
-        }).join('');
-        revealShelf(shelf);
-      } catch (e) {
-        shelf.innerHTML = '<span class="now-empty">Couldn\'t load books right now.</span>';
-        revealShelf(shelf);
-      }
-    }
-
-    loadFlicks();
-    loadJams();
-    loadReads();
-  </script>
-  <script src="effects.js"></script>
+  <script src="main.js"></script>
 
 </body>
 </html>
