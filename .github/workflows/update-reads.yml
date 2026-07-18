@@ -1,0 +1,58 @@
+name: Update Recent Reads
+
+on:
+  schedule:
+    - cron: '37 */6 * * *'  # every 6 hours, offset from update-flicks
+  workflow_dispatch:         # manual trigger
+
+jobs:
+  update-reads:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch and parse Goodreads RSS
+        run: |
+          python3 << 'EOF'
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          import json
+
+          url = 'https://www.goodreads.com/review/list_rss/108552445?shelf=read&sort=date_read&order=d&per_page=20'
+          req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+          with urllib.request.urlopen(req, timeout=15) as r:
+              root = ET.fromstring(r.read().decode('utf-8'))
+
+          books = []
+          for item in root.iter('item'):
+              rating = (item.findtext('user_rating') or '0').strip()
+              if not rating.isdigit() or int(rating) == 0:
+                  continue
+              img = (item.findtext('book_large_image_url') or '').strip() \
+                 or (item.findtext('book_image_url') or '').strip()
+              link = (item.findtext('link') or '').strip() \
+                  or (item.findtext('guid') or '').strip()
+              books.append({
+                  'title': (item.findtext('title') or 'Unknown').strip(),
+                  'author': (item.findtext('author_name') or '').strip(),
+                  'rating': int(rating),
+                  'img': img,
+                  'link': link,
+              })
+              if len(books) == 4:
+                  break
+
+          with open('reads.json', 'w') as f:
+              json.dump(books, f, indent=2)
+          print(f"Wrote {len(books)} books to reads.json")
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add reads.json
+          git diff --staged --quiet || git commit -m "chore: update recent reads"
+          git push

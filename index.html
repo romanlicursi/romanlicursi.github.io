@@ -15,7 +15,7 @@
   <link rel="preload" href="assets/fonts/MonaSansVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/MonaSansMonoVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260718" />
 </head>
 <body>
 
@@ -310,9 +310,7 @@
     <!-- ── Experience ── -->
     <section id="experience" class="reveal">
       <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Experience</h2>
-        </div>
+        <h2 class="section-label">Experience</h2>
         <div class="timeline">
 
           <div class="timeline-item stagger-item" style="transition-delay:0ms">
@@ -345,7 +343,7 @@
             <div class="timeline-line"></div>
             <div>
               <div class="exp-role">Growth</div>
-              <div class="exp-company">Roger <span class="exp-org-note">(YC S24)</span></div>
+              <div class="exp-company">Roger <span style="color:var(--text-2);font-weight:400">(YC S24)</span></div>
               <div class="exp-meta">Dec 2025 - Mar 2026</div>
               <ul class="exp-bullets">
                 <li>Ran outbound growth experiments for a YC-backed AI SDR platform</li>
@@ -359,8 +357,8 @@
             <div class="timeline-line"></div>
             <div>
               <div class="exp-role">GTM Engineer</div>
-              <div class="exp-company">College and University Healthcare Education Consortium <span class="exp-org-note">(CAUHEC)</span></div>
-              <div class="exp-meta">Sep 2025 - Present, Part-time, Remote</div>
+              <div class="exp-company">College and University Healthcare Education Consortium <span style="color:var(--text-2);font-weight:400">(CAUHEC)</span></div>
+              <div class="exp-meta">Sep 2025 - Present &middot; Part-time &middot; Remote</div>
               <ul class="exp-bullets">
                 <li>Built and own CAUHEC's outbound GTM infrastructure end to end, from lead sourcing and enrichment through deliverability and funnel reporting, as a one-person system</li>
                 <li>Designed AI-native sourcing and enrichment pipelines in Python, using local LLMs and public data to produce verified, high-intent contacts at scale without paid data vendors</li>
@@ -393,48 +391,44 @@
     <!-- ── Education & credentials ── -->
     <section id="education" class="reveal">
       <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Education &amp; Credentials</h2>
+        <h2 class="section-label">Education &amp; Credentials</h2>
+
+        <div class="edu-block">
+          <div class="edu-school">University of Wisconsin-Madison</div>
+          <div class="edu-degree">B.S. Computer Science</div>
+          <div class="edu-dates">Sep 2023 - May 2027</div>
+          <div class="edu-activities">Chi Psi Fraternity &middot; Informatics Skunkworks Machine Learning &middot; Data Science Club</div>
         </div>
-        <div class="edu-grid">
-          <div>
-            <div class="edu-school">University of Wisconsin-Madison</div>
-            <div class="edu-degree">B.S. Computer Science</div>
-            <div class="edu-dates">Sep 2023 - May 2027</div>
-            <div class="edu-activities">Chi Psi Fraternity, Informatics Skunkworks Machine Learning, Data Science Club</div>
-          </div>
-          <ul class="cert-grid">
-            <li class="cert-item">
-              <span class="cert-name">Agentic AI</span>
-              <span class="cert-meta">DeepLearning.AI &middot; May 2026</span>
-            </li>
-            <li class="cert-item">
-              <span class="cert-name">Revenue Operations</span>
-              <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
-            </li>
-            <li class="cert-item">
-              <span class="cert-name">Salesforce Admin Fundamentals</span>
-              <span class="cert-meta">Trailhead</span>
-            </li>
-            <li class="cert-item">
-              <span class="cert-name">Clay GTM Cohort</span>
-              <span class="cert-meta">Clay</span>
-            </li>
-          </ul>
-        </div>
+
+        <ul class="cert-list">
+          <li class="cert-item">
+            <span class="cert-name">Agentic AI</span>
+            <span class="cert-meta">DeepLearning.AI &middot; May 2026</span>
+          </li>
+          <li class="cert-item">
+            <span class="cert-name">Revenue Operations</span>
+            <span class="cert-meta">HubSpot Academy &middot; Oct 2025</span>
+          </li>
+          <li class="cert-item">
+            <span class="cert-name">Salesforce Admin Fundamentals</span>
+            <span class="cert-meta">Trailhead</span>
+          </li>
+          <li class="cert-item">
+            <span class="cert-name">Clay GTM Cohort</span>
+            <span class="cert-meta">Clay</span>
+          </li>
+        </ul>
       </div>
     </section>
 
     <!-- ── Skills ── -->
     <section id="skills" class="reveal">
       <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Skills</h2>
-          <p class="section-sub">I combine technical depth with business fluency. Every system I build ties to real revenue outcomes.</p>
-        </div>
+        <h2 class="section-label">Skills</h2>
+        <p class="skills-intro">I combine technical depth with business fluency. Every system I build ties to real revenue outcomes.</p>
         <div class="skills-grid">
 
-          <div class="skill-group stagger-item" style="transition-delay:0ms">
+          <div class="stagger-item" style="transition-delay:0ms">
             <div class="skill-group-label">AI Engineering</div>
             <div class="skill-tags">
               <span class="skill-tag">AI Agents</span>
@@ -449,7 +443,7 @@
             </div>
           </div>
 
-          <div class="skill-group stagger-item" style="transition-delay:70ms">
+          <div class="stagger-item" style="transition-delay:70ms">
             <div class="skill-group-label">GTM Systems</div>
             <div class="skill-tags">
               <span class="skill-tag">Salesforce</span>
@@ -465,7 +459,7 @@
             </div>
           </div>
 
-          <div class="skill-group stagger-item" style="transition-delay:140ms">
+          <div class="stagger-item" style="transition-delay:140ms">
             <div class="skill-group-label">Automation &amp; Integration</div>
             <div class="skill-tags">
               <span class="skill-tag">REST APIs</span>
@@ -478,7 +472,7 @@
             </div>
           </div>
 
-          <div class="skill-group stagger-item" style="transition-delay:210ms">
+          <div class="stagger-item" style="transition-delay:210ms">
             <div class="skill-group-label">Engineering &amp; Data</div>
             <div class="skill-tags">
               <span class="skill-tag">Python</span>
@@ -504,53 +498,48 @@
     <!-- ── Now ── -->
     <section id="now" class="reveal">
       <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Now</h2>
-        </div>
-        <div class="now-blocks">
 
-          <div>
-            <div class="now-label">recent jams</div>
-            <div class="turntable now-reveal" id="turntable" style="display:none">
-              <div class="turntable-text">
-                <div class="turntable-badge" id="jams-badge">Last Played</div>
-                <div class="turntable-title" id="jams-title">Loading</div>
-                <div class="turntable-artist" id="jams-artist">Last.fm</div>
-              </div>
-              <div class="vinyl-wrap">
-                <div class="vinyl" id="jams-vinyl">
-                  <div class="vinyl-disc"></div>
-                  <div class="vinyl-label">
-                    <img class="vinyl-art" id="jams-art" src="" alt="">
-                  </div>
-                  <div class="vinyl-hole"></div>
+        <div class="now-block">
+          <div class="now-block-heading">recent jams</div>
+          <div class="jams-turntable now-reveal" id="jams-turntable" style="display:none">
+            <div class="jams-turntable-text">
+              <div class="jams-now-badge" id="jams-badge">Last Played</div>
+              <div class="jams-track-title" id="jams-title">Loading</div>
+              <div class="jams-track-artist" id="jams-artist">Last.fm</div>
+            </div>
+            <div class="jams-vinyl-wrap">
+              <div class="jams-vinyl" id="jams-vinyl">
+                <div class="jams-vinyl-disc"></div>
+                <div class="jams-vinyl-label">
+                  <img class="jams-vinyl-art" id="jams-art" src="" alt="">
                 </div>
+                <div class="jams-vinyl-hole"></div>
               </div>
             </div>
-            <span class="now-empty" id="jams-empty" style="display:none">No recent scrobbles yet.</span>
           </div>
-
-          <div>
-            <div class="now-label">recent flicks</div>
-            <div class="shelf-wrap">
-              <div class="shelf" id="flicks-shelf">
-                <span class="now-loading">Loading…</span>
-              </div>
-              <div class="shelf-line"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="now-label">recent reads</div>
-            <div class="shelf-wrap">
-              <div class="shelf" id="reads-shelf">
-                <span class="now-loading">Loading…</span>
-              </div>
-              <div class="shelf-line"></div>
-            </div>
-          </div>
-
+          <span class="now-empty" id="jams-empty" style="display:none">No recent scrobbles yet.</span>
         </div>
+
+        <div class="now-block">
+          <div class="now-block-heading">recent flicks</div>
+          <div class="flicks-shelf-wrap">
+            <div class="flicks-shelf" id="flicks-shelf">
+              <span class="now-loading">Loading…</span>
+            </div>
+            <div class="shelf-line"></div>
+          </div>
+        </div>
+
+        <div class="now-block">
+          <div class="now-block-heading">recent reads</div>
+          <div class="flicks-shelf-wrap">
+            <div class="flicks-shelf" id="reads-shelf">
+              <span class="now-loading">Loading…</span>
+            </div>
+            <div class="shelf-line"></div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -577,7 +566,6 @@
   <footer>
     <div class="container">
       <span>&copy; 2026 Roman Licursi</span>
-      <span>Built with <a href="https://claude.ai/claude-code" target="_blank" rel="noopener">Claude Code</a></span>
     </div>
   </footer>
 
@@ -600,7 +588,7 @@
     </div>
   </dialog>
 
-  <script src="main.js"></script>
+  <script src="main.js?v=20260718"></script>
 
 </body>
 </html>

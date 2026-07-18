@@ -335,7 +335,7 @@
   const LASTFM_DEFAULT_IMG = '2a96cbd8b46e442fc41c2b86b821562f';
 
   async function loadJams() {
-    const turntable = document.getElementById('turntable');
+    const turntable = document.getElementById('jams-turntable');
     const emptyEl = document.getElementById('jams-empty');
     if (!turntable || !emptyEl) return;
     try {
@@ -376,52 +376,23 @@
     }
   }
 
-  /* Recent reads: Goodreads RSS. Public CORS proxies are flaky, so try them in order. */
+  /* Recent reads: pre-built reads.json (Goodreads RSS), refreshed by GitHub Actions.
+     Runtime CORS proxies were too flaky, same fix as flicks.json. */
   async function loadReads() {
     const shelf = document.getElementById('reads-shelf');
     if (!shelf) return;
-    const feed = 'https://www.goodreads.com/review/list_rss/108552445?shelf=read&sort=date_read&order=d&per_page=20';
-    const proxies = [
-      (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
-      (u) => 'https://corsproxy.io/?url=' + encodeURIComponent(u),
-      (u) => 'https://api.codetabs.com/v1/proxy?quest=' + u
-    ];
     try {
-      let text = null;
-      for (const wrap of proxies) {
-        try {
-          const res = await fetch(wrap(feed));
-          if (res.ok) {
-            text = await res.text();
-            break;
-          }
-        } catch { /* try the next proxy */ }
-      }
-      if (!text) throw new Error('all proxies failed');
-      const xml = new DOMParser().parseFromString(text, 'application/xml');
-      const allItems = [...xml.querySelectorAll('item')];
-      const items = allItems
-        .filter((i) => {
-          const r = i.getElementsByTagName('user_rating')[0]?.textContent;
-          return r && parseInt(r) > 0;
-        })
-        .slice(0, 4);
+      const res = await fetch('./reads.json');
+      if (!res.ok) throw new Error('fetch failed');
+      const items = await res.json();
       if (!items.length) {
         shelf.innerHTML = '<span class="now-empty">No rated books yet.</span>';
         revealShelf(shelf);
         return;
       }
 
-      shelf.innerHTML = items.map((item) => {
-        const title = item.querySelector('title')?.textContent?.trim() || 'Unknown';
-        const author = item.getElementsByTagName('author_name')[0]?.textContent?.trim() || '';
-        const img = item.getElementsByTagName('book_large_image_url')[0]?.textContent?.trim()
-          || item.getElementsByTagName('book_image_url')[0]?.textContent?.trim() || '';
-        const rating = parseInt(item.getElementsByTagName('user_rating')[0]?.textContent || '0');
+      shelf.innerHTML = items.map(({ title, author, rating, img, link }) => {
         const stars = rating ? '★'.repeat(rating) : '';
-        const link = item.querySelector('link')?.nextSibling?.textContent?.trim()
-          || item.querySelector('guid')?.textContent?.trim() || '#';
-
         const meta = [author, stars].filter(Boolean).join(' · ');
         return `<a href="${link}" target="_blank" rel="noopener" class="flick-item" data-lightbox-src="${encodeURIComponent(img)}" data-lightbox-title="${encodeURIComponent(title)}" data-lightbox-link="${encodeURIComponent(link)}" data-lightbox-group="culture" aria-label="View ${title} cover">
           <img class="flick-poster" src="${img}" alt="${title}" loading="lazy">
