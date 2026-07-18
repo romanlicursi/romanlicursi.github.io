@@ -15,7 +15,7 @@
   <link rel="preload" href="assets/fonts/MonaSansVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/MonaSansMonoVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-  <link rel="stylesheet" href="styles.css?v=20260718c" />
+  <link rel="stylesheet" href="styles.css?v=20260718e" />
 </head>
 <body>
 
@@ -45,7 +45,7 @@
           <h1 class="hero-name" data-enter style="--enter-delay:90ms"><span>Roman</span><span>Licursi</span></h1>
           <p class="hero-role" data-enter style="--enter-delay:180ms"><span data-scramble aria-label="GTM Engineer"><span aria-hidden="true">GTM Engineer</span></span><span class="cursor" aria-hidden="true"></span></p>
           <p class="hero-bio" data-enter style="--enter-delay:270ms">
-            I build production AI agents and revenue systems for GTM teams.
+            I build production AI agents and revenue systems for GTM teams,<br>and I can prove they work with evals.
           </p>
           <div class="hero-ctas" data-enter style="--enter-delay:360ms">
             <a href="mailto:romanlicursi@gmail.com" class="btn btn--primary">Email</a>
@@ -96,14 +96,25 @@
       <div class="marquee-window">
         <div class="marquee-track">
           <div class="marquee-group">
-            <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span><span>LLM evals</span><span>RAG / Retrieval</span><span>MCP</span><span>Claude Code</span><span>Lead scoring</span><span>Intent signals</span><span>Data enrichment</span><span>Webhooks</span><span>GitHub Actions</span><span>TypeScript</span><span>Next.js</span><span>Tableau</span>
+            <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span><span>LLM evals</span><span>LLM-as-judge</span><span>Context engineering</span><span>Agent observability</span><span>RAG / Retrieval</span><span>MCP</span><span>Claude Code</span><span>Lead scoring</span><span>Intent signals</span><span>Data enrichment</span><span>Webhooks</span><span>GitHub Actions</span><span>TypeScript</span><span>Next.js</span><span>Tableau</span>
           </div>
           <div class="marquee-group" aria-hidden="true">
-            <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span><span>LLM evals</span><span>RAG / Retrieval</span><span>MCP</span><span>Claude Code</span><span>Lead scoring</span><span>Intent signals</span><span>Data enrichment</span><span>Webhooks</span><span>GitHub Actions</span><span>TypeScript</span><span>Next.js</span><span>Tableau</span>
+            <span>AI agents</span><span>RevOps</span><span>GTM systems</span><span>Python</span><span>SQL</span><span>Clay</span><span>Salesforce</span><span>Supabase</span><span>dbt</span><span>Snowflake</span><span>LLM evals</span><span>LLM-as-judge</span><span>Context engineering</span><span>Agent observability</span><span>RAG / Retrieval</span><span>MCP</span><span>Claude Code</span><span>Lead scoring</span><span>Intent signals</span><span>Data enrichment</span><span>Webhooks</span><span>GitHub Actions</span><span>TypeScript</span><span>Next.js</span><span>Tableau</span>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- ── Positioning ── -->
+    <section class="positioning reveal" aria-label="Positioning">
+      <div class="container">
+        <p class="positioning-statement">
+          Traditional RevOps builds business logic <em>inside the software</em>.
+          I build that logic <em>in code</em> and version it on GitHub.
+        </p>
+        <p class="positioning-sub">I build production agents, and I can prove they work through evals and ultimately in revenue.</p>
+      </div>
+    </section>
 
     <!-- ── Experience ── -->
     <section id="experience" class="reveal">
@@ -231,6 +242,9 @@
               <span class="skill-tag">AI Agents</span>
               <span class="skill-tag">LLM Application Development</span>
               <span class="skill-tag">Evals</span>
+              <span class="skill-tag">Error Analysis / LLM-as-Judge</span>
+              <span class="skill-tag">Context Engineering</span>
+              <span class="skill-tag">Agent Observability</span>
               <span class="skill-tag">RAG / Retrieval</span>
               <span class="skill-tag">MCP</span>
               <span class="skill-tag">Grounding</span>
@@ -302,6 +316,38 @@
         <div class="projects-featured">
           <article class="card card--featured">
             <div class="project-top">
+              <span class="project-title">Proving a Production Answer Engine Works</span>
+              <span class="project-date">Together AI &middot; 2026</span>
+            </div>
+            <div class="stack-chips">
+              <span class="chip">Python</span>
+              <span class="chip">LLM-as-Judge</span>
+              <span class="chip">Synthetic Eval Sets</span>
+              <span class="chip">Paired Statistical Testing</span>
+              <span class="chip">Error Analysis</span>
+              <span class="chip">Grounding</span>
+            </div>
+            <p class="project-desc">
+              Built the evaluation system behind Together AI's Salesforce-embedded answer engine. Synthetic
+              adversarial questions span the six live data lanes, an independent LLM judge scores the answers,
+              and paired statistical testing, not vibes, selected the production model. Error analysis on the
+              judge-labeled failures drove a deterministic grounding selector that lifted answer accuracy by 7.5
+              percentage points, and rebuilding the inference path cut compound-query latency from 165 seconds
+              to 6.3. Internal systems; happy to walk through the methodology live.
+            </p>
+            <div class="project-metrics">
+              <span>+7.5pp answer accuracy</span>
+              <span>26x faster (165s &rarr; 6.3s)</span>
+              <span>6 live data lanes</span>
+              <span>Adversarial synthetic evals</span>
+              <span>Independent LLM judge</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="projects-featured">
+          <article class="card card--featured">
+            <div class="project-top">
               <span class="project-title">Clay GTM Account Prioritization Workflow</span>
               <span class="project-date">May 2026</span>
             </div>
@@ -325,6 +371,10 @@
                   formulas drive scoring and tiering, linked Jobs and People tables surface buying signals and
                   decision-makers, and a work email waterfall makes the best accounts actionable.
                 </p>
+                <div class="project-proof">
+                  <span class="project-proof-label">How I know it works</span>
+                  <p>Scoring and tiering are formula-driven, so every account's rank is auditable in-table, and no email ships until it survives a multi-provider verification waterfall.</p>
+                </div>
                 <div class="project-metrics">
                   <span>FETE framework</span>
                   <span>Claygent research</span>
@@ -394,6 +444,10 @@
               that route hot leads to a dedicated SDR queue and auto-create follow-up tasks, fully closing
               the loop from data ingestion to CRM workflow execution.
             </p>
+            <div class="project-proof">
+              <span class="project-proof-label">How I know it works</span>
+              <p>Verified end to end against a live Salesforce org: 100/100 leads scored and synced via bulk API, then Flow routing checked record-by-record at each tier boundary; the repo ships a verification checklist.</p>
+            </div>
             <div class="project-metrics">
               <span>100 leads scored</span>
               <span>Hot / Warm / Cold routing</span>
@@ -421,6 +475,10 @@
               A six-layer AI workflow that converts live job-market data into structured research, skill-gap
               analysis, sprint plans, and human-reviewed outreach drafts on an automated cadence.
             </p>
+            <div class="project-proof">
+              <span class="project-proof-label">How I know it works</span>
+              <p>Runs unattended on GitHub Actions; the run history and dated automated commits are the proof of operation. Outreach drafts wait for human review; nothing sends autonomously.</p>
+            </div>
             <div class="project-metrics">
               <span>Six-layer workflow</span>
               <span>Live job-market data</span>
@@ -450,6 +508,10 @@
               and needs-input states, redact common secret patterns, preserve desktop notifications, and send
               structured Telegram updates so long-running agent work can be monitored away from the terminal.
             </p>
+            <div class="project-proof">
+              <span class="project-proof-label">How I know it works</span>
+              <p>Ships with its own test suite (command parsing, local job store, secret-redaction safety) plus a smoke script and dry-run mode that exercise the full notification path without touching Telegram.</p>
+            </div>
             <div class="project-metrics">
               <span>Codex + Claude hooks</span>
               <span>Secret redaction</span>
@@ -483,6 +545,10 @@
               cadence, then fed into an AI layer that ranks and explains each recommendation. Users can save any pick
               directly to a Spotify playlist. Backend runs on Supabase edge functions with PostgreSQL persistence.
             </p>
+            <div class="project-proof">
+              <span class="project-proof-label">How I know it works</span>
+              <p>The taste profile is computed from real play/skip behavior, not self-reported genres; every recommendation carries an explanation; Vitest unit tests and Playwright end-to-end tests cover the app.</p>
+            </div>
             <div class="project-metrics">
               <span>OAuth 2.0 + token refresh</span>
               <span>Behavioral taste profiling</span>
@@ -586,7 +652,7 @@
     </div>
   </dialog>
 
-  <script src="main.js?v=20260718c"></script>
+  <script src="main.js?v=20260718e"></script>
 
 </body>
 </html>
