@@ -293,6 +293,9 @@ section { padding: 118px 0; }
   max-width: 46ch;
   margin-bottom: 36px;
 }
+@media (min-width: 1025px) {
+  .hero-bio { max-width: none; white-space: nowrap; }
+}
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
