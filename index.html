@@ -81,12 +81,12 @@
           <span class="proof-label">faster compound-query inference, 165s down to 6.3s in production</span>
         </div>
         <div class="proof-item">
-          <span class="proof-value">6</span>
+          <span class="proof-value">8</span>
           <span class="proof-label">live data lanes behind the Salesforce-embedded answer engine</span>
         </div>
         <div class="proof-item">
           <span class="proof-value">+7.5<em>pp</em></span>
-          <span class="proof-label">answer accuracy gained by shipping a grounding selector</span>
+          <span class="proof-label">answer accuracy gained by shipping a best-of-N grounding selector</span>
         </div>
       </div>
     </section>
@@ -129,9 +129,9 @@
               <div class="exp-company">Together AI</div>
               <div class="exp-meta">Apr 2026 - Present &middot; San Francisco Bay Area</div>
               <ul class="exp-bullets">
-                <li>Shipped a Salesforce-embedded production AI answer engine spanning six live data lanes, including Salesforce, product usage, Gong calls, and buying signals; rebuilt its inference path to cut compound-query latency from 165 seconds to 6.3 seconds, a 26x speedup.</li>
-                <li>Built an adversarial agent-evaluation system with synthetic questions and an independent LLM judge; used paired statistical testing to select the production model and shipped a grounding selector that improved answer accuracy by 7.5 percentage points.</li>
-                <li>Engineered deterministic grounding and security controls, then automated Gong call insights, intent routing, closed-lost re-engagement, and lead scoring across Clay, Slack, Hex, Snowflake, and Salesforce.</li>
+                <li>Shipped a Salesforce-embedded production AI answer engine spanning eight live data lanes, including Salesforce, product usage, Gong calls, and buying signals; rebuilt its inference path to cut compound-query latency from 165 seconds to 6.3 seconds, a 26x speedup.</li>
+                <li>Built an adversarial evaluation harness that auto-generates questions, runs the live agent, and grades answers with an LLM judge; a paired McNemar test on a frozen 133-question set selected the production model, and a best-of-N grounding selector lifted answer accuracy 7.5 percentage points.</li>
+                <li>Engineered a deterministic verifier that flags fabricated numbers, record IDs, and company names before they reach the user, plus content-security controls on the embedded app; automated Gong call insights, intent routing, closed-lost re-engagement, and lead scoring across Clay, Slack, Hex, Snowflake, and Salesforce.</li>
               </ul>
             </div>
           </div>
@@ -243,6 +243,7 @@
               <span class="skill-tag">LLM Application Development</span>
               <span class="skill-tag">Evals</span>
               <span class="skill-tag">Error Analysis / LLM-as-Judge</span>
+              <span class="skill-tag">Statistical Testing</span>
               <span class="skill-tag">Context Engineering</span>
               <span class="skill-tag">Agent Observability</span>
               <span class="skill-tag">RAG / Retrieval</span>
@@ -323,24 +324,32 @@
               <span class="chip">Python</span>
               <span class="chip">LLM-as-Judge</span>
               <span class="chip">Synthetic Eval Sets</span>
-              <span class="chip">Paired Statistical Testing</span>
+              <span class="chip">McNemar Test</span>
+              <span class="chip">Bootstrap CI</span>
+              <span class="chip">Best-of-N</span>
               <span class="chip">Error Analysis</span>
               <span class="chip">Grounding</span>
             </div>
             <p class="project-desc">
-              Built the evaluation system behind Together AI's Salesforce-embedded answer engine. Synthetic
-              adversarial questions span the six live data lanes, an independent LLM judge scores the answers,
-              and paired statistical testing, not vibes, selected the production model. Error analysis on the
-              judge-labeled failures drove a deterministic grounding selector that lifted answer accuracy by 7.5
-              percentage points, and rebuilding the inference path cut compound-query latency from 165 seconds
-              to 6.3. Internal systems; happy to walk through the methodology live.
+              Built the evaluation system behind Together AI's Salesforce-embedded answer engine. An adversarial
+              harness auto-generates questions across the eight live data lanes, runs the live agent, and grades
+              every answer with an LLM judge. Error analysis sorts each failure into categories (hallucination,
+              coverage gap, non-responsive, wrong-entity), and a deterministic verifier flags fabricated numbers,
+              record IDs, and company names; a best-of-N selector then picks the least-fabricated answer, which
+              lifted accuracy 7.5 percentage points. Rebuilding the inference path cut compound-query latency from
+              165 seconds to 6.3. Internal systems; happy to walk through the methodology live.
             </p>
+            <div class="project-proof">
+              <span class="project-proof-label">How I know it works</span>
+              <p>Model and prompt changes ship only if they clear a paired McNemar test on a frozen 133-question set, with 95% bootstrap confidence intervals and a p&lt;0.05 gate, so a reported gain is signal and not judge or sampling noise. The LLM judge is cross-checked by a second model from a different family to control for self-preference bias.</p>
+            </div>
             <div class="project-metrics">
-              <span>+7.5pp answer accuracy</span>
+              <span>+7.5pp accuracy (p=0.005)</span>
               <span>26x faster (165s &rarr; 6.3s)</span>
-              <span>6 live data lanes</span>
-              <span>Adversarial synthetic evals</span>
-              <span>Independent LLM judge</span>
+              <span>8 live data lanes</span>
+              <span>Frozen 133-question set</span>
+              <span>Paired McNemar gate</span>
+              <span>Deterministic verifier</span>
             </div>
           </article>
         </div>
