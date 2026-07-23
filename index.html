@@ -132,6 +132,7 @@
                 <li>Shipped a Salesforce-embedded production AI answer engine spanning eight live data lanes, including Salesforce, product usage, Gong calls, and buying signals; rebuilt its inference path to cut compound-query latency from 165 seconds to 6.3 seconds, a 26x speedup.</li>
                 <li>Built an adversarial evaluation harness that auto-generates questions, runs the live agent, and grades answers with an LLM judge; a paired McNemar test on a frozen 133-question set selected the production model, and a best-of-N grounding selector lifted answer accuracy 7.5 percentage points.</li>
                 <li>Engineered a deterministic verifier that flags fabricated numbers, record IDs, and company names before they reach the user, plus content-security controls on the embedded app; automated Gong call insights, intent routing, closed-lost re-engagement, and lead scoring across Clay, Slack, Hex, Snowflake, and Salesforce.</li>
+                <li>Shipped a predictive account-intelligence layer into the engine that tiers customer accounts by expansion and churn risk from live usage, support, and revenue signals, backed by nightly snapshots and a unit-tested deterministic scoring engine, so the rankings stay reproducible and the model only writes the narrative.</li>
               </ul>
             </div>
           </div>
@@ -316,8 +317,9 @@
           <h2 class="section-title">Projects</h2>
         </div>
 
-        <div class="projects-featured">
-          <article class="card card--featured">
+        <!-- Together AI builds: dual featured pair -->
+        <div class="projects-grid">
+          <article class="card card--featured stagger-item" style="transition-delay:0ms">
             <div class="project-top">
               <span class="project-title">Proving a Production Answer Engine Works</span>
               <span class="project-date">Together AI &middot; 2026</span>
@@ -354,8 +356,46 @@
               <span>Deterministic verifier</span>
             </div>
           </article>
+
+          <article class="card card--featured stagger-item" style="transition-delay:70ms">
+            <div class="project-top">
+              <span class="project-title">Predictive Account Intelligence</span>
+              <span class="project-date">Together AI &middot; 2026</span>
+            </div>
+            <div class="stack-chips">
+              <span class="chip">TypeScript</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">Postgres (Neon)</span>
+              <span class="chip">Vercel Cron</span>
+              <span class="chip">Time-Series Scoring</span>
+              <span class="chip">LLM Narration</span>
+              <span class="chip">Unit-Tested</span>
+            </div>
+            <p class="project-desc">
+              A predictive intelligence view inside the same Salesforce-embedded GTM engine that tiers the
+              customer account book by expansion and churn risk. A deterministic scoring engine reads live
+              usage, support, and revenue signals, ranks each account against its own baseline (percentile and
+              z-score over point-in-time history), and a nightly job snapshots the results so tiers can be
+              tracked and drilled into over time. The language model only writes the narrative; every tier and
+              number is computed in code. Internal systems; happy to walk through the methodology live.
+            </p>
+            <div class="project-proof">
+              <span class="project-proof-label">How I know it works</span>
+              <p>Tiering runs through a unit-tested scoring engine, so every ranking is reproducible offline and independent of the model, and a fresh-context build review gates each change against a written spec before it ships.</p>
+            </div>
+            <div class="project-metrics">
+              <span>Expansion + churn tiers</span>
+              <span>Nightly snapshots</span>
+              <span>Baseline-relative scoring</span>
+              <span>Unit-tested engine</span>
+              <span>Deterministic tiers</span>
+              <span>LLM narration only</span>
+            </div>
+          </article>
         </div>
 
+        <!-- Retired 2026-07-22 to save space; restore by unwrapping this template. -->
+        <template id="retired-clay-card">
         <div class="projects-featured">
           <article class="card card--featured">
             <div class="project-top">
@@ -432,6 +472,7 @@
             </div>
           </article>
         </div>
+        </template>
 
         <div class="projects-grid">
           <article class="card stagger-item" style="transition-delay:0ms">
