@@ -1,0 +1,462 @@
+/* ==========================================================================
+   Aurora theme layer ("Borealis + Horizon"), added 2026-10-04.
+   Loaded after styles.css and overrides it; styles.css keeps the layout and
+   the Instrument design underneath. Remove this file's <link> to go back.
+
+   What it does: curtains of blue light sway behind the hero, the lit rim of a
+   planet rises under it, display type is Newsreader, and cards light their
+   border under the cursor. One accent (cobalt). Radius rule: 22px cards,
+   14px inner surfaces, pill controls and tags, circular portrait.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('assets/fonts/NewsreaderVF.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('assets/fonts/NewsreaderItalicVF.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+/* Registered so the lit card border can fade in instead of snapping. */
+@property --lit {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+/* ── Tokens ── */
+:root,
+#experience,
+#education,
+#skills,
+#now {
+  --text:          #eef2fb;
+  --text-2:        #a9b2c5;
+  --text-3:        #8790a4;
+  --accent:        #84b4ff;
+  --accent-hover:  #a6c9ff;
+  --green:         #84b4ff; /* styles.css uses --green for hover and timeline state; one accent here */
+}
+:root {
+  --bg:            #05070c;
+  --bg-raised:     #0a0e16;
+  --bg-inset:      #080b12;
+  --bg-chip:       rgba(226, 236, 255, 0.05);
+  --line:          rgba(226, 236, 255, 0.09);
+  --line-strong:   rgba(226, 236, 255, 0.18);
+  --accent-ink:    #050b18;
+  --accent-soft:   rgba(132, 180, 255, 0.13);
+  --glow:          132, 180, 255;
+  --glow-soft:     178, 210, 255;
+  --glow-hot:      62, 122, 255;
+  --tint:          226, 236, 255;
+  --font-display:  'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --radius-card:   22px;
+  --radius-media:  14px;
+}
+
+body { background: var(--bg); }
+::selection { background: rgba(var(--glow), 0.3); }
+
+/* ── Curtains of light behind the hero (transform-only, so the compositor does the work) ── */
+.atmosphere {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 118vh;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000 50%, transparent 96%);
+  mask-image: linear-gradient(#000 50%, transparent 96%);
+}
+.atmosphere span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+.atmosphere span:nth-child(1) {
+  top: -22vh;
+  left: -6vw;
+  width: 46vw;
+  height: 96vh;
+  background: linear-gradient(180deg, #3e7aff 0%, rgba(62, 122, 255, 0.36) 55%, transparent 88%);
+  opacity: 0.56;
+  animation: curtain-a 17s ease-in-out infinite alternate;
+}
+.atmosphere span:nth-child(2) {
+  top: -26vh;
+  right: -4vw;
+  width: 42vw;
+  height: 104vh;
+  background: linear-gradient(180deg, #2aa9e6 0%, rgba(42, 169, 230, 0.3) 55%, transparent 86%);
+  opacity: 0.36;
+  animation: curtain-b 23s ease-in-out infinite alternate;
+}
+.atmosphere span:nth-child(3) {
+  top: -18vh;
+  left: 30vw;
+  width: 38vw;
+  height: 86vh;
+  background: linear-gradient(180deg, #a9cbff 0%, rgba(169, 203, 255, 0.26) 50%, transparent 84%);
+  opacity: 0.28;
+  animation: curtain-c 29s ease-in-out infinite alternate;
+}
+@keyframes curtain-a {
+  from { transform: translate3d(-8vw, 0, 0) skewX(-16deg) scaleY(0.88); }
+  to   { transform: translate3d(16vw, 3vh, 0) skewX(12deg) scaleY(1.1); }
+}
+@keyframes curtain-b {
+  from { transform: translate3d(6vw, 0, 0) skewX(14deg) scaleY(1.06); }
+  to   { transform: translate3d(-18vw, -2vh, 0) skewX(-10deg) scaleY(0.9); }
+}
+@keyframes curtain-c {
+  from { transform: translate3d(-10vw, -2vh, 0) skewX(8deg) scaleY(0.92); }
+  to   { transform: translate3d(12vw, 2vh, 0) skewX(-14deg) scaleY(1.12); }
+}
+
+/* ── Navigation: a centered pill that takes on glass once you scroll ── */
+.nav.scrolled {
+  background: none;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.nav-inner { justify-content: center; }
+.nav-links {
+  padding: 7px 24px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: background 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+}
+.nav.scrolled .nav-links {
+  border-color: var(--line);
+  background: rgba(9, 12, 20, 0.74);
+  box-shadow: inset 0 1px 0 rgba(var(--tint), 0.08), 0 16px 44px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+.nav-links a:hover { color: var(--text); }
+
+/* ── Buttons ── */
+.btn {
+  border-color: var(--line-strong);
+  background: rgba(var(--tint), 0.05);
+  box-shadow: inset 0 1px 0 rgba(var(--tint), 0.07);
+}
+.btn:hover { color: var(--text); border-color: var(--accent); }
+.btn--primary,
+.btn--primary:hover {
+  color: var(--accent-ink);
+  border-color: var(--text);
+  background: var(--text);
+  box-shadow: 0 10px 34px rgba(var(--glow-hot), 0.34);
+}
+.btn--primary:hover { border-color: #fff; background: #fff; }
+
+/* ── Hero: one centered stack (status, portrait, name, role, caption, bio, actions) ── */
+.hero {
+  padding: calc(var(--nav-h) + 24px) 0 212px;
+  overflow: hidden;
+}
+.hero > .container { position: relative; z-index: 1; }
+.hero-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  text-align: center;
+}
+/* The two hero columns dissolve so their children can be ordered as one stack. */
+.hero-main,
+.hero-aside { display: contents; }
+.hero-status { order: 0; margin-bottom: 26px; background: rgba(var(--tint), 0.04); }
+.hero-portrait { order: 1; }
+.hero-name { order: 2; }
+.hero-role { order: 3; }
+.hero-caption { order: 4; }
+.hero-bio { order: 5; }
+.hero-ctas { order: 6; }
+
+.hero-portrait {
+  width: 116px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  animation: aurora-enter 760ms var(--ease-out) 60ms backwards;
+}
+.hero-portrait img {
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgba(var(--tint), 0.22),
+    0 0 0 7px rgba(var(--tint), 0.05),
+    0 22px 60px rgba(var(--glow-hot), 0.3);
+  transition: box-shadow 420ms var(--ease-out), transform 520ms var(--spring-ease);
+}
+.hero-portrait::after { display: none; }
+@media (hover: hover) and (pointer: fine) {
+  .hero-portrait:hover img {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow:
+      0 0 0 1px rgba(var(--tint), 0.34),
+      0 0 0 7px rgba(var(--tint), 0.07),
+      0 26px 70px rgba(var(--glow-hot), 0.44);
+  }
+}
+
+.hero-name {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.24em;
+  font-size: clamp(50px, 8.6vw, 104px);
+  font-weight: 400;
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+.hero-role { margin-bottom: 12px; font-size: clamp(14px, 1.7vw, 17.5px); }
+.hero-caption {
+  margin: 0 0 20px;
+  font-size: 13px;
+  white-space: normal;
+  animation: aurora-enter 760ms var(--ease-out) 230ms backwards;
+}
+@keyframes aurora-enter {
+  from { opacity: 0; transform: translateY(20px); }
+}
+.hero-bio { margin-right: auto; margin-bottom: 30px; margin-left: auto; }
+.hero-ctas { justify-content: center; }
+
+/* The rim: one radial gradient whose center sits far below the hero, so only a shallow arc
+   shows. It rises on load, then its light breathes. */
+.hero::before {
+  --r: max(1700px, 180vw);
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 440px;
+  background: radial-gradient(
+    circle at 50% calc(308px + var(--r)),
+    var(--bg) calc(var(--r) - 90px),
+    #192333 calc(var(--r) - 2px), /* 16% of the glow color over --bg */
+    rgba(var(--glow-soft), 0.95) calc(var(--r) - 1px),
+    rgba(var(--glow-soft), 0.95) var(--r),
+    rgba(var(--glow-hot), 0.6) calc(var(--r) + 5px),
+    rgba(var(--glow-hot), 0.26) calc(var(--r) + 46px),
+    rgba(var(--glow), 0.1) calc(var(--r) + 140px),
+    transparent calc(var(--r) + 300px)
+  );
+  pointer-events: none;
+  animation:
+    rim-rise 2s var(--ease-out) both,
+    rim-breathe 8s ease-in-out 2s infinite alternate;
+}
+@keyframes rim-rise {
+  from { opacity: 0; transform: translateY(110px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes rim-breathe { to { opacity: 0.72; } }
+
+/* ── Proof band, marquee, positioning ── */
+.proof { border-top: 0; }
+.proof-item { align-items: center; text-align: center; }
+.proof-value { font-weight: 400; }
+.proof-label { max-width: 34ch; }
+
+.positioning { border-bottom-color: transparent; text-align: center; }
+.positioning-statement {
+  max-width: 30ch;
+  margin-right: auto;
+  margin-left: auto;
+  font-weight: 400;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.positioning-sub { margin: 0 auto; }
+
+/* ── Section headings: centered serif ── */
+#experience,
+#education,
+#skills,
+#now { border-top-color: transparent; }
+
+.section-label,
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.4vw, 50px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  text-transform: none;
+  color: var(--text);
+}
+.section-label { justify-content: center; margin-bottom: 40px; text-align: center; }
+.section-label::before { display: none; }
+.reveal .section-label { transform: translateY(12px); }
+.section-head { margin-bottom: 48px; text-align: center; }
+#projects .section-title { display: inline-block; }
+#projects .section-title::after {
+  left: calc(50% - 36px);
+  transform-origin: center;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+}
+
+/* ── Cards: the border lights up where the cursor is (main.js already sets --mx / --my) ── */
+.card {
+  --edge: var(--line);
+  padding: 28px;
+  border-color: transparent;
+  background:
+    linear-gradient(180deg, #0c111b, #090c14) padding-box,
+    radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), rgba(var(--glow-soft), calc(var(--lit, 0) * 0.9)), transparent 62%) border-box,
+    linear-gradient(var(--edge), var(--edge)) border-box;
+  box-shadow: inset 0 1px 0 rgba(var(--tint), 0.06), 0 30px 80px rgba(0, 0, 0, 0.4);
+  transition: --lit 320ms ease, opacity 560ms var(--ease-out), transform 560ms var(--ease-out), box-shadow 220ms;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover { --lit: 1; border-color: transparent; }
+}
+.card--featured { --edge: rgba(var(--glow), 0.3); border-color: transparent; }
+/* Featured work: a beam travels along the top edge. */
+.card--featured::after {
+  left: 0;
+  right: 0;
+  opacity: 1;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent) no-repeat;
+  background-size: 38% 100%;
+  background-position: 50% 0;
+  animation: beam 5s ease-in-out infinite alternate;
+}
+@keyframes beam {
+  from { background-position: -20% 0; }
+  to   { background-position: 120% 0; }
+}
+.projects-grid .card--wide { grid-column: 1 / -1; }
+
+/* styles.css starts grid cards at translateY(30px) scale(0.96) for their entrance but never
+   returns them to rest, so they stayed shrunk and could not lift on hover. Settle them here. */
+#projects.visible .projects-grid .stagger-item { transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  #projects.visible .projects-grid .card:hover { transform: translateY(-3px); }
+}
+
+/* The full-width card sets its description and its proof side by side. */
+@media (min-width: 821px) {
+  .projects-grid .card--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 44px;
+  }
+  .card--wide > * { grid-column: 1 / -1; }
+  .card--wide > .project-desc { grid-column: 1; }
+  .card--wide > .project-proof { grid-column: 2; padding-top: 0; border-top: 0; }
+}
+
+.project-title { font-weight: 500; }
+.project-desc { font-size: 14px; }
+.chip { border-radius: 999px; }
+
+/* ── Experience, education, skills ── */
+.timeline-line::before { box-shadow: 0 0 0 5px rgba(var(--glow), 0.12); }
+.timeline-line::after { background: linear-gradient(to bottom, var(--line-strong), transparent); }
+.exp-role,
+.edu-school {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.008em;
+}
+.edu-block { text-align: center; }
+
+.cert-item {
+  border-color: rgba(var(--tint), 0.12);
+  border-radius: var(--radius-media);
+  background:
+    linear-gradient(135deg, rgba(var(--tint), 0.07), rgba(var(--tint), 0.015)),
+    rgba(9, 12, 20, 0.6);
+  box-shadow: inset 0 1px 0 rgba(var(--tint), 0.1);
+}
+
+.skills-intro { max-width: none; margin-right: auto; margin-left: auto; text-align: center; }
+@media (min-width: 900px) {
+  /* One line on desktop: let it run a little wider than the 748px column. */
+  .skills-intro { margin-right: -60px; margin-left: -60px; white-space: nowrap; }
+}
+.skill-tag {
+  border-color: rgba(var(--tint), 0.12);
+  background: rgba(var(--tint), 0.05);
+  box-shadow: inset 0 1px 0 rgba(var(--tint), 0.08);
+}
+.skill-tag:hover {
+  border-color: rgba(var(--glow), 0.5);
+  background: rgba(var(--glow), 0.13);
+  box-shadow: inset 0 1px 0 rgba(var(--tint), 0.16), 0 16px 34px rgba(0, 8, 24, 0.5);
+}
+
+/* ── Now ── */
+.shelf-line {
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(var(--tint), 0.08) 15%,
+    rgba(var(--tint), 0.2) 50%,
+    rgba(var(--tint), 0.08) 85%,
+    transparent 100%
+  );
+}
+.shelf-line::after { background: linear-gradient(to bottom, rgba(var(--glow), 0.08), transparent); }
+#now { overflow-x: clip; }
+
+/* ── Contact: the light comes back up from the bottom ── */
+.contact { overflow: hidden; text-align: center; }
+.contact::before {
+  content: '';
+  position: absolute;
+  inset: 20% 0 0;
+  background: radial-gradient(58% 100% at 50% 100%, rgba(var(--glow-hot), 0.26), transparent 72%);
+  pointer-events: none;
+}
+.contact .container { position: relative; }
+.contact-heading {
+  max-width: 14ch;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 4px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+.contact-bio { margin-right: auto; margin-left: auto; text-wrap: balance; }
+.contact-links { justify-content: center; }
+
+.lightbox-control { background: rgba(9, 12, 20, 0.85); }
+
+/* ── Responsive ── */
+@media (max-width: 820px) {
+  .hero { padding: calc(var(--nav-h) + 20px) 0 184px; }
+  .hero-status { margin-bottom: 22px; }
+  .atmosphere span:nth-child(1) { top: -16vh; left: -30vw; width: 90vw; height: 80vh; }
+  .atmosphere span:nth-child(2) { top: -18vh; right: -30vw; width: 84vw; height: 84vh; }
+  .atmosphere span:nth-child(3) { left: 14vw; width: 72vw; height: 70vh; }
+}
+@media (max-width: 520px) {
+  .card { padding: 24px 22px; }
+  .nav-links { padding: 7px 18px; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere span,
+  .hero::before,
+  .card--featured::after { animation: none; }
+  .hero-portrait,
+  .hero-caption { animation: none; }
+}

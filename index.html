@@ -10,17 +10,18 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://romanlicursi.github.io" />
   <meta property="og:image" content="https://romanlicursi.github.io/linkedin_headshot.jpg" />
-  <meta name="theme-color" content="#0c0c0e" />
-  <link rel="preload" href="assets/fonts/HubotSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+  <meta name="theme-color" content="#05070c" />
+  <link rel="preload" href="assets/fonts/NewsreaderVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/MonaSansVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/MonaSansMonoVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <link rel="stylesheet" href="styles.css?v=20260718e" />
+  <link rel="stylesheet" href="aurora.css?v=20261004a" />
 </head>
 <body>
 
   <a class="skip-link" href="#experience">Skip to experience</a>
-  <div class="atmosphere" aria-hidden="true"></div>
+  <div class="atmosphere" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="grain" aria-hidden="true"></div>
 
   <!-- ── Navigation ── -->
@@ -67,7 +68,6 @@
           </a>
           <p class="hero-caption">
             <strong>GTM Systems Analyst Intern, Together AI</strong>
-            B.S. Computer Science, UW-Madison
           </p>
         </div>
       </div>
@@ -133,6 +133,10 @@
                 <li>Built an adversarial evaluation harness that auto-generates questions, runs the live agent, and grades answers with an LLM judge; a paired McNemar test on a frozen 133-question set selected the production model, and a best-of-N grounding selector lifted answer accuracy 7.5 percentage points.</li>
                 <li>Engineered a deterministic verifier that flags fabricated numbers, record IDs, and company names before they reach the user, plus content-security controls on the embedded app; automated Gong call insights, intent routing, closed-lost re-engagement, and lead scoring across Clay, Slack, Hex, Snowflake, and Salesforce.</li>
                 <li>Shipped a predictive account-intelligence layer into the engine that tiers customer accounts by expansion and churn risk from live usage, support, and revenue signals, backed by nightly snapshots and a unit-tested deterministic scoring engine, so the rankings stay reproducible and the model only writes the narrative.</li>
+                <li>Scaled the team's ABM app 10x (129 to 1,319 accounts) on live Salesforce data, and found and fixed a 36% undercount on a VP-facing meetings metric before a leadership pipeline review.</li>
+                <li>Built lead-scoring and reporting dashboards for demand-gen leadership in Hex and Snowflake; before rollout, showed the proposed MQL model would cut volume from 14,964 to 5,521 leads.</li>
+                <li>Building Ironclad contract workflow and Salesforce integration for new quote-to-cash process; an approved quote generates the customer Order Form, replacing a hand-filled Word template with 20 blanks, and the signed contract syncs back to the Opportunity in under a minute.</li>
+                <li>Supporting Salesforce Revenue Cloud (CPQ) rollout, including a working quote-to-contract prototype used in platform evaluation.</li>
               </ul>
             </div>
           </div>
@@ -142,11 +146,11 @@
             <div>
               <div class="exp-role">GTM Engineer</div>
               <div class="exp-company">College and University Healthcare Education Consortium <span style="color:var(--text-2);font-weight:400">(CAUHEC)</span></div>
-              <div class="exp-meta">Sep 2025 - Present &middot; Part-time &middot; Remote</div>
+              <div class="exp-meta">Sep 2025 - Aug 2026 &middot; Part-time &middot; Remote</div>
               <ul class="exp-bullets">
                 <li>Built and own CAUHEC's outbound GTM infrastructure end to end, from lead sourcing and enrichment through deliverability and funnel reporting, as a one-person system</li>
                 <li>Designed AI-native sourcing and enrichment pipelines in Python, using local LLMs and public data to produce verified, high-intent contacts at scale without paid data vendors</li>
-                <li>Treated deliverability as an engineering problem, maintained bounce below 5%, and protected sender reputation across a multi-mailbox, multi-persona campaign system</li>
+                <li>Treated deliverability as an engineering problem, targeting sub-5% bounce and protecting sender reputation across a multi-mailbox, multi-persona campaign system</li>
                 <li>Automated funnel and conversion reporting so growth decisions run on live data, and partner with the founder on segmentation and go-to-market strategy</li>
               </ul>
             </div>
@@ -157,7 +161,7 @@
             <div>
               <div class="exp-role">Growth</div>
               <div class="exp-company">Roger <span style="color:var(--text-2);font-weight:400">(YC S24)</span></div>
-              <div class="exp-meta">Dec 2025 - Mar 2026</div>
+              <div class="exp-meta">Dec 2025 - Apr 2026</div>
               <ul class="exp-bullets">
                 <li>Ran outbound growth experiments for a YC-backed AI SDR platform</li>
                 <li>Built prospect lists, launched campaigns across LinkedIn and email, tracked performance metrics</li>
@@ -180,19 +184,7 @@
             </div>
           </div>
 
-          <div class="timeline-item stagger-item" style="transition-delay:240ms">
-            <div class="timeline-line"></div>
-            <div>
-              <div class="exp-role">Campus Ambassador</div>
-              <div class="exp-company">Clay</div>
-              <div class="exp-meta">Jun 2026 - Present</div>
-              <ul class="exp-bullets">
-                <li>Represent Clay, the GTM data enrichment platform, on the UW-Madison campus</li>
-              </ul>
-            </div>
-          </div>
-
-          <p class="timeline-earlier"><strong>Earlier leadership:</strong> Website Director, TEDxUWMadison (Oct 2024 - Aug 2025)</p>
+          <p class="timeline-earlier"><strong>Earlier leadership:</strong> Website Director, TEDxUWMadison (Oct 2024 - Aug 2025) &middot; DECA International Finalist, top 8 worldwide in sales and marketing</p>
 
         </div>
       </div>
@@ -213,6 +205,10 @@
           <li class="cert-item">
             <span class="cert-name">Agentic AI</span>
             <span class="cert-meta">DeepLearning.AI &middot; May 2026</span>
+          </li>
+          <li class="cert-item">
+            <span class="cert-name">Claude Code in Action</span>
+            <span class="cert-meta">Anthropic &middot; 2026</span>
           </li>
           <li class="cert-item">
             <span class="cert-name">Revenue Operations</span>
@@ -271,6 +267,7 @@
               <span class="skill-tag">Signal-Based Selling</span>
               <span class="skill-tag">Data Enrichment</span>
               <span class="skill-tag">CPQ / Quote-to-Cash</span>
+              <span class="skill-tag">Ironclad CLM</span>
             </div>
           </div>
 
@@ -475,7 +472,36 @@
         </template>
 
         <div class="projects-grid">
-          <article class="card stagger-item" style="transition-delay:0ms">
+          <article class="card card--wide stagger-item" style="transition-delay:0ms">
+            <div class="project-top">
+              <span class="project-title">Autonomous Job Discovery System</span>
+              <span class="project-date">2026</span>
+            </div>
+            <div class="stack-chips">
+              <span class="chip">TypeScript</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">Postgres / pgvector</span>
+              <span class="chip">Scheduled Jobs</span>
+              <span class="chip">Browser Automation</span>
+            </div>
+            <p class="project-desc">
+              Designed and deployed a production system that discovers roles across ~7,500 employer job boards and
+              job-alert emails, deduplicates and scores each posting across eight weighted dimensions, and drives
+              the application flow with browser automation behind human-approved guardrails.
+            </p>
+            <div class="project-proof">
+              <span class="project-proof-label">How it's verified</span>
+              <p>An application is marked submitted only after the employer's own confirmation is visible on the page; a click alone proves nothing. The matching, application, and resume-tailoring logic ship with an automated test suite.</p>
+            </div>
+            <div class="project-metrics">
+              <span>~7,500 employer job boards</span>
+              <span>8 weighted scoring dimensions</span>
+              <span>Deduplicated postings</span>
+              <span>Human-approved guardrails</span>
+            </div>
+          </article>
+
+          <article class="card stagger-item" style="transition-delay:70ms">
             <div class="project-top">
               <span class="project-title">Salesforce Lead Routing &amp; Scoring Pipeline</span>
               <span class="project-date">Mar 2026</span>

@@ -1,7 +1,23 @@
 # AGENTS.md
 
-Static portfolio site, no build step (`index.html`, `styles.css`, `main.js`).
+Static portfolio site, no build step (`index.html`, `styles.css`, `aurora.css`, `main.js`).
 Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT connected.
+
+## Design (since 2026-10-04)
+
+- The look is the **Aurora theme layer** in `aurora.css`, loaded after `styles.css` and overriding it.
+  `styles.css` still holds the layout and the older "Instrument" design underneath; removing the
+  `aurora.css` link in `index.html` restores that look.
+- What Aurora does: three curtains of blue light sway behind the hero (the three `<span>`s inside
+  `.atmosphere`), the lit rim of a planet rises under the hero (`.hero::before`), cards light their
+  border under the cursor (uses the `--mx` / `--my` that `main.js` already sets), and featured cards
+  carry a travelling beam on the top edge.
+- One accent, cobalt `#84b4ff`. `--green` is set to the same value, so do not reintroduce a second accent.
+- Display type is **Newsreader** (self-hosted, OFL, `assets/fonts/`); body is Mona Sans. Anthropic Serif
+  was previewed and liked but is Anthropic's proprietary typeface, so it must not be committed here.
+- The hero is one centered stack: status pill, round portrait, name, cycling role line, role caption,
+  bio, buttons. `.hero-main` and `.hero-aside` use `display: contents` so the children can be ordered.
+- A full-width project card uses the class `card--wide`.
 
 ## Workflow rules
 
@@ -10,9 +26,9 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
   so the user can review. Do this without being asked, right after edits are done.
 - **Never use em dashes** in site copy or any content written for the user. Rewrite with
   commas, periods, colons, or parentheses instead.
-- If you touch `styles.css` or `main.js`, bump the cache-bust `?v=` query strings in `index.html`.
-- Keep the hero bio short and hard-wrapped (it currently uses a `<br>`); long hero text runs
-  under the portrait photo. Don't let hero text go full-width.
+- If you touch `styles.css`, `aurora.css`, or `main.js`, bump that file's cache-bust `?v=` query string in `index.html`.
+- Keep the hero bio to one short sentence. The hero is a centered stack and a long bio pushes the
+  buttons below the fold.
 - Don't add sections that duplicate existing ones (a tools/stack strip was added 2026-07-18
   and removed the same day for duplicating the Skills section).
 - Positioning claims: evals are the proven claim; revenue framing is "ultimately in revenue".
@@ -25,6 +41,20 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
 - Work GitHub account `roman-licursi` was invited with **write** access on 2026-07-18
   (pending acceptance at https://github.com/romanlicursi/romanlicursi.github.io/invitations).
   Personal account `romanlicursi` is admin. Deploy = push to `main`; no Vercel involvement.
+
+## Where we left off (2026-10-04)
+
+- Shipped the Aurora theme (above) and synced the page with the 2026-09-30 resume in `~/os/resume/`:
+  four more Together AI bullets (ABM app, dashboards and MQL model, Ironclad CLM, Revenue Cloud CPQ),
+  CAUHEC now ends Aug 2026 with "targeting sub-5% bounce", Roger ends Apr 2026, a Claude Code in Action
+  certificate, an Ironclad CLM skill tag, DECA in the leadership line, and a new
+  "Autonomous Job Discovery System" project card. The Resume button now serves the 2026-09-30 PDF
+  under the same file name.
+- Removed at Roman's request: the Clay Campus Ambassador experience entry and the
+  "B.S. Computer Science, UW-Madison" line under the portrait.
+- Open questions for Roman: the site says "GTM Systems Analyst Intern" while the resume says
+  "GTM Systems Intern"; the Clay project card is still retired here but listed on the resume; the
+  graduation date (Dec 2026 on the resume) is not shown on the site.
 
 ## Where we left off (2026-07-18)
 
