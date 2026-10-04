@@ -133,7 +133,12 @@ body { background: var(--bg); }
   padding: 7px 24px;
   border: 1px solid transparent;
   border-radius: 999px;
-  transition: background 280ms ease, border-color 280ms ease, box-shadow 280ms ease;
+  /* A zero blur at rest, so the glass can build up with the tint instead of snapping on. */
+  backdrop-filter: blur(0) saturate(100%);
+  -webkit-backdrop-filter: blur(0) saturate(100%);
+  transition:
+    background 280ms ease, border-color 280ms ease, box-shadow 280ms ease,
+    backdrop-filter 280ms ease, -webkit-backdrop-filter 280ms ease;
 }
 .nav.scrolled .nav-links {
   border-color: var(--line);
@@ -321,7 +326,23 @@ body { background: var(--bg); }
     radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%), rgba(var(--glow-soft), calc(var(--lit, 0) * 0.9)), transparent 62%) border-box,
     linear-gradient(var(--edge), var(--edge)) border-box;
   box-shadow: inset 0 1px 0 rgba(var(--tint), 0.06), 0 30px 80px rgba(0, 0, 0, 0.4);
-  transition: --lit 320ms ease, opacity 560ms var(--ease-out), transform 560ms var(--ease-out), box-shadow 220ms;
+  /* The entrance (opacity, transform) keeps its stagger. Hover uses `translate` and `--lit`,
+     which carry no delay, so a card answers the cursor at once. */
+  transition:
+    --lit 200ms ease,
+    opacity 560ms var(--ease-out) var(--stagger, 0ms),
+    transform 560ms var(--ease-out) var(--stagger, 0ms),
+    translate 200ms var(--ease-out),
+    box-shadow 220ms;
+}
+/* styles.css gives this one a longer entrance through an id rule, which also dropped the fades. */
+#projects .projects-featured .card {
+  transition:
+    --lit 200ms ease,
+    opacity 720ms var(--ease-out) 80ms,
+    transform 720ms var(--ease-out) 80ms,
+    translate 200ms var(--ease-out),
+    box-shadow 220ms;
 }
 @media (hover: hover) and (pointer: fine) {
   .card:hover { --lit: 1; border-color: transparent; }
@@ -353,7 +374,7 @@ body { background: var(--bg); }
    returns them to rest, so they stayed shrunk and could not lift on hover. Settle them here. */
 #projects.visible .projects-grid .stagger-item { transform: none; }
 @media (hover: hover) and (pointer: fine) {
-  #projects.visible .projects-grid .card:hover { transform: translateY(-3px); }
+  #projects.visible .projects-grid .card:hover { translate: 0 -3px; }
 }
 
 /* The full-width card sets its description and its proof side by side. */
@@ -403,6 +424,9 @@ body { background: var(--bg); }
     linear-gradient(135deg, rgba(var(--tint), 0.07), rgba(var(--tint), 0.015)),
     rgba(9, 12, 20, 0.6);
   box-shadow: inset 0 1px 0 rgba(var(--tint), 0.1);
+  /* Nothing sits behind these rows, so the 30px blur from styles.css only cost paint time. */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 .skills-intro { max-width: none; margin-right: auto; margin-left: auto; text-align: center; }
@@ -457,6 +481,46 @@ body { background: var(--bg); }
 
 .lightbox-control { background: rgba(9, 12, 20, 0.85); }
 
+/* ── Feel: press feedback, touch targets, and work that stops when it is off screen ── */
+
+/* Staggered entrances read their delay from --stagger (set inline in index.html). */
+.stagger-item:not(.card) { transition-delay: var(--stagger, 0ms); }
+
+/* Text links answer on press-down, with no fade-in. */
+.nav-links a:active,
+.project-link:active,
+.lightbox-caption a:active { opacity: 0.6; transition-duration: 0s; }
+
+/* Nav links are 33px tall; this widens what a finger can hit without moving anything. */
+.nav-links a { position: relative; }
+.nav-links a::after { content: ''; position: absolute; inset: -10px -9px; }
+
+/* Covers on the shelf press in quickly instead of riding the 290ms hover spring. */
+.flick-item:active { transform: perspective(500px) rotateY(-14deg) scale(0.97); transition-duration: 120ms; }
+@media (hover: hover) and (pointer: fine) {
+  .flick-item:hover:active { transform: perspective(500px) rotateY(0deg) translateY(-14px) scale(1.06); }
+}
+.flick-tooltip { backdrop-filter: none; -webkit-backdrop-filter: none; } /* 97% opaque: the blur never showed */
+
+/* The image viewer grows out of the cover that was clicked and returns to it (main.js sets the origin). */
+.lightbox { transform-origin: var(--origin-x, 50%) var(--origin-y, 50%); }
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.84); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes lightbox-out {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: scale(0.9); }
+}
+
+/* Looping animations pause while their section is off screen (main.js toggles the class). */
+.is-offscreen,
+.is-offscreen *,
+.is-offscreen::before,
+.is-offscreen::after,
+.is-offscreen *::before,
+.is-offscreen *::after { animation-play-state: paused !important; }
+
 /* ── Responsive ── */
 @media (max-width: 820px) {
   .hero { padding: calc(var(--nav-h) + 20px) 0 184px; }
@@ -480,4 +544,55 @@ body { background: var(--bg); }
   .card--featured::after { animation: none; }
   .hero-portrait,
   .hero-caption { animation: none; }
+}
+
+/* Reduced motion keeps short color and opacity fades (they explain a change of state) and drops movement. */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .nav-links,
+  .nav-links a,
+  #projects .projects-grid .stagger-item,
+  #projects .projects-featured .card,
+  .skill-tag,
+  .project-link,
+  .lightbox-control,
+  .flick-tooltip {
+    transition-property: color, background-color, border-color, box-shadow, opacity, --lit !important;
+    transition-duration: 160ms !important;
+    transition-delay: 0s !important;
+  }
+  #projects.visible .projects-grid .card:hover { translate: none; }
+  .flick-item:hover,
+  .flick-item:active,
+  .flick-item:hover:active { transform: perspective(500px) rotateY(-14deg); }
+}
+
+/* ── Reduce Transparency (a system setting): glass becomes solid ── */
+@media (prefers-reduced-transparency: reduce) {
+  .nav-links,
+  .nav.scrolled .nav-links { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .nav.scrolled .nav-links { background: #090c14; }
+  .lightbox::backdrop { background: rgba(5, 7, 12, 0.97); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .lightbox-control { background: #090c14; }
+}
+
+/* ── Increase Contrast (a system setting): brighter secondary text, firmer edges, calmer backdrop ── */
+@media (prefers-contrast: more) {
+  :root,
+  #experience,
+  #education,
+  #skills,
+  #now {
+    --text-2: #d3daea;
+    --text-3: #b8c1d4;
+  }
+  :root {
+    --line: rgba(226, 236, 255, 0.3);
+    --line-strong: rgba(226, 236, 255, 0.55);
+  }
+  .atmosphere { opacity: 0.45; }
+  .nav.scrolled .nav-links { background: #090c14; border-color: var(--line-strong); }
+  .card { --edge: var(--line-strong); }
+  .cert-item,
+  .skill-tag { border-color: var(--line-strong); }
 }

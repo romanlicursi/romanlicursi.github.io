@@ -18,6 +18,16 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
 - The hero is one centered stack: status pill, round portrait, name, cycling role line, role caption,
   bio, buttons. `.hero-main` and `.hero-aside` use `display: contents` so the children can be ordered.
 - A full-width project card uses the class `card--wide`.
+- Feel rules (2026-10-04, the "Feel" section and the settings blocks at the end of `aurora.css`):
+  - A staggered entrance is set with `style="--stagger:70ms"`, never an inline `transition-delay`.
+    An inline delay also delays hover, which made cards answer the cursor up to 210ms late.
+  - Cards lift on hover with the `translate` property; `transform` is kept for the entrance.
+  - `main.js` adds `is-offscreen` to the hero, backdrop, marquee, featured cards and record player
+    while they are out of view, and `aurora.css` pauses their looping animations. A new looping
+    animation should sit inside one of those, or be added to that observer.
+  - The image viewer scales from the cover that was clicked (`anchorTo` in `main.js`).
+  - Reduce Motion keeps color fades and drops movement; Reduce Transparency and Increase Contrast
+    each have a block at the end of `aurora.css`.
 
 ## Workflow rules
 

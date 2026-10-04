@@ -1,6 +1,6 @@
 /* Roman Licursi, Portfolio
    All motion degrades to static under prefers-reduced-motion.
-   Sections: nav, reveal, role scramble, card spotlight, lightbox, Now loaders. */
+   Sections: nav, reveal, off-screen pause, role scramble, card spotlight, lightbox, Now loaders. */
 (() => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -46,6 +46,17 @@
     { rootMargin: '0px 0px -64px 0px' }
   );
   document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+  /* ── Looping animations rest while their section is off screen (aurora.css reads the class) ── */
+  const loopObserver = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.target.classList.toggle('is-offscreen', !e.isIntersecting)),
+    { rootMargin: '120px 0px' }
+  );
+  /* Start once the hero entrance has played, so a page opened at an anchor never holds it at frame one. */
+  window.setTimeout(() => {
+    document.querySelectorAll('.atmosphere, .hero, .marquee, .card--featured, #jams-turntable')
+      .forEach((el) => loopObserver.observe(el));
+  }, 3000);
 
   /* ── Hero role line: cycles phrases with a scramble transition.
         Final text lives in aria-label; only the hidden visual span churns. ── */
@@ -204,6 +215,16 @@
       }
     }
 
+    /* The viewer scales from the cover it belongs to: out of it on open, back into it on close.
+       The dialog is centered in the viewport, so the origin is the cover's offset from the center. */
+    function anchorTo(element) {
+      if (!element) return;
+      const from = element.getBoundingClientRect();
+      const page = document.documentElement; // client size: excludes a classic scrollbar
+      dialog.style.setProperty('--origin-x', `calc(50% + ${from.left + from.width / 2 - page.clientWidth / 2}px)`);
+      dialog.style.setProperty('--origin-y', `calc(50% + ${from.top + from.height / 2 - page.clientHeight / 2}px)`);
+    }
+
     function openLightbox(trigger) {
       collectGallery(trigger.dataset.lightboxGroup || 'default');
       const index = galleryItems.findIndex((item) => item.element === trigger);
@@ -212,6 +233,7 @@
       renderGalleryItem(index);
       dialog.classList.remove('closing');
       if (!dialog.open) dialog.showModal();
+      anchorTo(trigger);
       closeButton.focus({ preventScroll: true });
     }
 
@@ -227,6 +249,7 @@
         finishClose();
         return;
       }
+      anchorTo(galleryItems[galleryIndex]?.element);
       dialog.classList.add('closing');
       closeTimer = window.setTimeout(finishClose, 170);
     }
