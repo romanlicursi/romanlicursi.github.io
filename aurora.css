@@ -282,7 +282,7 @@ body { background: var(--bg); }
   line-height: 1.2;
   text-wrap: balance;
 }
-.positioning-sub { margin: 0 auto; }
+.positioning-sub { max-width: 64ch; margin: 0 auto; text-wrap: balance; }
 
 /* ── Section headings: centered serif ── */
 #experience,
@@ -343,6 +343,12 @@ body { background: var(--bg); }
 }
 .projects-grid .card--wide { grid-column: 1 / -1; }
 
+/* The project blocks are separate grids; give every pair of neighbors the same 20px gap. */
+.projects-featured { margin-bottom: 0; }
+.projects-grid + .projects-grid,
+.projects-grid + .projects-featured,
+.projects-featured + .projects-grid { margin-top: 20px; }
+
 /* styles.css starts grid cards at translateY(30px) scale(0.96) for their entrance but never
    returns them to rest, so they stayed shrunk and could not lift on hover. Settle them here. */
 #projects.visible .projects-grid .stagger-item { transform: none; }
@@ -360,6 +366,18 @@ body { background: var(--bg); }
   .card--wide > * { grid-column: 1 / -1; }
   .card--wide > .project-desc { grid-column: 1; }
   .card--wide > .project-proof { grid-column: 2; padding-top: 0; border-top: 0; }
+}
+
+/* The Clay card's pipeline pulse, in the theme's color (styles.css draws it in champagne). */
+@keyframes fete-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--glow), 0); border-color: var(--line-strong); }
+  6% { box-shadow: 0 10px 30px -6px rgba(var(--glow), 0.45); border-color: var(--accent); }
+  16% { box-shadow: 0 0 0 0 rgba(var(--glow), 0); border-color: var(--line-strong); }
+}
+@keyframes fete-pulse-export {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--glow), 0); border-color: var(--accent); }
+  6% { box-shadow: 0 10px 34px -4px rgba(var(--glow), 0.6); border-color: var(--accent); }
+  16% { box-shadow: 0 0 0 0 rgba(var(--glow), 0); border-color: var(--accent); }
 }
 
 .project-title { font-weight: 500; }
@@ -448,6 +466,9 @@ body { background: var(--bg); }
   .atmosphere span:nth-child(3) { left: 14vw; width: 72vw; height: 70vh; }
 }
 @media (max-width: 520px) {
+  /* The status line runs to two lines on phones, so it stops being a pill. */
+  .hero-status { align-items: flex-start; border-radius: 16px; line-height: 1.5; text-align: left; }
+  .hero-status::before { margin-top: 0.5em; }
   .card { padding: 24px 22px; }
   .nav-links { padding: 7px 18px; }
 }

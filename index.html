@@ -16,7 +16,7 @@
   <link rel="preload" href="assets/fonts/MonaSansMonoVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <link rel="stylesheet" href="styles.css?v=20260718e" />
-  <link rel="stylesheet" href="aurora.css?v=20261004a" />
+  <link rel="stylesheet" href="aurora.css?v=20261004b" />
 </head>
 <body>
 
@@ -42,7 +42,7 @@
     <section id="hero" class="hero">
       <div class="container hero-grid">
         <div class="hero-main">
-          <p class="hero-status" data-enter style="--enter-delay:0ms">Open to GTM Engineering &amp; Applied AI roles</p>
+          <p class="hero-status" data-enter style="--enter-delay:0ms">Open to forward deployed, solutions, GTM and applied AI roles</p>
           <h1 class="hero-name" data-enter style="--enter-delay:90ms"><span>Roman</span><span>Licursi</span></h1>
           <p class="hero-role" data-enter style="--enter-delay:180ms"><span data-scramble aria-label="GTM Engineer"><span aria-hidden="true">GTM Engineer</span></span><span class="cursor" aria-hidden="true"></span></p>
           <p class="hero-bio" data-enter style="--enter-delay:270ms">
@@ -67,7 +67,7 @@
             <img src="linkedin_headshot.jpg" alt="Roman Licursi" fetchpriority="high" />
           </a>
           <p class="hero-caption">
-            <strong>GTM Systems Analyst Intern, Together AI</strong>
+            <strong>GTM Systems Intern, Together AI</strong>
           </p>
         </div>
       </div>
@@ -78,11 +78,11 @@
       <div class="container proof-grid">
         <div class="proof-item">
           <span class="proof-value">26<em>x</em></span>
-          <span class="proof-label">faster compound-query inference, 165s down to 6.3s in production</span>
+          <span class="proof-label">faster heavy-query answers from the GTM team's AI agent, 165s down to 6.3s</span>
         </div>
         <div class="proof-item">
-          <span class="proof-value">8</span>
-          <span class="proof-label">live data lanes behind the Salesforce-embedded answer engine</span>
+          <span class="proof-value">36<em>%</em></span>
+          <span class="proof-label">undercount on a VP-facing meetings metric, found and fixed before a leadership pipeline review</span>
         </div>
         <div class="proof-item">
           <span class="proof-value">+7.5<em>pp</em></span>
@@ -112,7 +112,7 @@
           Traditional RevOps builds business logic <em>inside the software</em>.
           I build that logic <em>in code</em> and version it on GitHub.
         </p>
-        <p class="positioning-sub">I build production agents, and I can prove they work through evals and ultimately in revenue.</p>
+        <p class="positioning-sub">I sit with sales, finance and legal to work out what they need, ship the system, and verify it against live data before rollout. Recent builds: an AI agent behind a 60/60 eval suite, an ABM app scaled 10x, and a contract workflow that replaces a 20-blank Word form.</p>
       </div>
     </section>
 
@@ -125,18 +125,17 @@
           <div class="timeline-item stagger-item" style="transition-delay:0ms">
             <div class="timeline-line"></div>
             <div>
-              <div class="exp-role">GTM Systems Analyst Intern</div>
+              <div class="exp-role">GTM Systems Intern</div>
               <div class="exp-company">Together AI</div>
               <div class="exp-meta">Apr 2026 - Present &middot; San Francisco Bay Area</div>
               <ul class="exp-bullets">
-                <li>Shipped a Salesforce-embedded production AI answer engine spanning eight live data lanes, including Salesforce, product usage, Gong calls, and buying signals; rebuilt its inference path to cut compound-query latency from 165 seconds to 6.3 seconds, a 26x speedup.</li>
-                <li>Built an adversarial evaluation harness that auto-generates questions, runs the live agent, and grades answers with an LLM judge; a paired McNemar test on a frozen 133-question set selected the production model, and a best-of-N grounding selector lifted answer accuracy 7.5 percentage points.</li>
-                <li>Engineered a deterministic verifier that flags fabricated numbers, record IDs, and company names before they reach the user, plus content-security controls on the embedded app; automated Gong call insights, intent routing, closed-lost re-engagement, and lead scoring across Clay, Slack, Hex, Snowflake, and Salesforce.</li>
-                <li>Shipped a predictive account-intelligence layer into the engine that tiers customer accounts by expansion and churn risk from live usage, support, and revenue signals, backed by nightly snapshots and a unit-tested deterministic scoring engine, so the rankings stay reproducible and the model only writes the narrative.</li>
+                <li>Built an internal AI agent for the GTM team that answers account questions from Salesforce, product usage, call transcripts and buying signals, with an automated eval suite that catches wrong answers before each release; cut heavy-query latency from 165 s to 6.3 s (26x).</li>
+                <li>Built an evaluation harness that generates realistic questions, runs the real agent on live data and grades the answers with an independent model. It found that a typed company name could silently return a different company's data; centralized the matching logic and verified the fix on a 98/98 trap battery with no regressions.</li>
+                <li>Built production automation in Clay, Slack and webhooks that enriches inbound leads and routes buying signals to reps.</li>
                 <li>Scaled the team's ABM app 10x (129 to 1,319 accounts) on live Salesforce data, and found and fixed a 36% undercount on a VP-facing meetings metric before a leadership pipeline review.</li>
                 <li>Built lead-scoring and reporting dashboards for demand-gen leadership in Hex and Snowflake; before rollout, showed the proposed MQL model would cut volume from 14,964 to 5,521 leads.</li>
-                <li>Building Ironclad contract workflow and Salesforce integration for new quote-to-cash process; an approved quote generates the customer Order Form, replacing a hand-filled Word template with 20 blanks, and the signed contract syncs back to the Opportunity in under a minute.</li>
-                <li>Supporting Salesforce Revenue Cloud (CPQ) rollout, including a working quote-to-contract prototype used in platform evaluation.</li>
+                <li>Building the Ironclad contract workflow and its Salesforce integration for a new quote-to-cash process, with the implementation partner. An approved quote generates the customer Order Form, replacing a hand-filled Word template with 20 blanks, and the signed contract syncs back to the Salesforce Opportunity in under a minute.</li>
+                <li>Supporting the Salesforce Revenue Cloud (CPQ) rollout: built a working quote-to-contract prototype used in the platform evaluation, and a demo app that showed finance, product and commerce stakeholders how quote values flow into the order form.</li>
               </ul>
             </div>
           </div>
@@ -198,6 +197,7 @@
         <div class="edu-block">
           <div class="edu-school">University of Wisconsin-Madison</div>
           <div class="edu-degree">B.S. Computer Science</div>
+          <div class="edu-dates">Expected Dec 2026</div>
           <div class="edu-activities">Chi Psi Fraternity &middot; Informatics Skunkworks Machine Learning &middot; Data Science Club</div>
         </div>
 
@@ -230,7 +230,7 @@
     <section id="skills" class="reveal">
       <div class="container">
         <h2 class="section-label">Skills</h2>
-        <p class="skills-intro">I combine technical depth with business fluency, every system I build ties to real revenue outcomes.</p>
+        <p class="skills-intro">I combine technical depth with business fluency. Every system I build ties to real revenue outcomes.</p>
         <div class="skills-grid">
 
           <div class="stagger-item" style="transition-delay:0ms">
@@ -323,25 +323,22 @@
             </div>
             <div class="stack-chips">
               <span class="chip">Python</span>
+              <span class="chip">Salesforce</span>
+              <span class="chip">Retrieval</span>
               <span class="chip">LLM-as-Judge</span>
-              <span class="chip">Synthetic Eval Sets</span>
-              <span class="chip">McNemar Test</span>
-              <span class="chip">Bootstrap CI</span>
-              <span class="chip">Best-of-N</span>
-              <span class="chip">Error Analysis</span>
+              <span class="chip">Eval Harness</span>
               <span class="chip">Grounding</span>
             </div>
             <p class="project-desc">
-              Built the evaluation system behind Together AI's Salesforce-embedded answer engine. An adversarial
-              harness auto-generates questions across the eight live data lanes, runs the live agent, and grades
-              every answer with an LLM judge. Error analysis sorts each failure into categories (hallucination,
-              coverage gap, non-responsive, wrong-entity), and a deterministic verifier flags fabricated numbers,
-              record IDs, and company names; a best-of-N selector then picks the least-fabricated answer, which
-              lifted accuracy 7.5 percentage points. Rebuilding the inference path cut compound-query latency from
-              165 seconds to 6.3. Internal systems; happy to walk through the methodology live.
+              An internal AI agent for the GTM team that answers account questions from Salesforce, product
+              usage and billing, sales call transcripts and buying signals. Re-architecting the slow path cut
+              heavy-query latency from 165 seconds to 6.3 seconds (26x). It ships behind a 60/60 regression
+              eval suite, and an evaluation harness generates realistic questions, runs the real agent on live
+              data and grades the answers with an independent model, so wrong answers get caught before a
+              release. Internal systems; happy to walk through the methodology live.
             </p>
             <div class="project-proof">
-              <span class="project-proof-label">Evals ran</span>
+              <span class="project-proof-label">How it's verified</span>
               <p>Model and prompt changes ship only if they clear a paired McNemar test on a frozen 133-question set, with 95% bootstrap confidence intervals and a p&lt;0.05 gate, so a reported gain is signal and not judge or sampling noise. The LLM judge is cross-checked by a second model from a different family to control for self-preference bias.</p>
             </div>
             <div class="project-metrics">
@@ -377,7 +374,7 @@
               number is computed in code. Internal systems; happy to walk through the methodology live.
             </p>
             <div class="project-proof">
-              <span class="project-proof-label">Evals ran</span>
+              <span class="project-proof-label">How it's verified</span>
               <p>Tiering runs through a unit-tested scoring engine, so every ranking is reproducible offline and independent of the model, and a fresh-context build review gates each change against a written spec before it ships.</p>
             </div>
             <div class="project-metrics">
@@ -391,8 +388,6 @@
           </article>
         </div>
 
-        <!-- Retired 2026-07-22 to save space; restore by unwrapping this template. -->
-        <template id="retired-clay-card">
         <div class="projects-featured">
           <article class="card card--featured">
             <div class="project-top">
@@ -420,7 +415,7 @@
                   decision-makers, and a work email waterfall makes the best accounts actionable.
                 </p>
                 <div class="project-proof">
-                  <span class="project-proof-label">Evals ran</span>
+                  <span class="project-proof-label">How it's verified</span>
                   <p>Scoring and tiering are formula-driven, so every account's rank is auditable in-table, and no email ships until it survives a multi-provider verification waterfall.</p>
                 </div>
                 <div class="project-metrics">
@@ -469,7 +464,6 @@
             </div>
           </article>
         </div>
-        </template>
 
         <div class="projects-grid">
           <article class="card card--wide stagger-item" style="transition-delay:0ms">
@@ -523,7 +517,7 @@
               the loop from data ingestion to CRM workflow execution.
             </p>
             <div class="project-proof">
-              <span class="project-proof-label">Evals ran</span>
+              <span class="project-proof-label">How it's verified</span>
               <p>Verified end to end against a live Salesforce org: 100/100 leads scored and synced via bulk API, then Flow routing checked record-by-record at each tier boundary; the repo ships a verification checklist.</p>
             </div>
             <div class="project-metrics">
@@ -554,7 +548,7 @@
               analysis, sprint plans, and human-reviewed outreach drafts on an automated cadence.
             </p>
             <div class="project-proof">
-              <span class="project-proof-label">Evals ran</span>
+              <span class="project-proof-label">How it's verified</span>
               <p>Runs unattended on GitHub Actions; the run history and dated automated commits are the proof of operation. Outreach drafts wait for human review; nothing sends autonomously.</p>
             </div>
             <div class="project-metrics">
@@ -587,7 +581,7 @@
               structured Telegram updates so long-running agent work can be monitored away from the terminal.
             </p>
             <div class="project-proof">
-              <span class="project-proof-label">Evals ran</span>
+              <span class="project-proof-label">How it's verified</span>
               <p>Ships with its own test suite (command parsing, local job store, secret-redaction safety) plus a smoke script and dry-run mode that exercise the full notification path without touching Telegram.</p>
             </div>
             <div class="project-metrics">
@@ -624,7 +618,7 @@
               directly to a Spotify playlist. Backend runs on Supabase edge functions with PostgreSQL persistence.
             </p>
             <div class="project-proof">
-              <span class="project-proof-label">Evals ran</span>
+              <span class="project-proof-label">How it's verified</span>
               <p>The taste profile is computed from real play/skip behavior, not self-reported genres; every recommendation carries an explanation; Vitest unit tests and Playwright end-to-end tests cover the app.</p>
             </div>
             <div class="project-metrics">

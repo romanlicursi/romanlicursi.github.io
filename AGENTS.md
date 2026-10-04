@@ -31,8 +31,15 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
   buttons below the fold.
 - Don't add sections that duplicate existing ones (a tools/stack strip was added 2026-07-18
   and removed the same day for duplicating the Skills section).
-- Positioning claims: evals are the proven claim; revenue framing is "ultimately in revenue".
-  Don't overstate revenue proof.
+- Positioning: evals are one proof point, not the page's organizing idea. Keep them where they are
+  literally true (the GTM Agent card, the Together AI bullets, the skills list). The proof block on
+  every project card is labeled "How it's verified", because most of those proofs are tests or checks,
+  not evals. Don't overstate revenue proof.
+- Every work claim must match the verified resume files (the dated resumes and `writing-context.md`
+  in `~/os/resume/`). Copy their wording; never upgrade it ("supporting" stays "supporting").
+- This repo is public, and so is this file. Keep job-search strategy, application data, and anything
+  unverified out of it. The private playbook (taste, positioning evidence, process, tooling) is
+  `~/os/career/portfolio/PLAYBOOK.md`.
 - New sections: class `reveal`, but no `id` unless a matching nav link is added
   (`main.js` tracks `main section[id]`).
 
@@ -41,6 +48,19 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
 - Work GitHub account `roman-licursi` was invited with **write** access on 2026-07-18
   (pending acceptance at https://github.com/romanlicursi/romanlicursi.github.io/invitations).
   Personal account `romanlicursi` is admin. Deploy = push to `main`; no Vercel involvement.
+
+## Where we left off (2026-10-04, role-fit pass)
+
+- Reworked the copy for the roles Roman applies to most: the status line names those lanes; the
+  positioning sub-line says how he works with sales, finance and legal and names three builds; the
+  headline stats are 26x, the 36% undercount fix, and +7.5pp; the Together AI bullets follow the
+  resume plus the evaluation harness and the stakeholder demo app from `writing-context.md`; the GTM
+  Agent card leads with what the agent does; the Clay card is restored; education shows
+  "Expected Dec 2026"; the title is "GTM Systems Intern".
+- Considered and rejected: a keyword-only "Solutions and delivery" skills group (low signal), and
+  copying the resume bullets word for word (the page should add depth the resume lacks).
+- Project blocks (`.projects-grid`, `.projects-featured`) are separate grids; `aurora.css` gives
+  neighbors a 20px gap.
 
 ## Where we left off (2026-10-04)
 
@@ -52,9 +72,8 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
   under the same file name.
 - Removed at Roman's request: the Clay Campus Ambassador experience entry and the
   "B.S. Computer Science, UW-Madison" line under the portrait.
-- Open questions for Roman: the site says "GTM Systems Analyst Intern" while the resume says
-  "GTM Systems Intern"; the Clay project card is still retired here but listed on the resume; the
-  graduation date (Dec 2026 on the resume) is not shown on the site.
+- The three open questions from this pass (title wording, the retired Clay card, the missing
+  graduation date) were settled in the role-fit pass above.
 
 ## Where we left off (2026-07-18)
 
