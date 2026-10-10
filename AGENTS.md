@@ -59,6 +59,14 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
   (pending acceptance at https://github.com/romanlicursi/romanlicursi.github.io/invitations).
   Personal account `romanlicursi` is admin. Deploy = push to `main`; no Vercel involvement.
 
+## Where we left off (2026-10-10)
+
+- Removed at Roman's request: the positioning section between the marquee and Experience (the
+  "Traditional RevOps..." statement and its sub-line). Its `.positioning*` rules are still in
+  `styles.css` and `aurora.css`, unused.
+- The middle headline stat is now 10x (ABM app, 129 to 1,319 accounts) in place of the 36% undercount
+  fix. The 36% fix stays in the Together AI bullet.
+
 ## Where we left off (2026-10-04, role-fit pass)
 
 - Reworked the copy for the roles Roman applies to most: the status line names those lanes; the
