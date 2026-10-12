@@ -596,3 +596,61 @@ body { background: var(--bg); }
   .cert-item,
   .skill-tag { border-color: var(--line-strong); }
 }
+
+/* ── Scroll depth (added 2026-10-12): small scroll-linked motion on top of Aurora ──
+   main.js sets --hero-p on <html> (0 at the top of the page, 1 when the hero has scrolled away)
+   and --lx / --ly (pointer position, -1 to 1). These rules use the `translate` property, so the
+   entrance and loop animations that run on `transform` are untouched. Delete this block and the
+   "Scroll depth" block in main.js to remove all of it. */
+
+/* The curtains fall behind the page at three slightly different rates, and lean to the pointer. */
+.atmosphere span { translate: calc(var(--lx, 0) * -14px) calc(var(--hero-p, 0) * 96px + var(--ly, 0) * -8px); }
+.atmosphere span:nth-child(2) { translate: calc(var(--lx, 0) * -9px) calc(var(--hero-p, 0) * 64px + var(--ly, 0) * -5px); }
+.atmosphere span:nth-child(3) { translate: calc(var(--lx, 0) * -20px) calc(var(--hero-p, 0) * 128px + var(--ly, 0) * -11px); }
+/* The planet rim is the near plane: it rises a little as the page leaves the top. */
+/* The box reaches 60px below the hero (clipped at rest), so the lift never shows its cut bottom edge. */
+.hero::before { bottom: -60px; height: 500px; translate: 0 calc(var(--hero-p, 0) * -56px + var(--ly, 0) * 3px); }
+
+/* Headline numbers count up once (main.js). The reserved width stops the row from shifting. */
+.proof-value [data-count] { display: inline-block; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* The latency strip: both paths on one axis, at true scale. Filled by default, so it reads
+   correctly with no script and with Reduce Motion; main.js drives --f from scroll otherwise. */
+.race-strip {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 26px 0 34px;
+  display: grid;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+}
+.race-row {
+  display: grid;
+  grid-template-columns: 52px 1fr 60px;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-3);
+}
+.race-track { position: relative; height: 1px; background: var(--line-strong); }
+.race-bar {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--text-2);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--f, 1));
+}
+.race-row--new .race-bar { background: var(--accent); transform: scaleX(var(--f, 0.0382)); }
+.race-time { text-align: right; font-variant-numeric: tabular-nums; color: var(--text-2); }
+.race-row--new .race-time { color: var(--accent); }
+.race-note { margin: 2px 0 0; text-align: center; font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere span,
+  .hero::before { translate: none; }
+}

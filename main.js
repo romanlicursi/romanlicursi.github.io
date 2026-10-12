@@ -149,6 +149,113 @@
     });
   }
 
+  /* ── Scroll depth (added 2026-10-12; aurora.css reads the variables) ──
+        The hero's planes drift apart as the page leaves the top and lean to the pointer, the
+        headline numbers count up once, and the latency strip fills to scale as it passes. ── */
+  const rootStyle = document.documentElement.style;
+  const clampUnit = (value) => Math.min(Math.max(value, 0), 1);
+  const raceStrip = document.querySelector('[data-race-strip]');
+  const raceNewBar = raceStrip?.querySelector('.race-row--new .race-bar');
+  const raceOldBar = raceStrip?.querySelector('.race-row--old .race-bar');
+  const raceNewTime = raceStrip?.querySelector('[data-race-new]');
+  const raceOldTime = raceStrip?.querySelector('[data-race-old]');
+  const OLD_PATH_SECONDS = 165;
+  const NEW_PATH_SECONDS = 6.3;
+  let depthFrame = 0;
+  let raceSeconds = -1;
+
+  function drawRace(seconds) {
+    if (seconds === raceSeconds || !raceNewBar || !raceOldBar || !raceNewTime || !raceOldTime) return;
+    raceSeconds = seconds;
+    const newSeconds = Math.min(seconds, NEW_PATH_SECONDS);
+    raceNewBar.style.setProperty('--f', (newSeconds / OLD_PATH_SECONDS).toFixed(4));
+    raceOldBar.style.setProperty('--f', (seconds / OLD_PATH_SECONDS).toFixed(4));
+    raceNewTime.textContent = `${newSeconds.toFixed(1)} s`;
+    raceOldTime.textContent = seconds >= OLD_PATH_SECONDS ? `${OLD_PATH_SECONDS} s` : `${seconds.toFixed(1)} s`;
+  }
+
+  function updateDepth() {
+    depthFrame = 0;
+    if (reduceMotion.matches) {
+      rootStyle.removeProperty('--hero-p');
+      drawRace(OLD_PATH_SECONDS);
+      return;
+    }
+    if (heroSection) {
+      rootStyle.setProperty('--hero-p', clampUnit(window.scrollY / Math.max(heroSection.offsetHeight, 1)).toFixed(4));
+    }
+    if (raceStrip) {
+      /* The clock runs while the strip crosses the middle of the screen: 0 s as it enters, 165 s near the upper third. */
+      const viewport = window.innerHeight;
+      const progress = clampUnit((viewport * 0.92 - raceStrip.getBoundingClientRect().top) / (viewport * 0.5));
+      drawRace(Math.round(progress * OLD_PATH_SECONDS * 10) / 10);
+    }
+  }
+  const requestDepth = () => { if (!depthFrame) depthFrame = requestAnimationFrame(updateDepth); };
+  window.addEventListener('scroll', requestDepth, { passive: true });
+  window.addEventListener('resize', requestDepth, { passive: true });
+  reduceMotion.addEventListener?.('change', requestDepth);
+  updateDepth();
+
+  /* Pointer lean: only with a mouse, only while the hero is on screen, never the only way to see it. */
+  if (finePointer.matches && heroSection) {
+    const leanTarget = { x: 0, y: 0 };
+    const lean = { x: 0, y: 0 };
+    let leanFrame = 0;
+    const leanStep = () => {
+      lean.x += (leanTarget.x - lean.x) * 0.08;
+      lean.y += (leanTarget.y - lean.y) * 0.08;
+      rootStyle.setProperty('--lx', lean.x.toFixed(3));
+      rootStyle.setProperty('--ly', lean.y.toFixed(3));
+      const moving = Math.abs(leanTarget.x - lean.x) > 0.002 || Math.abs(leanTarget.y - lean.y) > 0.002;
+      leanFrame = moving ? requestAnimationFrame(leanStep) : 0;
+    };
+    window.addEventListener('pointermove', (event) => {
+      if (reduceMotion.matches || window.scrollY > heroSection.offsetHeight) return;
+      leanTarget.x = (event.clientX / window.innerWidth) * 2 - 1;
+      leanTarget.y = (event.clientY / window.innerHeight) * 2 - 1;
+      if (!leanFrame) leanFrame = requestAnimationFrame(leanStep);
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => {
+      leanTarget.x = 0;
+      leanTarget.y = 0;
+      if (!leanFrame) leanFrame = requestAnimationFrame(leanStep);
+    });
+  }
+
+  /* Headline numbers count up once when they come into view. The final text is already in the markup. */
+  const counters = document.querySelectorAll('[data-count]');
+  if (counters.length && !reduceMotion.matches) {
+    const runCount = (el) => {
+      const final = el.dataset.count;
+      const sign = final.startsWith('+') ? '+' : '';
+      const target = parseFloat(final);
+      const decimals = (final.split('.')[1] || '').length;
+      const start = performance.now();
+      const duration = 1400;
+      const step = (now) => {
+        const progress = clampUnit((now - start) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = progress < 1 ? sign + (target * eased).toFixed(decimals) : final;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.style.minWidth = '';
+      };
+      requestAnimationFrame(step);
+    };
+    const countObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      countObserver.unobserve(entry.target);
+      runCount(entry.target);
+    }), { threshold: 0.6 });
+    /* Hold each number's final width (measured in the real font) so the row does not shift while it counts. */
+    const armCounters = () => counters.forEach((el) => {
+      el.style.minWidth = `${el.getBoundingClientRect().width}px`;
+      countObserver.observe(el);
+    });
+    if (document.fonts?.ready) document.fonts.ready.then(armCounters);
+    else armCounters();
+  }
+
   /* ── Native dialog lightbox, delegated triggers so async shelves join ── */
   const dialog = document.getElementById('lightbox');
   const lightboxFigure = dialog?.querySelector('.lightbox-figure');

@@ -40,7 +40,7 @@
   <link rel="preload" href="assets/fonts/MonaSansMonoVF.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <link rel="stylesheet" href="styles.css?v=20260718e" />
-  <link rel="stylesheet" href="aurora.css?v=20261004c" />
+  <link rel="stylesheet" href="aurora.css?v=20261012a" />
 </head>
 <body>
 
@@ -101,16 +101,23 @@
     <section class="proof" aria-label="Impact highlights">
       <div class="container proof-grid">
         <div class="proof-item">
-          <span class="proof-value">26<em>x</em></span>
+          <span class="proof-value"><span data-count="26">26</span><em>x</em></span>
           <span class="proof-label">faster heavy-query answers from the GTM team's AI agent, 165s down to 6.3s</span>
         </div>
         <div class="proof-item">
-          <span class="proof-value">10<em>x</em></span>
+          <span class="proof-value"><span data-count="10">10</span><em>x</em></span>
           <span class="proof-label">more accounts in the team's ABM app, scaled from 129 to 1,319 on live Salesforce data</span>
         </div>
         <div class="proof-item">
-          <span class="proof-value">+7.5<em>pp</em></span>
+          <span class="proof-value"><span data-count="+7.5">+7.5</span><em>pp</em></span>
           <span class="proof-label">answer accuracy gained by shipping a best-of-N grounding selector</span>
+        </div>
+      </div>
+      <div class="container">
+        <div class="race-strip" data-race-strip role="img" aria-label="Heavy-query latency drawn to scale: 6.3 seconds after the rebuild, 165 seconds before.">
+          <div class="race-row race-row--new"><span class="race-name">After</span><span class="race-track"><span class="race-bar"></span></span><span class="race-time" data-race-new>6.3 s</span></div>
+          <div class="race-row race-row--old"><span class="race-name">Before</span><span class="race-track"><span class="race-bar"></span></span><span class="race-time" data-race-old>165 s</span></div>
+          <p class="race-note">The same heavy query, drawn to scale.</p>
         </div>
       </div>
     </section>
@@ -737,7 +744,7 @@
     </div>
   </dialog>
 
-  <script src="main.js?v=20261004a"></script>
+  <script src="main.js?v=20261012a"></script>
 
 </body>
 </html>

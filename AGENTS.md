@@ -29,6 +29,14 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
   - Reduce Motion keeps color fades and drops movement; Reduce Transparency and Increase Contrast
     each have a block at the end of `aurora.css`.
 
+- Scroll depth (2026-10-12, the "Scroll depth" blocks at the end of `aurora.css` and in `main.js`):
+  four small additions, no layout change. `main.js` sets `--hero-p` on `<html>` (0 at the top, 1 when
+  the hero is gone) and `--lx` / `--ly` (pointer). The curtains and the planet rim read them through
+  the `translate` property, so the `transform` animations are untouched. The three headline numbers
+  count up once (`data-count` holds the final text). The latency strip under them (`data-race-strip`)
+  draws 6.3 s against 165 s at true scale and fills as it crosses the screen. With Reduce Motion or
+  no script, everything shows its final state. Delete the two blocks to remove all of it.
+
 ## Workflow rules
 
 - **Always preview in the browser after making site updates.** Serve the repo locally
@@ -58,6 +66,13 @@ Deploys via GitHub Pages from `main` (live ~30s after push). Vercel is NOT conne
 - Work GitHub account `roman-licursi` was invited with **write** access on 2026-07-18
   (pending acceptance at https://github.com/romanlicursi/romanlicursi.github.io/invitations).
   Personal account `romanlicursi` is admin. Deploy = push to `main`; no Vercel involvement.
+
+## Where we left off (2026-10-12)
+
+- Shipped the four "Scroll depth" additions (see Design): hero depth on scroll, pointer lean, headline
+  numbers that count up, and the 6.3 s against 165 s latency strip under them. No layout or copy change.
+- Considered and rejected: a full rebuild of the page on a scroll engine. The owner wants small
+  additions on top of the current design, not a new structure.
 
 ## Where we left off (2026-10-10)
 
